@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  admin           :boolean
+#  email_address   :string
+#  password_digest :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  account_id      :integer          not null
+#
+# Indexes
+#
+#  index_users_on_account_id  (account_id)
+#
+one:
+  admin: false
+  email_address: MyString
+  password_digest: MyString
+  account: one
+
+two:
+  admin: false
+  email_address: MyString
+  password_digest: MyString
+  account: two

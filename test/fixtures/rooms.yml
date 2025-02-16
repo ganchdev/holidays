@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: rooms
+#
+#  id          :integer          not null, primary key
+#  capacity    :integer
+#  color       :string
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  property_id :integer          not null
+#
+# Indexes
+#
+#  index_rooms_on_property_id  (property_id)
+#
+one:
+  property: one
+  name: MyString
+  color: MyString
+
+two:
+  property: two
+  name: MyString
+  color: MyString

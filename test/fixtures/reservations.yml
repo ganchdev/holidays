@@ -1,0 +1,32 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: reservations
+#
+#  id           :integer          not null, primary key
+#  adults       :integer
+#  cancelled_at :datetime
+#  children     :integer
+#  notes        :text
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  room_id      :integer          not null
+#
+# Indexes
+#
+#  index_reservations_on_room_id  (room_id)
+#
+one:
+  room: one
+  adults: 1
+  children: 1
+  notes: MyText
+  cancelled_at: 2025-02-16 19:11:43
+
+two:
+  room: two
+  adults: 1
+  children: 1
+  notes: MyText
+  cancelled_at: 2025-02-16 19:11:43
