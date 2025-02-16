@@ -4,13 +4,16 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  admin           :boolean
-#  email_address   :string           not null
-#  password_digest :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  account_id      :integer          not null
+#  id            :integer          not null, primary key
+#  admin         :boolean
+#  email_address :string           not null
+#  first_name    :string
+#  image         :string
+#  last_name     :string
+#  name          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  account_id    :integer
 #
 # Indexes
 #

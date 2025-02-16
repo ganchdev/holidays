@@ -10,4 +10,8 @@
 #  updated_at :datetime         not null
 #
 class Account < ApplicationRecord
+
+  has_many :users
+  has_many :properties
+
 end

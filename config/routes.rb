@@ -2,8 +2,11 @@
 
 Rails.application.routes.draw do
   root "dashboard#index"
-  resource :session
-  resources :passwords, param: :token
+  scope controller: :auth do
+    get "/auth", action: :new
+    get "/auth/:provider/callback", action: :callback
+    match :logout, action: :destroy, via: [:delete, :get]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
