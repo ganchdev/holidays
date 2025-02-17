@@ -7,7 +7,14 @@ Rails.application.routes.draw do
     get "/auth/:provider/callback", action: :callback
     match :logout, action: :destroy, via: [:delete, :get]
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  namespace :admin do
+    get "/", to: "accounts#index"
+    resources :accounts
+    resources :users
+    resources :authorized_users
+    resources :authorized_users
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

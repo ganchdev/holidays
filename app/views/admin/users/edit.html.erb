@@ -1,0 +1,41 @@
+<% content_for :title, "Edit user | #{@user.name}" %>
+
+<h1>Edit user</h1>
+
+<%= form_with model: [:admin, @user] do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :email_address %>
+    <%= form.email_field :email_address, disabled: true %>
+  </div>
+
+  <div>
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :admin %>
+    <%= form.check_box :admin %>
+  </div>
+
+  <div>
+    <%= form.label :account_id, "Account" %>
+    <%= form.collection_select :account_id, Account.all, :id, :name, include_blank: "No Account" %>
+  </div>
+
+  <div>
+    <%= form.submit class: "button" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", admin_users_path, class: "button" %>

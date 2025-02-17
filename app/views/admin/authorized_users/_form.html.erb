@@ -1,0 +1,15 @@
+<%= form_with model: [:admin, authorized_user] do |form| %>
+  <div>
+    <%= form.label :email_address %>
+    <%= form.email_field :email_address, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :account_id, "Account" %>
+    <%= form.collection_select :account_id, Account.all, :id, :name, include_blank: "No Account" %>
+  </div>
+
+  <div>
+    <%= form.submit class: "button" %>
+  </div>
+<% end %>

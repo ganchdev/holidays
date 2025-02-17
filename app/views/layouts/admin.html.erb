@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render "layouts/head" %>
+
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <%= render "layouts/flash" %>
+
+    <nav>
+      <ul>
+        <li><%= link_to "Accounts", admin_accounts_path %></li>
+        <li><%= link_to "Users", admin_users_path %></li>
+        <li><%= link_to "Authorized Users", admin_authorized_users_path %></li>
+      </ul>
+    </nav>
+
+    <%= yield %>
+  </body>
+</html>

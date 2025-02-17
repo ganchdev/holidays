@@ -1,0 +1,30 @@
+<h1>Authorized Users</h1>
+
+<%= link_to "New authorized user", new_admin_authorized_user_path, class: "button" %>
+
+<!-- Authorized Users Table -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Account</th>
+      <th>User</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @authorized_users.each do |authorized_user| %>
+      <tr>
+        <td><%= authorized_user.id %></td>
+        <td><%= authorized_user.email_address %></td>
+        <td><%= authorized_user.account&.name || "N/A" %></td>
+        <td><%= authorized_user.user&.name || "N/A" %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_authorized_user_path(authorized_user) %> |
+          <%= button_to "Delete", admin_authorized_user_path(authorized_user), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

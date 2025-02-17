@@ -1,0 +1,33 @@
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Admin</th>
+      <th>Account</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email_address %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.admin? ? "Yes" : "No" %></td>
+        <td><%= user.account&.name || "N/A" %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_user_path(user) %> |
+          <%= button_to "Delete", admin_user_path(user), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

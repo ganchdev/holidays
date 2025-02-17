@@ -12,7 +12,7 @@ class AuthController < ApplicationController
   def callback
     auth_data = request.env["omniauth.auth"]["info"]
 
-    unless email_authorized? auth_data["email"]
+    unless AuthorizedUser.exists?(email_address: auth_data["email"])
       redirect_to auth_path, alert: "Unauthorized"
       return
     end
@@ -59,11 +59,6 @@ class AuthController < ApplicationController
 
     user.save! if user.new_record?
     user
-  end
-
-  def email_authorized?(email)
-    authorized = Holidays::Application.authorized_users.keys
-    authorized.include? email
   end
 
 end

@@ -29,9 +29,5 @@ module Holidays
 
     config.i18n.default_locale = :bg
 
-    def self.authorized_users
-      @authorized_users ||= JSON.parse(ENV.fetch("AUTHORIZED_USERS"))
-    end
-
   end
 end
