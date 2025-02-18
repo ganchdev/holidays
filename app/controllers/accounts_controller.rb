@@ -8,6 +8,7 @@ class AccountsController < ApplicationController
     end
   end
 
+  # POST /a
   def create
     if @account = Current.user.create_account(params.expect(account: :name))
       Current.user.update(account: @account)

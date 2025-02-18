@@ -9,6 +9,7 @@ class AuthController < ApplicationController
 
   before_action :redirect_if_authenticated, only: [:new, :callback]
 
+  # GET /auth/:provider/callback
   def callback
     auth_data = request.env["omniauth.auth"]["info"]
 
@@ -30,6 +31,7 @@ class AuthController < ApplicationController
     end
   end
 
+  # DELETE|GET /logout
   def destroy
     terminate_session
 

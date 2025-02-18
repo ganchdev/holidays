@@ -150,6 +150,8 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.25.4)
+    mocha (2.7.1)
+      ruby2_keywords (>= 0.0.5)
     msgpack (1.8.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -295,6 +297,7 @@ GEM
     rubocop-ast (1.38.0)
       parser (>= 3.3.1.0)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
     securerandom (0.4.1)
     selenium-webdriver (4.28.0)
@@ -386,6 +389,7 @@ DEPENDENCIES
   capybara
   dotenv-rails
   importmap-rails
+  mocha
   omniauth
   omniauth-github (~> 2.0.0)
   omniauth-google-oauth2
