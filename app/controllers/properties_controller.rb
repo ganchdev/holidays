@@ -9,7 +9,7 @@ class PropertiesController < ApplicationController
     @properties = Current.account.properties
   end
 
-  # GET /properties/1
+  # GET /properties/:id
   def show
   end
 
@@ -18,7 +18,7 @@ class PropertiesController < ApplicationController
     @property = Current.account.properties.build
   end
 
-  # GET /properties/1/edit
+  # GET /properties/:id/edit
   def edit
   end
 
@@ -27,37 +27,33 @@ class PropertiesController < ApplicationController
     @property = Current.account.properties.build(property_params)
 
     if @property.save
-      redirect_to property_path(@property), notice: "Property was successfully created."
+      redirect_to property_path(@property), notice: t("flash.properties.created_successfully")
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /properties/1
+  # PATCH/PUT /properties/:id
   def update
     if @property.update(property_params)
-      redirect_to property_path(@property), notice: "Property was successfully updated.",
-                                            status: :see_other
+      redirect_to property_path(@property), notice: t("flash.properties.updated_successfully"), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /properties/1
+  # DELETE /properties/:id
   def destroy
     @property.destroy!
-    redirect_to properties_path, notice: "Property was successfully destroyed.",
-                                 status: :see_other
+    redirect_to properties_path, notice: t("flash.properties.destroyed_successfully"), status: :see_other
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_property
-    @property = Current.account.properties.find(params.expect(:id))
+    @property = Current.account.properties.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def property_params
     params.expect(property: [:name, :account_id])
   end

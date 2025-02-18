@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     @rooms = @property.rooms
   end
 
-  # GET /properties/:property_id/rooms/1
+  # GET /properties/:property_id/rooms/:id
   def show
   end
 
@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
     @room = @property.rooms.build
   end
 
-  # GET /properties/:property_id/rooms/1/edit
+  # GET /properties/:property_id/rooms/:id/edit
   def edit
   end
 
@@ -28,39 +28,38 @@ class RoomsController < ApplicationController
     @room = @property.rooms.build(room_params)
 
     if @room.save
-      redirect_to property_room_path(@property, @room), notice: "Room was successfully created."
+      redirect_to property_room_path(@property, @room), notice: t("flash.rooms.created_successfully")
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /properties/:property_id/rooms/1
+  # PATCH/PUT /properties/:property_id/rooms/:id
   def update
     if @room.update(room_params)
-      redirect_to property_room_path(@property, @room), notice: "Room was successfully updated.", status: :see_other
+      redirect_to property_room_path(@property, @room), notice: t("flash.rooms.updated_successfully"),
+                                                        status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /properties/:property_id/rooms/1
+  # DELETE /properties/:property_id/rooms/:id
   def destroy
     @room.destroy!
-    redirect_to property_rooms_path(@property), notice: "Room was successfully destroyed.", status: :see_other
+    redirect_to property_rooms_path(@property), notice: t("flash.rooms.destroyed_successfully"), status: :see_other
   end
 
   private
 
   def set_property
-    @property = Current.account.properties.find(params.expect(:property_id))
+    @property = Current.account.properties.find(params[:property_id])
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_room
-    @room = @property.rooms.find(params.expect(:id))
+    @room = @property.rooms.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def room_params
     params.expect(room: [:name, :capacity, :color, :property_id])
   end

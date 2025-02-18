@@ -1,4 +1,23 @@
 bg:
+  flash:
+    auth:
+      unauthorized: "Неразрешен достъп"
+      sign_in_error: "Възникна грешка при влизането. Моля, опитайте отново."
+      authentication_failed: "Автентикацията не бе успешна. Моля, опитайте отново."
+      logged_out: "Успешно излязохте от профила си."
+      already_logged_in: "Не можете да влезете в тази страница, докато сте в профила си."
+      rate_limited: "Опитайте отново по-късно."
+    accounts:
+      already_has_account: "Вече имате акаунт."
+      created_successfully: "Акаунтът беше създаден успешно."
+    properties:
+      created_successfully: "Имотът беше успешно създаден."
+      updated_successfully: "Имотът беше успешно актуализиран."
+      destroyed_successfully: "Имотът беше успешно изтрит."
+    rooms:
+      created_successfully: "Стаята беше успешно създадена."
+      updated_successfully: "Стаята беше успешно актуализирана."
+      destroyed_successfully: "Стаята беше успешно изтрита."
   activerecord:
     errors:
       models:

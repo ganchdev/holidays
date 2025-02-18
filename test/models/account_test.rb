@@ -29,7 +29,7 @@ class AccountTest < ActiveSupport::TestCase
   end
 
   test "should have a unique name" do
-    existing_account = accounts(:one) # Assuming you have a fixture named :one
+    existing_account = accounts(:one)
     @account.name = existing_account.name
 
     assert_not @account.valid?, "Saved the account with a duplicate name"
