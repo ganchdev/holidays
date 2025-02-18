@@ -20,7 +20,6 @@ class AuthController < ApplicationController
     begin
       user = find_or_create_user(auth_data)
       start_new_session_for(user)
-      flash[:hello] = "👋"
       redirect_to after_authentication_url
     rescue ActiveRecord::RecordInvalid
       redirect_to auth_path, alert: "There was an error signing in. Please try again."

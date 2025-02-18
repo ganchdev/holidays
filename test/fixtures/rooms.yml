@@ -18,10 +18,10 @@
 #
 one:
   property: one
-  name: MyString
-  color: MyString
+  name: 21
+  color: red
 
 two:
   property: two
-  name: MyString
-  color: MyString
+  name: 22
+  color: blue

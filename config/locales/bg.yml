@@ -1,2 +1,51 @@
 bg:
+  activerecord:
+    errors:
+      models:
+        account:
+          attributes:
+            name:
+              blank: "не може да бъде празно"
+              taken: "вече е заето"
+        user:
+          attributes:
+            name:
+              blank: "не може да бъде празно"
+            email_address:
+              blank: "не може да бъде празно"
+              taken: "вече е заето"
+              invalid: "не е валиден"
+            first_name:
+              blank: "не може да бъде празно"
+            last_name:
+              blank: "не може да бъде празно"
+        property:
+          attributes:
+            name:
+              blank: "не може да бъде празно"
+            account:
+              required: "трябва да бъде свързан с акаунт"
+        room:
+          attributes:
+            name:
+              blank: "не може да бъде празно"
+            capacity:
+              blank: "не може да бъде празно"
+              not_a_number: "трябва да бъде число"
+              greater_than: "трябва да бъде по-голямо от 0"
+              not_an_integer: "трябва да бъде цяло число"
+        reservation:
+          attributes:
+            adults:
+              blank: "не може да бъде празно"
+              not_a_number: "трябва да бъде число"
+              greater_than_or_equal_to: "трябва да бъде поне 1"
+              not_an_integer: "трябва да бъде цяло число"
+            children:
+              not_a_number: "трябва да бъде число"
+              greater_than_or_equal_to: "трябва да бъде поне 0"
+              not_an_integer: "трябва да бъде цяло число"
+            deposit:
+              not_a_number: "трябва да бъде число"
+              greater_than_or_equal_to: "трябва да бъде поне 0"
   hello: "Здравей"

@@ -5,9 +5,10 @@
 # Table name: reservations
 #
 #  id           :integer          not null, primary key
-#  adults       :integer
+#  adults       :integer          default(1)
 #  cancelled_at :datetime
-#  children     :integer
+#  children     :integer          default(0)
+#  deposit      :decimal(10, 2)
 #  notes        :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -19,7 +20,7 @@
 #
 one:
   room: one
-  adults: 1
+  adults: 2
   children: 1
   notes: MyText
   cancelled_at: 2025-02-16 19:11:43
@@ -27,6 +28,6 @@ one:
 two:
   room: two
   adults: 1
-  children: 1
+  children: 2
   notes: MyText
   cancelled_at: 2025-02-16 19:11:43

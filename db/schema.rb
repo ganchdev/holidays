@@ -37,9 +37,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_222710) do
 
   create_table "reservations", force: :cascade do |t|
     t.integer "room_id", null: false
-    t.integer "adults"
-    t.integer "children"
+    t.integer "adults", default: 1
+    t.integer "children", default: 0
     t.text "notes"
+    t.decimal "deposit", precision: 10, scale: 2
     t.datetime "cancelled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

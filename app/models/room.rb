@@ -20,4 +20,7 @@ class Room < ApplicationRecord
 
   belongs_to :property
 
+  validates :name, presence: true
+  validates :capacity, presence: true, numericality: { greater_than: 0, only_integer: true }
+
 end

@@ -20,16 +20,13 @@
 #  index_users_on_account_id     (account_id)
 #  index_users_on_email_address  (email_address) UNIQUE
 #
-<% password_digest = BCrypt::Password.create("password") %>
 
 one:
-  admin: false
+  admin: true
   account: one
   email_address: one@example.com
-  password_digest: <%= password_digest %>
 
 two:
   admin: false
   account: two
   email_address: two@example.com
-  password_digest: <%= password_digest %>

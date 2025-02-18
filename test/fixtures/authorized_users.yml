@@ -19,11 +19,9 @@
 one:
   email_address: MyString
   account: MyString
-  references: MyString
   user: one
 
 two:
   email_address: MyString
   account: MyString
-  references: MyString
   user: two

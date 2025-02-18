@@ -16,8 +16,8 @@
 #
 one:
   account: one
-  name: MyString
+  name: Beach
 
 two:
   account: two
-  name: MyString
+  name: Mountain

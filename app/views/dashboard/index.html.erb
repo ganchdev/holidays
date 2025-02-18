@@ -1,6 +1,14 @@
 <h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
 
+<h2>Properties</h2>
+<%= link_to "New property", new_account_property_path(Current.account) %>
+<ul>
+  <% Current.account.properties.each do |prop| %>
+    <li><%= prop.name %></li>
+  <% end %>
+</ul>
+
+<hr>
 <%= link_to logout_path, method: :delete, class: "contrast", data: { turbo: false } do %>
   Logout
 <% end %>
