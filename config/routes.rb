@@ -16,11 +16,10 @@ Rails.application.routes.draw do
     resources :authorized_users
   end
 
-  resources :accounts, only: [:new, :create], path: "a" do
-    resources :properties do
-      resources :rooms do
-        resources :reservations
-      end
+  resources :accounts, only: [:new, :create]
+  resources :properties do
+    resources :rooms do
+      resources :reservations
     end
   end
 

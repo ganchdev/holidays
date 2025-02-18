@@ -1,7 +1,7 @@
 <h1>Dashboard#index</h1>
 
 <h2>Properties</h2>
-<%= link_to "New property", new_account_property_path(Current.account) %>
+<%= link_to "New property", new_property_path %>
 <ul>
   <% Current.account.properties.each do |prop| %>
     <li><%= prop.name %></li>

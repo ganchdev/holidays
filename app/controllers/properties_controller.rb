@@ -27,7 +27,7 @@ class PropertiesController < ApplicationController
     @property = Current.account.properties.build(property_params)
 
     if @property.save
-      redirect_to account_property_path(Current.account, @property), notice: "Property was successfully created."
+      redirect_to property_path(@property), notice: "Property was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -36,8 +36,8 @@ class PropertiesController < ApplicationController
   # PATCH/PUT /properties/1
   def update
     if @property.update(property_params)
-      redirect_to account_property_path(Current.account, @property), notice: "Property was successfully updated.",
-                                                                     status: :see_other
+      redirect_to property_path(@property), notice: "Property was successfully updated.",
+                                            status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,8 +46,8 @@ class PropertiesController < ApplicationController
   # DELETE /properties/1
   def destroy
     @property.destroy!
-    redirect_to account_properties_path(Current.account), notice: "Property was successfully destroyed.",
-                                                          status: :see_other
+    redirect_to properties_path, notice: "Property was successfully destroyed.",
+                                 status: :see_other
   end
 
   private

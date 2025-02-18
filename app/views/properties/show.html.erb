@@ -3,8 +3,8 @@
 <%= render @property %>
 
 <div>
-  <%= link_to "Edit this property", edit_account_property_path(Current.account, @property) %> |
-  <%= link_to "Back to properties", account_properties_path(Current.account) %>
+  <%= link_to "Edit this property", edit_property_path(@property) %> |
+  <%= link_to "Back to properties", properties_path %>
 
-  <%= button_to "Destroy this property", account_property_path(Current.account, @property), method: :delete %>
+  <%= button_to "Destroy this property", property_path(@property), method: :delete %>
 </div>
