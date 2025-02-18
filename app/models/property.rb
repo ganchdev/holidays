@@ -17,6 +17,7 @@
 class Property < ApplicationRecord
 
   belongs_to :account
+  has_many :rooms
 
   validates :name, presence: true
 

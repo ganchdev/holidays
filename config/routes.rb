@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :rooms
   root "dashboard#index"
   scope controller: :auth do
     get "/auth", action: :new
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
     get "/", to: "accounts#index"
     resources :accounts
     resources :users
-    resources :authorized_users
     resources :authorized_users
   end
 
