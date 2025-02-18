@@ -43,9 +43,12 @@ en:
             last_name:
               blank: "can't be blank"
         property:
+          restrict_dependent_destroy:
+            has_many: "Cannot delete because %{record} exist"
           attributes:
             name:
               blank: "can't be blank"
+              taken: "has already been taken"
             account:
               required: "must be associated with an account"
         room:

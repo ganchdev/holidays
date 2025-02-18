@@ -2,13 +2,13 @@ bg:
   flash:
     accounts:
       already_has_account: "Вече имате акаунт."
-      created_successfully: "Акаунтът беше създаден успешно."
+      created_successfully: "Акаунтът беше успешно създаден."
     auth:
-      unauthorized: "Неразрешен достъп"
-      sign_in_error: "Възникна грешка при влизането. Моля, опитайте отново."
-      authentication_failed: "Автентикацията не бе успешна. Моля, опитайте отново."
-      logged_out: "Успешно излязохте от профила си."
-      already_logged_in: "Не можете да влезете в тази страница, докато сте в профила си."
+      unauthorized: "Неоторизиран достъп"
+      sign_in_error: "Възникна грешка при влизане. Моля, опитайте отново."
+      authentication_failed: "Удостоверяването не бе успешно. Моля, опитайте отново."
+      logged_out: "Успешно излязохте от акаунта си."
+      already_logged_in: "Не можете да влезете на тази страница, докато сте влезли в системата."
       rate_limited: "Опитайте отново по-късно."
     bookings:
       created_successfully: "Резервацията беше успешно създадена."
@@ -29,28 +29,31 @@ bg:
           attributes:
             name:
               blank: "не може да бъде празно"
-              taken: "вече е заето"
+              taken: "вече съществува"
         user:
           attributes:
             name:
               blank: "не може да бъде празно"
             email_address:
               blank: "не може да бъде празно"
-              taken: "вече е заето"
-              invalid: "не е валиден"
+              taken: "вече съществува"
+              invalid: "е невалиден"
             first_name:
               blank: "не може да бъде празно"
             last_name:
               blank: "не може да бъде празно"
         property:
+          restrict_dependent_destroy:
+            has_many: "Не може да се изтрие, защото съществуват %{record}"
           attributes:
             name:
               blank: "не може да бъде празно"
+              taken: "вече съществува"
             account:
               required: "трябва да бъде свързан с акаунт"
         room:
           restrict_dependent_destroy:
-            has_many: "Не може да бъде изтрито, защото съществуват %{record}"
+            has_many: "Не може да се изтрие, защото съществуват %{record}"
           attributes:
             name:
               blank: "не може да бъде празно"
@@ -73,4 +76,4 @@ bg:
             deposit:
               not_a_number: "трябва да бъде число"
               greater_than_or_equal_to: "трябва да бъде поне 0"
-  hello: "Здравей"
+  hello: "Здравей, свят"

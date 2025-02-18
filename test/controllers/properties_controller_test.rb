@@ -45,9 +45,22 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Updated Name", @property.name
   end
 
-  test "should destroy property" do
+  test "should not destroy property with bookings" do
+    assert_no_difference("Property.count") do
+      delete property_url(@property), headers: { "HTTP_REFERER" => properties_url }
+    end
+
+    assert_redirected_to properties_url
+    follow_redirect!
+    assert_match I18n.t("activerecord.errors.models.property.restrict_dependent_destroy.has_many", record: "bookings"),
+                 response.body
+  end
+
+  test "should destroy property without bookings" do
+    property_without_bookings = properties(:without_bookings)
+
     assert_difference("Property.count", -1) do
-      delete property_url(@property)
+      delete property_url(property_without_bookings)
     end
     assert_redirected_to properties_url
   end

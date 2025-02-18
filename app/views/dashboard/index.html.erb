@@ -4,7 +4,7 @@
 <%= link_to "New property", new_property_path %>
 <ul>
   <% Current.account.properties.each do |prop| %>
-    <li><%= prop.name %></li>
+    <li><%= link_to prop.name, property_path(prop) %></li>
   <% end %>
 </ul>
 
