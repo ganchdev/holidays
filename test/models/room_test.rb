@@ -22,6 +22,7 @@ class RoomTest < ActiveSupport::TestCase
 
   def setup
     @room = Room.new(name: "Conference Room", capacity: 10, property: properties(:one)) # Using a fixture for property
+    @booking = bookings(:one)
   end
 
   test "should be valid with all required attributes" do
@@ -60,6 +61,28 @@ class RoomTest < ActiveSupport::TestCase
 
   test "should respond to property association" do
     assert_respond_to @room, :property
+  end
+
+  test "should not destroy room with existing bookings" do
+    @booking.update(room: @room)
+
+    assert_no_difference("Room.count") do
+      @room.destroy
+    end
+
+    assert @room.errors[:base].include?(
+      I18n.t("activerecord.errors.models.room.restrict_dependent_destroy.has_many", record: "bookings")
+    ), "Expected room to have an error preventing destruction when bookings exist"
+  end
+
+  test "should destroy room if no bookings exist" do
+    @booking.update(room: @room)
+
+    @room.bookings.destroy_all
+
+    assert_difference("Room.count", -1) do
+      @room.destroy
+    end
   end
 
 end

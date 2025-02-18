@@ -19,7 +19,7 @@ require "test_helper"
 class PropertyTest < ActiveSupport::TestCase
 
   def setup
-    @property = Property.new(name: "Test Property", account: accounts(:one)) # Using fixture for account
+    @property = Property.new(name: "Test Property", account: accounts(:one))
   end
 
   test "should be valid with all required attributes" do

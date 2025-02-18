@@ -25,8 +25,21 @@ one:
   admin: true
   account: one
   email_address: one@example.com
+  first_name: John
+  last_name: Doe
+  name: John Doe
 
 two:
   admin: false
   account: two
   email_address: two@example.com
+  first_name: Jane
+  last_name: Smith
+  name: Jane Smith
+
+without_account:
+  admin: false
+  email_address: withoutaccount@example.com
+  first_name: Alex
+  last_name: Johnson
+  name: Alex Johnson

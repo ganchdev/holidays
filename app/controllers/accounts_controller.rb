@@ -10,13 +10,12 @@ class AccountsController < ApplicationController
 
   # POST /a
   def create
-    if @account = Current.user.create_account(params.expect(account: :name))
-      Current.user.update(account: @account)
+    @account = Current.user.create_account!(params.expect(account: :name))
+    Current.user.update(account: @account)
 
-      redirect_to root_path, notice: "Account was successfully created."
-    else
-      render :new, status: :unprocessable_entity
-    end
+    redirect_to root_path, notice: "Account was successfully created."
+  rescue ActiveRecord::RecordInvalid
+    render :new, status: :unprocessable_entity
   end
 
 end

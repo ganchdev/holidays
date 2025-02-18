@@ -20,8 +20,16 @@ one:
   property: one
   name: 21
   color: red
+  capacity: 2
 
 two:
   property: two
   name: 22
   color: blue
+  capacity: 4
+
+room_without_bookings:
+  property: one
+  name: 21
+  color: blue
+  capacity: 3

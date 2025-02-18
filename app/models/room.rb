@@ -19,6 +19,7 @@
 class Room < ApplicationRecord
 
   belongs_to :property
+  has_many :bookings, dependent: :restrict_with_error
 
   validates :name, presence: true
   validates :capacity, presence: true, numericality: { greater_than: 0, only_integer: true }

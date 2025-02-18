@@ -6,7 +6,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties
   def index
-    @properties = Property.all
+    @properties = Current.account.properties
   end
 
   # GET /properties/1
@@ -54,7 +54,7 @@ class PropertiesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_property
-    @property = Property.find(params.expect(:id))
+    @property = Current.account.properties.find(params.expect(:id))
   end
 
   # Only allow a list of trusted parameters through.

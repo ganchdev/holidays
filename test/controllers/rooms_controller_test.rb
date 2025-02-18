@@ -5,9 +5,9 @@ require "test_helper"
 class RoomsControllerTest < ActionDispatch::IntegrationTest
 
   setup do
-    @property = properties(:one) # Assuming you have a property fixture
-    @room = rooms(:one) # Assuming you have a room fixture
-    @user = users(:one) # Assuming you have a user fixture
+    @property = properties(:one)
+    @room = rooms(:room_without_bookings)
+    @user = users(:one)
 
     set_current_user(@user)
   end

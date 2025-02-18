@@ -26,6 +26,8 @@ bg:
             account:
               required: "трябва да бъде свързан с акаунт"
         room:
+          restrict_dependent_destroy:
+            has_many: "Не може да бъде изтрито, защото съществуват %{record}"
           attributes:
             name:
               blank: "не може да бъде празно"

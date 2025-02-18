@@ -27,7 +27,7 @@ class BookingTest < ActiveSupport::TestCase
       adults: 2,
       children: 1,
       deposit: 100.50,
-      room: rooms(:one) # Using fixture for room
+      room: rooms(:one)
     )
   end
 

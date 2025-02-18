@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
 
   # GET /properties/:property_id/rooms
   def index
-    @rooms = @property.rooms.all
+    @rooms = @property.rooms
   end
 
   # GET /properties/:property_id/rooms/1
@@ -57,7 +57,7 @@ class RoomsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_room
-    @room = Room.find(params.expect(:id))
+    @room = @property.rooms.find(params.expect(:id))
   end
 
   # Only allow a list of trusted parameters through.

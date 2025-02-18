@@ -55,6 +55,8 @@ en:
             account:
               required: "must be associated with an account"
         room:
+          restrict_dependent_destroy:
+            has_many: "Cannot delete because %{record} exist"
           attributes:
             name:
               blank: "can't be blank"
