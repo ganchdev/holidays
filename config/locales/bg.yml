@@ -1,5 +1,8 @@
 bg:
   flash:
+    accounts:
+      already_has_account: "Вече имате акаунт."
+      created_successfully: "Акаунтът беше създаден успешно."
     auth:
       unauthorized: "Неразрешен достъп"
       sign_in_error: "Възникна грешка при влизането. Моля, опитайте отново."
@@ -7,9 +10,10 @@ bg:
       logged_out: "Успешно излязохте от профила си."
       already_logged_in: "Не можете да влезете в тази страница, докато сте в профила си."
       rate_limited: "Опитайте отново по-късно."
-    accounts:
-      already_has_account: "Вече имате акаунт."
-      created_successfully: "Акаунтът беше създаден успешно."
+    bookings:
+      created_successfully: "Резервацията беше успешно създадена."
+      updated_successfully: "Резервацията беше успешно актуализирана."
+      destroyed_successfully: "Резервацията беше успешно отменена."
     properties:
       created_successfully: "Имотът беше успешно създаден."
       updated_successfully: "Имотът беше успешно актуализиран."

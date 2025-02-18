@@ -1,0 +1,9 @@
+<h1>Booking Details</h1>
+
+<p>Adults: <%= @booking.adults %></p>
+<p>Children: <%= @booking.children %></p>
+<p>Deposit: <%= number_to_currency(@booking.deposit) %></p>
+<p>Notes: <%= @booking.notes %></p>
+
+<%= link_to "Edit", edit_property_room_booking_path(@property, @room, @booking) %> |
+<%= link_to "Back to Bookings", property_room_bookings_path(@property, @room) %>

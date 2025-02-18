@@ -1,5 +1,8 @@
 en:
   flash:
+    accounts:
+      already_has_account: "You already have an account."
+      created_successfully: "Account was successfully created."
     auth:
       unauthorized: "Unauthorized"
       sign_in_error: "There was an error signing in. Please try again."
@@ -7,9 +10,10 @@ en:
       logged_out: "You have been logged out successfully."
       already_logged_in: "Can't access this page while logged in."
       rate_limited: "Try again later."
-    accounts:
-      already_has_account: "You already have an account."
-      created_successfully: "Account was successfully created."
+    bookings:
+      created_successfully: "Booking was successfully created."
+      updated_successfully: "Booking was successfully updated."
+      destroyed_successfully: "Booking was successfully canceled."
     properties:
       created_successfully: "Property was successfully created."
       updated_successfully: "Property was successfully updated."

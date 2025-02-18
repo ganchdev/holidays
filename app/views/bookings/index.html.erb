@@ -1,0 +1,30 @@
+<% content_for :title, "Bookings" %>
+
+<h1>Bookings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Adults</th>
+      <th>Children</th>
+      <th>Deposit</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr id="<%= dom_id booking %>">
+        <td><%= booking.adults %></td>
+        <td><%= booking.children %></td>
+        <td><%= number_to_currency(booking.deposit) %></td>
+        <td>
+          <%= link_to "Show", property_room_booking_path(@property, @room, booking) %> |
+          <%= link_to "Edit", edit_property_room_booking_path(@property, @room, booking) %> |
+          <%= link_to "Cancel", property_room_booking_path(@property, @room, booking), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "New Booking", new_property_room_booking_path(@property, @room) %>

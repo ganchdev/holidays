@@ -1,0 +1,25 @@
+<%= form_with(model: [@property, @room, booking], local: true) do |form| %>
+  <div>
+    <%= form.label :adults %>
+    <%= form.number_field :adults %>
+  </div>
+
+  <div>
+    <%= form.label :children %>
+    <%= form.number_field :children %>
+  </div>
+
+  <div>
+    <%= form.label :deposit %>
+    <%= form.number_field :deposit, step: "0.01" %>
+  </div>
+
+  <div>
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
