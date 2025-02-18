@@ -27,15 +27,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_222710) do
     t.index ["user_id"], name: "index_authorized_users_on_user_id"
   end
 
-  create_table "properties", force: :cascade do |t|
-    t.integer "account_id", null: false
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_properties_on_account_id"
-  end
-
-  create_table "reservations", force: :cascade do |t|
+  create_table "bookings", force: :cascade do |t|
     t.integer "room_id", null: false
     t.integer "adults", default: 1
     t.integer "children", default: 0
@@ -44,7 +36,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_222710) do
     t.datetime "cancelled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_reservations_on_room_id"
+    t.index ["room_id"], name: "index_bookings_on_room_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.integer "account_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_properties_on_account_id"
   end
 
   create_table "rooms", force: :cascade do |t|

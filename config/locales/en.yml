@@ -63,7 +63,7 @@ en:
               not_a_number: "must be a number"
               greater_than: "must be greater than 0"
               not_an_integer: "must be an integer"
-        reservation:
+        booking:
           attributes:
             adults:
               blank: "can't be blank"

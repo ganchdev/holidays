@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: reservations
+# Table name: bookings
 #
 #  id           :integer          not null, primary key
 #  adults       :integer          default(1)
@@ -16,9 +16,9 @@
 #
 # Indexes
 #
-#  index_reservations_on_room_id  (room_id)
+#  index_bookings_on_room_id  (room_id)
 #
-class Reservation < ApplicationRecord
+class Booking < ApplicationRecord
 
   belongs_to :room
 

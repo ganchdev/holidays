@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :accounts, only: [:new, :create]
   resources :properties do
     resources :rooms do
-      resources :reservations
+      resources :bookings
     end
   end
 

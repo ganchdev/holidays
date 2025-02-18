@@ -34,7 +34,7 @@ bg:
               not_a_number: "трябва да бъде число"
               greater_than: "трябва да бъде по-голямо от 0"
               not_an_integer: "трябва да бъде цяло число"
-        reservation:
+        booking:
           attributes:
             adults:
               blank: "не може да бъде празно"
