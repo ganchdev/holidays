@@ -9,7 +9,9 @@
 #  cancelled_at :datetime
 #  children     :integer          default(0)
 #  deposit      :decimal(10, 2)
+#  ends_at      :datetime
 #  notes        :text
+#  starts_at    :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  room_id      :integer          not null
@@ -23,11 +25,13 @@ one:
   adults: 2
   children: 1
   notes: MyText
-  cancelled_at: 2025-02-16 19:11:43
+  starts_at: 2025-02-16 19:11:43
+  ends_at: 2025-02-20 19:11:43
 
 two:
   room: two
   adults: 1
   children: 2
   notes: MyText
-  cancelled_at: 2025-02-16 19:11:43
+  starts_at: 2025-02-16 19:11:43
+  ends_at: 2025-02-20 19:11:43

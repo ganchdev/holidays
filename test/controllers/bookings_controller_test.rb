@@ -32,7 +32,9 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
           adults: @booking.adults,
           children: @booking.children,
           deposit: @booking.deposit,
-          notes: @booking.notes
+          notes: @booking.notes,
+          starts_at: DateTime.now + 1.month,
+          ends_at: (DateTime.now + 1.month) + 3.days
         }
       }
     end

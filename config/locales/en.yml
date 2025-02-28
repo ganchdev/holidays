@@ -64,6 +64,10 @@ en:
               not_an_integer: "must be an integer"
         booking:
           attributes:
+            base:
+              overlapping_booking: "Booking times overlap with an existing booking"
+            ends_at:
+              after_starts_at: "must be after the start time"
             adults:
               blank: "can't be blank"
               not_a_number: "must be a number"

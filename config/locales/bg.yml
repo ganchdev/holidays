@@ -64,6 +64,10 @@ bg:
               not_an_integer: "трябва да бъде цяло число"
         booking:
           attributes:
+            base:
+              overlapping_booking: "Времето на резервацията се припокрива със съществуваща резервация"
+            ends_at:
+              after_starts_at: "трябва да бъде след началото на резервацията"
             adults:
               blank: "не може да бъде празно"
               not_a_number: "трябва да бъде число"

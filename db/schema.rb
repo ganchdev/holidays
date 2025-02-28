@@ -34,6 +34,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_16_222710) do
     t.text "notes"
     t.decimal "deposit", precision: 10, scale: 2
     t.datetime "cancelled_at"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_bookings_on_room_id"

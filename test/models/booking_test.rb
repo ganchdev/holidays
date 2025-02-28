@@ -9,7 +9,9 @@
 #  cancelled_at :datetime
 #  children     :integer          default(0)
 #  deposit      :decimal(10, 2)
+#  ends_at      :datetime
 #  notes        :text
+#  starts_at    :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  room_id      :integer          not null
@@ -27,7 +29,9 @@ class BookingTest < ActiveSupport::TestCase
       adults: 2,
       children: 1,
       deposit: 100.50,
-      room: rooms(:one)
+      room: rooms(:one),
+      starts_at: DateTime.now + 1.day,
+      ends_at: DateTime.now + 5.days
     )
   end
 
@@ -93,6 +97,54 @@ class BookingTest < ActiveSupport::TestCase
 
   test "should respond to room association" do
     assert_respond_to @booking, :room
+  end
+
+  test "should not allow overlapping bookings for the same room" do # rubocop:disable Metrics/BlockLength
+    @booking.save!
+
+    @booking = Booking.new(
+      adults: 2,
+      children: 1,
+      deposit: 100.50,
+      room: rooms(:one),
+      starts_at: DateTime.now + 1.day,
+      ends_at: DateTime.now + 5.days
+    )
+
+    overlapping_booking = Booking.new(
+      adults: 2,
+      children: 1,
+      deposit: 100.50,
+      room: rooms(:one),
+      starts_at: @booking.starts_at + 1.day,
+      ends_at: @booking.ends_at - 1.day
+    )
+
+    overlapping_booking_two = Booking.new(
+      adults: 2,
+      children: 1,
+      deposit: 100.50,
+      room: rooms(:one),
+      starts_at: @booking.starts_at - 1.day,
+      ends_at: @booking.starts_at + 1.day
+    )
+
+    overlapping_booking_three = Booking.new(
+      adults: 2,
+      children: 1,
+      deposit: 100.50,
+      room: rooms(:one),
+      starts_at: @booking.ends_at - 1.day,
+      ends_at: @booking.ends_at + 1.day
+    )
+
+    assert_not overlapping_booking.valid?, "Saved an overlapping booking"
+    assert_not overlapping_booking_two.valid?, "Saved an overlapping booking"
+    assert_not overlapping_booking_three.valid?, "Saved an overlapping booking"
+
+    expected_message = I18n.t("activerecord.errors.models.booking.attributes.base.overlapping_booking",
+                              default: "Booking times overlap with an existing booking")
+    assert_includes overlapping_booking.errors[:base], expected_message
   end
 
 end
