@@ -17,9 +17,8 @@ Rails.application.routes.draw do
 
   resources :accounts, only: [:new, :create]
   resources :properties do
-    resources :rooms do
-      resources :bookings
-    end
+    resources :rooms
+    resources :bookings
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

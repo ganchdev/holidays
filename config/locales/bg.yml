@@ -23,6 +23,11 @@ bg:
       updated_successfully: "Стаята беше успешно актуализирана."
       destroyed_successfully: "Стаята беше успешно изтрита."
   activerecord:
+    attributes:
+      booking:
+        starts_at: "Дата на настаняване"
+        ends_at: "Дата на напускане"
+        deposit: "Депозит"
     errors:
       models:
         account:
@@ -66,7 +71,10 @@ bg:
           attributes:
             base:
               overlapping_booking: "Времето на резервацията се припокрива със съществуваща резервация"
+            starts_at:
+              blank: "не може да бъде празна"
             ends_at:
+              blank: "не може да бъде празна"
               after_starts_at: "трябва да бъде след началото на резервацията"
             adults:
               blank: "не може да бъде празно"

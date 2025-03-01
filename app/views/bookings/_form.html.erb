@@ -1,4 +1,6 @@
 <%= form_with(model: [@property, @room, booking], local: true) do |form| %>
+  <%= form_errors booking %>
+
   <div>
     <%= form.label :adults %>
     <%= form.number_field :adults %>

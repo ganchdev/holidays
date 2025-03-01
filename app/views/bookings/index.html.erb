@@ -18,13 +18,13 @@
         <td><%= booking.children %></td>
         <td><%= number_to_currency(booking.deposit) %></td>
         <td>
-          <%= link_to "Show", property_room_booking_path(@property, @room, booking) %> |
-          <%= link_to "Edit", edit_property_room_booking_path(@property, @room, booking) %> |
-          <%= link_to "Cancel", property_room_booking_path(@property, @room, booking), method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= link_to "Show", property_booking_path(@property, booking) %> |
+          <%= link_to "Edit", edit_property_booking_path(@property, booking) %> |
+          <%= link_to "Cancel", property_booking_path(@property, booking), method: :delete, data: { confirm: "Are you sure?" } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to "New Booking", new_property_room_booking_path(@property, @room) %>
+<%= link_to "New Booking", new_property_booking_path(@property) %>

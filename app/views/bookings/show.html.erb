@@ -5,5 +5,5 @@
 <p>Deposit: <%= number_to_currency(@booking.deposit) %></p>
 <p>Notes: <%= @booking.notes %></p>
 
-<%= link_to "Edit", edit_property_room_booking_path(@property, @room, @booking) %> |
-<%= link_to "Back to Bookings", property_room_bookings_path(@property, @room) %>
+<%= link_to "Edit", edit_property_booking_path(@property, @booking) %> |
+<%= link_to "Back to Bookings", property_bookings_path(@property) %>

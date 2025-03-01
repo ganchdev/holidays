@@ -23,6 +23,11 @@ en:
       updated_successfully: "Room was successfully updated."
       destroyed_successfully: "Room was successfully destroyed."
   activerecord:
+    attributes:
+      booking:
+        starts_at: "Start Time"
+        ends_at: "End Time"
+        deposit: "Deposit"
     errors:
       models:
         account:
@@ -66,7 +71,10 @@ en:
           attributes:
             base:
               overlapping_booking: "Booking times overlap with an existing booking"
+            starts_at:
+              blank: "can't be blank"
             ends_at:
+              blank: "can't be blank"
               after_starts_at: "must be after the start time"
             adults:
               blank: "can't be blank"

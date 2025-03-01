@@ -7,28 +7,26 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
     @property = properties(:one)
-    @room = rooms(:one)
     @booking = bookings(:one)
-
-    @room.bookings << @booking
 
     set_current_user(@user)
   end
 
   test "should get index" do
-    get property_room_bookings_url(@property, @room)
+    get property_bookings_url(@property)
     assert_response :success
   end
 
   test "should get new" do
-    get new_property_room_booking_url(@property, @room)
+    get new_property_booking_url(@property)
     assert_response :success
   end
 
   test "should create booking" do
     assert_difference("Booking.count", 1) do
-      post property_room_bookings_url(@property, @room), params: {
+      post property_bookings_url(@property), params: {
         booking: {
+          room_id: @property.rooms.first.id,
           adults: @booking.adults,
           children: @booking.children,
           deposit: @booking.deposit,
@@ -39,21 +37,21 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to property_room_booking_url(@property, @room, Booking.last)
+    assert_redirected_to property_booking_url(@property, Booking.last)
   end
 
   test "should show booking" do
-    get property_room_booking_url(@property, @room, @booking)
+    get property_booking_url(@property, @booking)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_property_room_booking_url(@property, @room, @booking)
+    get edit_property_booking_url(@property, @booking)
     assert_response :success
   end
 
   test "should update booking" do
-    patch property_room_booking_url(@property, @room, @booking), params: {
+    patch property_booking_url(@property, @booking), params: {
       booking: {
         adults: @booking.adults,
         children: @booking.children,
@@ -61,15 +59,15 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
         notes: @booking.notes
       }
     }
-    assert_redirected_to property_room_booking_url(@property, @room, @booking)
+    assert_redirected_to property_booking_url(@property, @booking)
   end
 
   test "should destroy booking" do
     assert_difference("Booking.count", -1) do
-      delete property_room_booking_url(@property, @room, @booking)
+      delete property_booking_url(@property, @booking)
     end
 
-    assert_redirected_to property_room_bookings_url(@property, @room)
+    assert_redirected_to property_bookings_url(@property)
   end
 
 end

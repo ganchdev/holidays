@@ -18,6 +18,7 @@ class Property < ApplicationRecord
 
   belongs_to :account
   has_many :rooms, dependent: :destroy
+  has_many :bookings, through: :rooms
 
   validates :name, presence: true, uniqueness: { scope: :account_id, message: :taken }
 
