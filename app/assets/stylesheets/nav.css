@@ -1,0 +1,20 @@
+nav {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: var(--pico-primary-background);
+}
+
+nav li * {
+  color: white;
+}
+
+nav li a[type="button"] {
+  font-weight: bolder;
+  background-color: color-mix(
+    in srgb,
+    var(--pico-background-color) 65%,
+    black 35%
+  );
+  display: inline-flex !important;
+  margin: 0 !important;
+}

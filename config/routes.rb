@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   end
 
   resources :accounts, only: [:new, :create]
-  resources :properties do
-    resources :rooms
+  resources :properties, except: [:index] do
+    resources :rooms, except: [:show]
     resources :bookings
   end
 

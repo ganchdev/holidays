@@ -2,6 +2,9 @@
 
 class BookingsController < ApplicationController
 
+  layout "bookings", only: [:index, :show]
+  layout "application", only: [:new, :create]
+
   before_action :set_property
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
 
@@ -29,7 +32,7 @@ class BookingsController < ApplicationController
 
     if @booking.save
       redirect_to property_booking_path(@property, @booking),
-                  notice: t("flash.bookings.created_successfully")
+        notice: t("flash.bookings.created_successfully")
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,7 +42,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       redirect_to property_booking_path(@property, @booking),
-                  notice: t("flash.bookings.updated_successfully"), status: :see_other
+        notice: t("flash.bookings.updated_successfully"), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -49,8 +52,8 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy!
     redirect_to property_bookings_path(@property),
-                notice: t("flash.bookings.destroyed_successfully"),
-                status: :see_other
+      notice: t("flash.bookings.destroyed_successfully"),
+      status: :see_other
   end
 
   private

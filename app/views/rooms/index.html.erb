@@ -1,16 +1,31 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Rooms" %>
+<%= render_nav title: "Rooms", back_url: edit_property_path(@property) do %>
+  <li>
+    <%= link_to "New room", new_property_room_path(@property), type: "button", class: "primary" %>
+  </li>
+<% end %>
 
-<h1>Rooms</h1>
-
-<div id="rooms">
-  <% @rooms.each do |room| %>
-    <%= render room %>
-    <p>
-      <%= link_to "Show this room", property_room_path(@property, room) %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New room", new_property_room_path(@property) %>
+<% if @rooms.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Capacity</th>
+        <th scope="col">Color</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <th scope="row"><%= room.name %></th>
+          <td><%= room.capacity %></td>
+          <td><%= room.color %></td>
+          <td><%= link_to "Edit", edit_property_room_path(@property, room) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>No rooms available</h3>
+<% end %>

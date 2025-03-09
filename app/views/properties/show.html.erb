@@ -1,9 +1,9 @@
-<%= render @property %>
+<% content_for :title, @property.name %>
+<%= render_nav title: @property.name, back_url: root_path do %>
+  <li>
+    <%= link_to "Edit", edit_property_path(@property), type: "button", class: "primary" %>
+  </li>
+<% end %>
 
-<div>
-  <%= link_to "Rooms", property_rooms_path(@property) %>
-  <%= link_to "Edit this property", edit_property_path(@property) %> |
-  <%= link_to "Back to properties", properties_path %>
-
-  <%= button_to "Destroy this property", property_path(@property), method: :delete %>
-</div>
+<%= button_to "New booking", new_property_booking_path(@property), method: :get %>
+<%= button_to "Bookings", property_bookings_path(@property), method: :get, class: "outline" %>

@@ -11,11 +11,6 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
     set_current_user(@user)
   end
 
-  test "should get index" do
-    get properties_url
-    assert_response :success
-  end
-
   test "should get new" do
     get new_property_url
     assert_response :success

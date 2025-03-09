@@ -1,14 +1,7 @@
-<h1>Dashboard#index</h1>
+<% content_for :title, "Dashboard" %>
 
-<h2>Properties</h2>
-<%= link_to "New property", new_property_path %>
-<ul>
+<ul class="list">
   <% Current.account.properties.each do |prop| %>
-    <li><%= link_to prop.name, property_path(prop) %></li>
+    <li><%= link_to prop.name, property_path(prop), class: "" %></li>
   <% end %>
 </ul>
-
-<hr>
-<%= link_to logout_path, method: :delete, class: "contrast", data: { turbo: false } do %>
-  Logout
-<% end %>

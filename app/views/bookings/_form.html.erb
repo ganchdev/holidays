@@ -2,6 +2,11 @@
   <%= form_errors booking %>
 
   <div>
+    <%= form.label :room_id %>
+    <%= form.select :room_id, options_for_select(@property.rooms.map { |r| [r.name, r.id] }), { include_blank: "Select a room", required: true } %>
+  </div>
+
+  <div>
     <%= form.label :adults %>
     <%= form.number_field :adults %>
   </div>
@@ -12,8 +17,18 @@
   </div>
 
   <div>
+    <%= form.label :starts_at %>
+    <%= form.date_field :starts_at, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :ends_at %>
+    <%= form.date_field :ends_at, required: true %>
+  </div>
+
+  <div>
     <%= form.label :deposit %>
-    <%= form.number_field :deposit, step: "0.01" %>
+    <%= form.number_field :deposit, step: "0.01", min: 0 %>
   </div>
 
   <div>

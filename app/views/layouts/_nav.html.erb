@@ -1,0 +1,23 @@
+<%# locals: (title:, back_url:, menu_content:) -%>
+
+<% content_for :nav do %>
+  <nav>
+    <ul>
+      <% if back_url %>
+        <li><%= link_to "←", back_url, method: :get, type: "button", class: "primary" %></li>
+      <% end %>
+      <li>
+        <% if title %>
+          <strong><%= title %></strong>
+        <% end %>
+      </li>
+    </ul>
+    <ul>
+      <% if menu_content %>
+        <%= menu_content %>
+      <% else %>
+        <li></li>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>

@@ -26,12 +26,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
     assert_difference("Room.count", 1) do
       post property_rooms_url(@property), params: { room: { name: "New Room", capacity: 10, color: "Blue" } }
     end
-    assert_redirected_to property_room_path(@property, Room.last)
-  end
-
-  test "should show room" do
-    get property_room_url(@property, @room)
-    assert_response :success
+    assert_redirected_to property_rooms_path(@property)
   end
 
   test "should get edit" do
@@ -41,7 +36,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update room" do
     patch property_room_url(@property, @room), params: { room: { name: "Updated Name", capacity: 15, color: "Red" } }
-    assert_redirected_to property_room_path(@property, @room)
+    assert_redirected_to property_rooms_path(@property)
     @room.reload
     assert_equal "Updated Name", @room.name
     assert_equal 15, @room.capacity

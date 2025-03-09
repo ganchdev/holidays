@@ -4,11 +4,6 @@ class PropertiesController < ApplicationController
 
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
-  # GET /properties
-  def index
-    @properties = Current.account.properties
-  end
-
   # GET /properties/:id
   def show
   end

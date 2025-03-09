@@ -1,12 +1,12 @@
-<% content_for :title, "Editing property" %>
-
-<h1>Editing property</h1>
+<% content_for :title, "Editing #{@property.name}" %>
+<%= render_nav title: "Editing property", back_url: property_path(@property) do %>
+  <li>
+    <%= link_to "Rooms", property_rooms_path(@property), type: "button", class: "primary" %>
+  </li>
+<% end %>
 
 <%= render "form", property: @property %>
 
-<br>
-
 <div>
-  <%= link_to "Show this property", property_path(@property) %> |
-  <%= link_to "Back to properties", properties_path %>
+  <%= button_to "Destroy this property", property_path(@property), class: "secondary", method: :delete, data: { turbo_confirm: "Are you sure?" } %>
 </div>

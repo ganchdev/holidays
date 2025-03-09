@@ -1,4 +1,9 @@
 <% content_for :title, "Bookings" %>
+<%= render_nav title: "Bookings", back_url: property_path(@property) do %>
+  <li>
+    <%= link_to "Today", "#" %>
+  </li>
+<% end %>
 
 <h1>Bookings</h1>
 

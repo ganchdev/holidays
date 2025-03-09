@@ -1,12 +1,4 @@
 <% content_for :title, "Editing room" %>
-
-<h1>Editing room</h1>
+<%= render_nav title: "Editing room #{@room.name}", back_url: property_rooms_path(@property) %>
 
 <%= render "form", room: @room %>
-
-<br>
-
-<div>
-  <%= link_to "Show this room", property_room_path(@property, @room) %> |
-  <%= link_to "Back to rooms", property_rooms_path(@property) %>
-</div>

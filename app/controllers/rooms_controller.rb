@@ -3,15 +3,11 @@
 class RoomsController < ApplicationController
 
   before_action :set_property
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :set_room, only: [:edit, :update, :destroy]
 
   # GET /properties/:property_id/rooms
   def index
     @rooms = @property.rooms
-  end
-
-  # GET /properties/:property_id/rooms/:id
-  def show
   end
 
   # GET /properties/:property_id/rooms/new
@@ -28,7 +24,7 @@ class RoomsController < ApplicationController
     @room = @property.rooms.build(room_params)
 
     if @room.save
-      redirect_to property_room_path(@property, @room), notice: t("flash.rooms.created_successfully")
+      redirect_to property_rooms_path(@property), notice: t("flash.rooms.created_successfully")
     else
       render :new, status: :unprocessable_entity
     end
@@ -37,8 +33,8 @@ class RoomsController < ApplicationController
   # PATCH/PUT /properties/:property_id/rooms/:id
   def update
     if @room.update(room_params)
-      redirect_to property_room_path(@property, @room), notice: t("flash.rooms.updated_successfully"),
-                                                        status: :see_other
+      redirect_to property_rooms_path(@property), notice: t("flash.rooms.updated_successfully"),
+                                                  status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
