@@ -3,8 +3,10 @@
 <% content_for :nav do %>
   <nav>
     <ul>
-      <% if back_url %>
-        <li><%= link_to "←", back_url, method: :get, type: "button", class: "primary" %></li>
+      <% if back_url == "history.back()" %>
+        <li><%= link_to_with_icon "", "arrow-left", icon_options: { height: 26, width: 26 }, onclick: "history.back()", type: "button", class: "primary" %></li>
+      <% else %>
+        <li><%= link_to_with_icon back_url, "arrow-left", icon_options: { height: 26, width: 26 }, method: :get, type: "button", class: "primary" %></li>
       <% end %>
       <li>
         <% if title %>

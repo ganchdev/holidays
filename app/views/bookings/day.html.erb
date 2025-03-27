@@ -1,0 +1,11 @@
+<% content_for :title, "Bookings" %>
+<%= render_nav title: @day.strftime("%a, %d %b %Y"), back_url: "history.back()" do %>
+  <li>
+    <%= link_to "New booking", new_property_booking_path(back_to: "history.back()", day: @day), type: "button" %>
+  </li>
+<% end %>
+
+<% @bookings.each do |b| %>
+  <%= b.inspect %>
+  <br>
+<% end %>

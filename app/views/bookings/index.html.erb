@@ -1,35 +1,33 @@
 <% content_for :title, "Bookings" %>
 <%= render_nav title: "Bookings", back_url: property_path(@property) do %>
   <li>
-    <%= link_to "Today", "#" %>
+    <%= link_to "Today", property_bookings_path, type: "button" %>
   </li>
 <% end %>
 
-<h1>Bookings</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Adults</th>
-      <th>Children</th>
-      <th>Deposit</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookings.each do |booking| %>
-      <tr id="<%= dom_id booking %>">
-        <td><%= booking.adults %></td>
-        <td><%= booking.children %></td>
-        <td><%= number_to_currency(booking.deposit) %></td>
-        <td>
-          <%= link_to "Show", property_booking_path(@property, booking) %> |
-          <%= link_to "Edit", edit_property_booking_path(@property, booking) %> |
-          <%= link_to "Cancel", property_booking_path(@property, booking), method: :delete, data: { confirm: "Are you sure?" } %>
-        </td>
-      </tr>
+<div data-controller="calendar">
+  <div data-calendar-target="weekHeader"></div>
+  <ul data-calendar-target="list">
+    <% @weeks.each do |week| %>
+      <li class="week" data-calendar-target="week" data-week="<%= week[:start_date].to_s %>">
+        <ul class="weekdays">
+          <% week[:days].each do |day| %>
+            <li class="weekday" >
+              <%= link_to day_property_bookings_path(@property, day: day[0]), class: "weekday-link", data: { turbo_prefetch: false } do %>
+                <div class="date">
+                  <span><%= day[0].to_date.strftime("%d") %></span>
+                  <span><%= day[0].to_date.strftime("%a") %></span>
+                </div>
+                <div class="bookings">
+                  <% day[1].each do |booking| %>
+                    <span><%= booking.room.name %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
     <% end %>
-  </tbody>
-</table>
-
-<%= link_to "New Booking", new_property_booking_path(@property) %>
+  </ul>
+</div>

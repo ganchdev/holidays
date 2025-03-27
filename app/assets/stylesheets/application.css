@@ -8,3 +8,76 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+[data-calendar-target="weekHeader"] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  border-bottom: 1px solid lightgray;
+}
+
+[data-calendar-target="list"] {
+  height: 80vh; /* Full viewport height */
+  overflow-y: scroll; /* Enable vertical scrolling */
+  scroll-snap-type: y mandatory; /* Enable vertical snap scrolling */
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+}
+
+/* Individual week item */
+[data-calendar-target="list"] [data-calendar-target="week"] {
+  scroll-snap-align: start; /* Snap each week to the top */
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--pico-primary-background);
+}
+
+.weekdays {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch; /* Make sure all items stretch evenly */
+  height: 100%; /* Ensure it fills the full height */
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure each weekday fills the space evenly */
+.weekday {
+  flex: 1; /* Ensure all weekdays take equal height */
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid dimgray; /* Optional: Visual separation */
+}
+
+.weekday-link {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+/* Remove border from last weekday */
+.weekday:last-child {
+  border-bottom: none;
+}
+
+.date {
+  width: 80px; /* or whatever fixed size you want */
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .bookings fills remaining space */
+.bookings {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap; /* optional: wrap if many bookings */
+  gap: 0.5rem; /* spacing between booking names */
+}
