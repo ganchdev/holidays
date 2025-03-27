@@ -2,6 +2,28 @@
 
 module ApplicationHelper
 
+  include OcticonsHelper
+
+  alias icon octicon
+
+  # rubocop:disable Style/OptionalArguments
+  def button_to_with_icon(name = nil, path, icon_name, icon_options: {}, **html_options)
+    button_to path, **html_options do
+      concat(icon(icon_name, **icon_options))
+      concat(" ")
+      concat(name)
+    end
+  end
+
+  def link_to_with_icon(name = nil, path, icon_name, icon_options: {}, **html_options)
+    link_to path, **html_options do
+      concat(icon(icon_name, **icon_options))
+      concat(" ")
+      concat(name)
+    end
+  end
+  # rubocop:enable Style/OptionalArguments
+
   def form_errors(object)
     return unless object.errors.any?
 

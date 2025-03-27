@@ -33,9 +33,14 @@ class Booking < ApplicationRecord
   validate :ends_at_after_starts_at
   validate :no_overlapping_bookings
 
-  scope :upcoming, -> { where("starts_at > ?", DateTime.now) }
-  scope :past, -> { where("ends_at < ?", DateTime.now) }
-  scope :current, -> { where("starts_at <= ? AND ends_at >= ?", DateTime.now, DateTime.now) }
+  scope :upcoming, -> { where("starts_at >= ?", Date.current.beginning_of_day + 1.day) }
+  scope :past, -> { where("ends_at < ?", Date.current.beginning_of_day) }
+  scope :current, lambda {
+    where("starts_at < ? AND ends_at >= ?", Date.current.beginning_of_day + 1.day, Date.current.beginning_of_day)
+  }
+  scope :for_day, lambda { |day|
+    where("starts_at < ? AND ends_at > ?", day.to_date + 1, day.to_date)
+  }
 
   private
 
@@ -48,9 +53,14 @@ class Booking < ApplicationRecord
   end
 
   def no_overlapping_bookings
+    return if starts_at.blank? || ends_at.blank? || room_id.blank?
+
+    start_time = starts_at.beginning_of_day
+    end_time   = ends_at.end_of_day
+
     overlapping_bookings = Booking.where(room_id: room_id)
                                   .where.not(id: id)
-                                  .where("DATE(starts_at) < DATE(?) AND DATE(ends_at) > DATE(?)", ends_at, starts_at)
+                                  .where("starts_at < ? AND ends_at > ?", end_time, start_time)
 
     return unless overlapping_bookings.exists?
 

@@ -24,4 +24,11 @@ class Room < ApplicationRecord
   validates :name, presence: true
   validates :capacity, presence: true, numericality: { greater_than: 0, only_integer: true }
 
+  scope :available_between, lambda { |start_date, end_date|
+    where.not(id: joins(:bookings)
+                  .where("bookings.starts_at < ? AND bookings.ends_at > ?",
+                         end_date.to_datetime, start_date.to_datetime)
+                  .select("rooms.id"))
+  }
+
 end

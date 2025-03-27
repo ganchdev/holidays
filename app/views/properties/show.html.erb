@@ -5,5 +5,5 @@
   </li>
 <% end %>
 
-<%= button_to "New booking", new_property_booking_path(@property), method: :get %>
+<%= button_to_with_icon "New booking", new_property_booking_path(@property), "plus", method: :get %>
 <%= button_to "Bookings", property_bookings_path(@property), method: :get, class: "outline" %>

@@ -18,7 +18,7 @@
 
   <div>
     <%= form.label :starts_at %>
-    <%= form.date_field :starts_at, required: true %>
+    <%= form.date_field :starts_at, required: true, value: form.object.starts_at || params[:day] %>
   </div>
 
   <div>
