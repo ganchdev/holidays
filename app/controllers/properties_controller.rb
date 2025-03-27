@@ -2,7 +2,7 @@
 
 class PropertiesController < ApplicationController
 
-  before_action :set_property, only: [:show, :edit, :update, :destroy]
+  before_action :find_property, only: [:show, :edit, :update, :destroy]
 
   # GET /properties/:id
   def show
@@ -45,7 +45,7 @@ class PropertiesController < ApplicationController
 
   private
 
-  def set_property
+  def find_property
     @property = Current.account.properties.find(params[:id])
   end
 

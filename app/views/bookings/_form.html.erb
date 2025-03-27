@@ -1,9 +1,23 @@
-<%= form_with(model: [@property, @room, booking], local: true) do |form| %>
+<%= form_with model: [@property, @room, booking], id: :booking_form, data: { controller: "form-reload" } do |form| %>
   <%= form_errors booking %>
 
   <div>
+    <%= form.label :starts_at %>
+    <%= form.date_field :starts_at, required: true, value: booking.starts_at || params[:day], data: { action: "change->form-reload#trigger" } %>
+  </div>
+
+  <div>
+    <%= form.label :ends_at %>
+    <%= form.date_field :ends_at, min: (params[:day].presence || booking.starts_at)&.to_date&.+(1.day), required: true, data: { action: "change->form-reload#trigger" } %>
+  </div>
+
+  <div>
     <%= form.label :room_id %>
-    <%= form.select :room_id, options_for_select(@property.rooms.map { |r| [r.name, r.id] }), { include_blank: "Select a room", required: true } %>
+    <% if local_assigns[:available_rooms].present? %>
+        <%= form.select :room_id, options_for_select(available_rooms.map { |r| [r.name, r.id] }), { include_blank: "Select a room" }, required: true %>
+    <% else %>
+        <%= form.select :room_id, [], { include_blank: "Select dates" }, disabled: true %>
+    <% end %>
   </div>
 
   <div>
@@ -14,16 +28,6 @@
   <div>
     <%= form.label :children %>
     <%= form.number_field :children %>
-  </div>
-
-  <div>
-    <%= form.label :starts_at %>
-    <%= form.date_field :starts_at, required: true, value: form.object.starts_at || params[:day] %>
-  </div>
-
-  <div>
-    <%= form.label :ends_at %>
-    <%= form.date_field :ends_at, required: true %>
   </div>
 
   <div>

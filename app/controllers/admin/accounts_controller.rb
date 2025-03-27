@@ -3,7 +3,7 @@
 module Admin
   class AccountsController < BaseController
 
-    before_action :set_account, only: [:edit, :update, :destroy]
+    before_action :find_account, only: [:edit, :update, :destroy]
 
     def index
       @accounts = Account.all
@@ -41,7 +41,7 @@ module Admin
 
     private
 
-    def set_account
+    def find_account
       @account = Account.find(params[:id])
     end
 

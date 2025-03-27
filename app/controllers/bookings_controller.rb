@@ -5,12 +5,12 @@ class BookingsController < ApplicationController
   layout "bookings", only: [:index, :show]
   layout "application", only: [:new, :create]
 
-  before_action :set_property
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :find_property
+  before_action :find_booking, only: [:show, :edit, :update, :destroy]
 
   # GET /properties/:property_id/bookings
   def index
-    @weeks = weeks_with_bookings_for_year(Date.today.year)
+    @weeks ||= CalendarGeneratorService.new(property: @property).call
   end
 
   # GET /properties/:property_id/bookings/:id
@@ -41,6 +41,26 @@ class BookingsController < ApplicationController
   def create
     @booking = @property.bookings.build(booking_params)
 
+    if params[:reload].present?
+      if @booking.starts_at.present? &&
+         @booking.ends_at.present? &&
+         @booking.ends_at.to_date > @booking.starts_at.to_date
+
+        available_rooms = @property.rooms.available_between(@booking.starts_at, @booking.ends_at)
+      else
+        available_rooms = nil
+      end
+
+      render turbo_stream:
+        turbo_stream.replace(
+          :booking_form,
+          method: :morph,
+          partial: "bookings/form",
+          locals: { booking: @booking, available_rooms: available_rooms }
+        )
+      return
+    end
+
     if @booking.save
       redirect_to property_booking_path(@property, @booking),
                   notice: t("flash.bookings.created_successfully")
@@ -70,44 +90,16 @@ class BookingsController < ApplicationController
 
   private
 
-  def set_property
+  def find_property
     @property = Current.account.properties.find(params[:property_id])
   end
 
-  def set_booking
+  def find_booking
     @booking = @property.bookings.find(params[:id])
   end
 
   def booking_params
     params.expect(booking: [:room_id, :adults, :children, :deposit, :notes, :starts_at, :ends_at])
-  end
-
-  def weeks_with_bookings_for_year(year) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity
-    start_date = Date.new(year, 1, 1)
-    end_date = Date.new(year, 12, 31)
-    weeks = []
-
-    bookings = @property.bookings.where("starts_at < ? AND ends_at > ?", end_date + 1, start_date).to_a
-
-    grouped = bookings.flat_map do |b|
-      (b.starts_at.to_date...(b.ends_at.to_date)).map { |day| [day, b] }
-    end.group_by(&:first).transform_values { |arr| arr.map(&:last) } # rubocop:disable Style/MultilineBlockChain
-
-    # Start on the Monday of the first week
-    current_week_start = start_date - ((start_date.wday - 1) % 7)
-
-    while current_week_start <= end_date
-      weeks << {
-        start_date: current_week_start,
-        days: (0..6).map do |i|
-          day = current_week_start + i
-          [day, grouped[day] || []]
-        end
-      }
-      current_week_start += 7
-    end
-
-    weeks
   end
 
 end

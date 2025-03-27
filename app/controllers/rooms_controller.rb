@@ -2,8 +2,8 @@
 
 class RoomsController < ApplicationController
 
-  before_action :set_property
-  before_action :set_room, only: [:edit, :update, :destroy]
+  before_action :find_property
+  before_action :find_room, only: [:edit, :update, :destroy]
 
   # GET /properties/:property_id/rooms
   def index
@@ -48,11 +48,11 @@ class RoomsController < ApplicationController
 
   private
 
-  def set_property
+  def find_property
     @property = Current.account.properties.find(params[:property_id])
   end
 
-  def set_room
+  def find_room
     @room = @property.rooms.find(params[:id])
   end
 

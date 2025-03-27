@@ -6,12 +6,7 @@ export default class extends Controller {
   connect() {
     this.observeWeeks();
     this.scrollToCurrentWeek();
-
-    const scrollY = sessionStorage.getItem("calendar-scroll");
-    if (scrollY && this.hasListTarget) {
-      this.listTarget.scrollTop = parseInt(scrollY, 10);
-      sessionStorage.removeItem("calendar-scroll");
-    }
+    this.scrollToSaved();
 
     document.addEventListener("turbo:before-visit", this.saveScroll);
   }
@@ -29,6 +24,14 @@ export default class extends Controller {
       sessionStorage.setItem("calendar-scroll", this.listTarget.scrollTop);
     }
   };
+
+  scrollToSaved() {
+    const scrollY = sessionStorage.getItem("calendar-scroll");
+    if (scrollY && this.hasListTarget) {
+      this.listTarget.scrollTop = parseInt(scrollY, 10);
+      sessionStorage.removeItem("calendar-scroll");
+    }
+  }
 
   observeWeeks() {
     if (!this.hasWeekTarget) return;

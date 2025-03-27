@@ -24,6 +24,8 @@ class Booking < ApplicationRecord
 
   belongs_to :room
 
+  delegate :property, to: :room
+
   validates :adults, presence: true, numericality: { greater_than_or_equal_to: 1, only_integer: true }
   validates :children, numericality: { greater_than_or_equal_to: 0, only_integer: true }, allow_nil: true
   validates :deposit, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
@@ -53,14 +55,15 @@ class Booking < ApplicationRecord
   end
 
   def no_overlapping_bookings
-    return if starts_at.blank? || ends_at.blank? || room_id.blank?
+    return if property.nil? || starts_at.blank? || ends_at.blank? || room_id.blank?
 
     start_time = starts_at.beginning_of_day
     end_time   = ends_at.end_of_day
 
-    overlapping_bookings = Booking.where(room_id: room_id)
-                                  .where.not(id: id)
-                                  .where("starts_at < ? AND ends_at > ?", end_time, start_time)
+    overlapping_bookings = property.bookings
+                                   .where(room_id: room_id)
+                                   .where.not(id: id)
+                                   .where("starts_at < ? AND ends_at > ?", end_time, start_time)
 
     return unless overlapping_bookings.exists?
 
