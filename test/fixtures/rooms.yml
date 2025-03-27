@@ -28,6 +28,24 @@ two:
   color: blue
   capacity: 4
 
+three:
+  property: three
+  name: 22
+  color: blue
+  capacity: 4
+
+four:
+  property: four
+  name: 24
+  color: blue
+  capacity: 4
+
+five:
+  property: five
+  name: 24
+  color: blue
+  capacity: 4
+
 room_without_bookings:
   property: one
   name: 21
