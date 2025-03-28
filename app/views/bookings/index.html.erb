@@ -18,9 +18,9 @@
                   <span><%= day[0].to_date.strftime("%d") %></span>
                   <span><%= day[0].to_date.strftime("%a") %></span>
                 </div>
-                <div class="bookings">
+                <div class="weekday-bookings">
                   <% day[1].each do |booking| %>
-                    <span><%= booking.room.name %></span>
+                    <%= room_badge booking.room %>
                   <% end %>
                 </div>
               <% end %>

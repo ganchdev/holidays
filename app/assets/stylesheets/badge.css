@@ -1,0 +1,47 @@
+/* Badge/Pill Component for PicoCSS */
+:root {
+  --badge-padding-y: 0.25rem;
+  --badge-padding-x: 0.5rem;
+  --badge-border-radius: 0.25rem;
+  --badge-font-size: 1rem;
+  --badge-font-weight: 700;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  min-width: 2.1rem;
+  padding: 0 var(--badge-padding-x);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  line-height: 2;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-radius: var(--badge-border-radius);
+  background-color: var(--secondary);
+  color: white;
+  border: 1px solid transparent;
+}
+
+.badge.success {
+  background-color: var(--form-element-valid-border-color, #2ecc40);
+  color: white;
+}
+
+.badge.info {
+  background-color: var(--info-color, #0074d9);
+  color: white;
+}
+
+.badge.warning {
+  background-color: var(--form-element-warning-border-color, #ff851b);
+  color: white;
+}
+
+.badge.danger {
+  background-color: var(--form-element-invalid-border-color, #ff4136);
+  color: white;
+}

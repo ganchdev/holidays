@@ -51,4 +51,8 @@ module ApplicationHelper
     nav_partial.html_safe
   end
 
+  def room_badge(room)
+    content_tag :span, room.name, class: "badge", style: "background-color: #{room.color}"
+  end
+
 end
