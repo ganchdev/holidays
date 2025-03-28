@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rbs_inline: enabled
+
 # The CalendarGeneratorService generates a calendar structure for a property's bookings
 # organized by weeks and days for a specified year.
 #
@@ -19,8 +21,9 @@
 #
 class CalendarGeneratorService
 
-  # @param property [Property] the property whose bookings will be organized
-  # @param year [Integer] the year for which to generate the calendar (defaults to current year)
+  # @rbs property: Property
+  # @rbs year: Integer
+  # @rbs return: CalendarGeneratorService
   def initialize(property:, year: Date.today.year)
     @property = property
     @year = year
@@ -30,23 +33,24 @@ class CalendarGeneratorService
 
   # Generate and return the calendar structure
   #
-  # @return [Array<Hash>] an array of week hashes, each containing:
-  #   - start_date [Date] the Monday that starts the week
-  #   - days [Array<Array>] 7 day entries, each con
+  # @rbs return: Array[{ start_date: Date, days: Array[[Date, Array[Booking]]] }]
   def call
     generate_weeks(group_bookings)
   end
 
   private
 
-  attr_reader :property, :year
+  attr_reader :property #: Property
+  attr_reader :year #: Integer
 
-  # Generate a weekly calendar structure with bookings
+  # Generate a weekly calendar structure with bookings,
+  # it takes `bookings` as a hash mapping dates to arrays
+  # of bookings
   #
-  # @param bookings [Hash] a hash mapping dates to arrays of bookings
-  # @return [Array<Hash>] the constructed weekly calendar
+  # @rbs bookings: Hash[Date, Array[Booking]]
+  # @rbs return: Array[{ start_date: Date, days: Array[[Date, Array[Booking]]] }]
   def generate_weeks(bookings)
-    weeks = []
+    weeks = [] #: Array[{ start_date: Date, days: Array[[Date, Array[Booking]]] }]
 
     current_week_start = @start_date - ((@start_date.wday - 1) % 7)
 
@@ -59,10 +63,12 @@ class CalendarGeneratorService
   end
 
   # Build a single week structure with its days and associated bookings
+  # `week_start_date` is the Monday that starts the week and
+  # `bookings_by_date` is a hash mapping dates to arrays of bookings
   #
-  # @param week_start_date [Date] the Monday that starts the week
-  # @param bookings_by_date [Hash] a hash mapping dates to arrays of bookings
-  # @return [Hash] the constructed week with its days and bookings
+  # @rbs week_start_date: Date
+  # @rbs bookings_by_date: Hash[Date, Array[Booking]]
+  # @rbs return: { start_date: Date, days: Array[[Date, Array[Booking]]] }
   def build_week(week_start_date, bookings_by_date)
     {
       start_date: week_start_date,
@@ -76,20 +82,23 @@ class CalendarGeneratorService
   # Group bookings by date
   # For each booking, map it to all days it spans, then group by date
   #
-  # @return [Hash] a hash mapping dates to arrays of bookings
+  # @rbs return: Hash[Date, Array[Booking]]
   def group_bookings
-    day_bookings_map = property_bookings.flat_map do |booking|
-      (booking.starts_at.to_date...booking.ends_at.to_date).map do |day|
-        [day, booking]
+    grouped_bookings = {} #: Hash[Date, Array[Booking]]
+
+    property_bookings.each do |booking|
+      (booking.starts_at.to_date...booking.ends_at.to_date).each do |day|
+        grouped_bookings[day] ||= []
+        grouped_bookings[day] << booking
       end
     end
 
-    day_bookings_map.group_by(&:first).transform_values { |pairs| pairs.map(&:last) }
+    grouped_bookings
   end
 
   # Fetch all bookings for the property within the year's date range
   #
-  # @return [Array<Booking>] an array of bookings
+  # @rbs return: Array[Booking]
   def property_bookings
     @property_bookings ||= property.bookings
                                    .where("starts_at < ? AND ends_at > ?", @end_date + 1, @start_date)

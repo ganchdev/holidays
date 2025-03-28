@@ -1,0 +1,289 @@
+class Room < ::ApplicationRecord
+  extend ::_ActiveRecord_Relation_ClassMethods[::Room, ::Room::ActiveRecord_Relation, ::Integer]
+
+  module GeneratedAttributeMethods
+    def id: () -> ::Integer
+
+    def id=: (::Integer) -> ::Integer
+
+    def id?: () -> bool
+
+    def id_changed?: () -> bool
+
+    def id_change: () -> [ ::Integer?, ::Integer? ]
+
+    def id_will_change!: () -> void
+
+    def id_was: () -> ::Integer?
+
+    def id_previously_changed?: () -> bool
+
+    def id_previous_change: () -> ::Array[::Integer?]?
+
+    def id_previously_was: () -> ::Integer?
+
+    def id_before_last_save: () -> ::Integer?
+
+    def id_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def id_in_database: () -> ::Integer?
+
+    def saved_change_to_id: () -> ::Array[::Integer?]?
+
+    def saved_change_to_id?: () -> bool
+
+    def will_save_change_to_id?: () -> bool
+
+    def restore_id!: () -> void
+
+    def clear_id_change: () -> void
+
+    def property_id: () -> ::Integer
+
+    def property_id=: (::Integer) -> ::Integer
+
+    def property_id?: () -> bool
+
+    def property_id_changed?: () -> bool
+
+    def property_id_change: () -> [ ::Integer?, ::Integer? ]
+
+    def property_id_will_change!: () -> void
+
+    def property_id_was: () -> ::Integer?
+
+    def property_id_previously_changed?: () -> bool
+
+    def property_id_previous_change: () -> ::Array[::Integer?]?
+
+    def property_id_previously_was: () -> ::Integer?
+
+    def property_id_before_last_save: () -> ::Integer?
+
+    def property_id_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def property_id_in_database: () -> ::Integer?
+
+    def saved_change_to_property_id: () -> ::Array[::Integer?]?
+
+    def saved_change_to_property_id?: () -> bool
+
+    def will_save_change_to_property_id?: () -> bool
+
+    def restore_property_id!: () -> void
+
+    def clear_property_id_change: () -> void
+
+    def capacity: () -> ::Integer?
+
+    def capacity=: (::Integer?) -> ::Integer?
+
+    def capacity?: () -> bool
+
+    def capacity_changed?: () -> bool
+
+    def capacity_change: () -> [ ::Integer?, ::Integer? ]
+
+    def capacity_will_change!: () -> void
+
+    def capacity_was: () -> ::Integer?
+
+    def capacity_previously_changed?: () -> bool
+
+    def capacity_previous_change: () -> ::Array[::Integer?]?
+
+    def capacity_previously_was: () -> ::Integer?
+
+    def capacity_before_last_save: () -> ::Integer?
+
+    def capacity_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def capacity_in_database: () -> ::Integer?
+
+    def saved_change_to_capacity: () -> ::Array[::Integer?]?
+
+    def saved_change_to_capacity?: () -> bool
+
+    def will_save_change_to_capacity?: () -> bool
+
+    def restore_capacity!: () -> void
+
+    def clear_capacity_change: () -> void
+
+    def name: () -> ::String?
+
+    def name=: (::String?) -> ::String?
+
+    def name?: () -> bool
+
+    def name_changed?: () -> bool
+
+    def name_change: () -> [ ::String?, ::String? ]
+
+    def name_will_change!: () -> void
+
+    def name_was: () -> ::String?
+
+    def name_previously_changed?: () -> bool
+
+    def name_previous_change: () -> ::Array[::String?]?
+
+    def name_previously_was: () -> ::String?
+
+    def name_before_last_save: () -> ::String?
+
+    def name_change_to_be_saved: () -> ::Array[::String?]?
+
+    def name_in_database: () -> ::String?
+
+    def saved_change_to_name: () -> ::Array[::String?]?
+
+    def saved_change_to_name?: () -> bool
+
+    def will_save_change_to_name?: () -> bool
+
+    def restore_name!: () -> void
+
+    def clear_name_change: () -> void
+
+    def color: () -> ::String?
+
+    def color=: (::String?) -> ::String?
+
+    def color?: () -> bool
+
+    def color_changed?: () -> bool
+
+    def color_change: () -> [ ::String?, ::String? ]
+
+    def color_will_change!: () -> void
+
+    def color_was: () -> ::String?
+
+    def color_previously_changed?: () -> bool
+
+    def color_previous_change: () -> ::Array[::String?]?
+
+    def color_previously_was: () -> ::String?
+
+    def color_before_last_save: () -> ::String?
+
+    def color_change_to_be_saved: () -> ::Array[::String?]?
+
+    def color_in_database: () -> ::String?
+
+    def saved_change_to_color: () -> ::Array[::String?]?
+
+    def saved_change_to_color?: () -> bool
+
+    def will_save_change_to_color?: () -> bool
+
+    def restore_color!: () -> void
+
+    def clear_color_change: () -> void
+
+    def created_at: () -> ::ActiveSupport::TimeWithZone
+
+    def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
+
+    def created_at?: () -> bool
+
+    def created_at_changed?: () -> bool
+
+    def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+    def created_at_will_change!: () -> void
+
+    def created_at_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def created_at_previously_changed?: () -> bool
+
+    def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def created_at_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def created_at_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+    def created_at_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def created_at_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+    def saved_change_to_created_at: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_created_at?: () -> bool
+
+    def will_save_change_to_created_at?: () -> bool
+
+    def restore_created_at!: () -> void
+
+    def clear_created_at_change: () -> void
+
+    def updated_at: () -> ::ActiveSupport::TimeWithZone
+
+    def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
+
+    def updated_at?: () -> bool
+
+    def updated_at_changed?: () -> bool
+
+    def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+    def updated_at_will_change!: () -> void
+
+    def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def updated_at_previously_changed?: () -> bool
+
+    def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def updated_at_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def updated_at_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+    def updated_at_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def updated_at_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+    def saved_change_to_updated_at: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_updated_at?: () -> bool
+
+    def will_save_change_to_updated_at?: () -> bool
+
+    def restore_updated_at!: () -> void
+
+    def clear_updated_at_change: () -> void
+  end
+  include GeneratedAttributeMethods
+  def bookings: () -> ::Booking::ActiveRecord_Associations_CollectionProxy
+  def bookings=: (::Booking::ActiveRecord_Associations_CollectionProxy | ::Array[::Booking]) -> (::Booking::ActiveRecord_Associations_CollectionProxy | ::Array[::Booking])
+  def booking_ids: () -> ::Array[::Integer]
+  def booking_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+
+  def property: () -> ::Property
+  def property=: (::Property?) -> ::Property?
+  def reload_property: () -> ::Property?
+  def build_property: (untyped) -> ::Property
+  def create_property: (untyped) -> ::Property
+  def create_property!: (untyped) -> ::Property
+  module GeneratedAssociationMethods
+  end
+  include GeneratedAssociationMethods
+
+  def self.available_between: (untyped start_date, untyped end_date) -> ::Room::ActiveRecord_Relation
+
+  module GeneratedRelationMethods
+    def available_between: (untyped start_date, untyped end_date) -> ::Room::ActiveRecord_Relation
+  end
+
+  class ActiveRecord_Relation < ::ActiveRecord::Relation
+    include ::Room::GeneratedRelationMethods
+    include ::_ActiveRecord_Relation[::Room, ::Integer]
+    include ::Enumerable[::Room]
+  end
+
+  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include ::Room::GeneratedRelationMethods
+    include ::_ActiveRecord_Relation[::Room, ::Integer]
+  end
+end

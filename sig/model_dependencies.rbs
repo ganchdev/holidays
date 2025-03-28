@@ -1,0 +1,18 @@
+class ApplicationRecord < ::ActiveRecord::Base
+end
+class Session::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+class Booking::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+class Room::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+class User::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+class Property::ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+end
+class ActiveRecord::Associations::CollectionProxy < ::ActiveRecord::Relation
+end
+class ActiveRecord::Relation < ::Object
+end
+module ActiveRecord::Associations
+end

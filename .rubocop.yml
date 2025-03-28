@@ -26,6 +26,9 @@ Style/SymbolArray:
 Layout/EmptyLinesAroundClassBody:
   EnforcedStyle: empty_lines
 
+Layout/LeadingCommentSpace:
+  Enabled: false
+
 # We want to keep attr_* definitions separated on their own lines, rather than
 # all of them collapsed into a single attr_* call. The collapsed/grouped variant
 # is harder to read, and harder to see what's been changed in diffs.

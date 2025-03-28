@@ -1,0 +1,394 @@
+class User < ::ApplicationRecord
+  extend ::_ActiveRecord_Relation_ClassMethods[::User, ::User::ActiveRecord_Relation, ::Integer]
+
+  module GeneratedAttributeMethods
+    def id: () -> ::Integer
+
+    def id=: (::Integer) -> ::Integer
+
+    def id?: () -> bool
+
+    def id_changed?: () -> bool
+
+    def id_change: () -> [ ::Integer?, ::Integer? ]
+
+    def id_will_change!: () -> void
+
+    def id_was: () -> ::Integer?
+
+    def id_previously_changed?: () -> bool
+
+    def id_previous_change: () -> ::Array[::Integer?]?
+
+    def id_previously_was: () -> ::Integer?
+
+    def id_before_last_save: () -> ::Integer?
+
+    def id_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def id_in_database: () -> ::Integer?
+
+    def saved_change_to_id: () -> ::Array[::Integer?]?
+
+    def saved_change_to_id?: () -> bool
+
+    def will_save_change_to_id?: () -> bool
+
+    def restore_id!: () -> void
+
+    def clear_id_change: () -> void
+
+    def account_id: () -> ::Integer?
+
+    def account_id=: (::Integer?) -> ::Integer?
+
+    def account_id?: () -> bool
+
+    def account_id_changed?: () -> bool
+
+    def account_id_change: () -> [ ::Integer?, ::Integer? ]
+
+    def account_id_will_change!: () -> void
+
+    def account_id_was: () -> ::Integer?
+
+    def account_id_previously_changed?: () -> bool
+
+    def account_id_previous_change: () -> ::Array[::Integer?]?
+
+    def account_id_previously_was: () -> ::Integer?
+
+    def account_id_before_last_save: () -> ::Integer?
+
+    def account_id_change_to_be_saved: () -> ::Array[::Integer?]?
+
+    def account_id_in_database: () -> ::Integer?
+
+    def saved_change_to_account_id: () -> ::Array[::Integer?]?
+
+    def saved_change_to_account_id?: () -> bool
+
+    def will_save_change_to_account_id?: () -> bool
+
+    def restore_account_id!: () -> void
+
+    def clear_account_id_change: () -> void
+
+    def admin: () -> bool?
+
+    def admin=: (bool?) -> bool?
+
+    def admin?: () -> bool
+
+    def admin_changed?: () -> bool
+
+    def admin_change: () -> [ bool?, bool? ]
+
+    def admin_will_change!: () -> void
+
+    def admin_was: () -> bool?
+
+    def admin_previously_changed?: () -> bool
+
+    def admin_previous_change: () -> ::Array[bool?]?
+
+    def admin_previously_was: () -> bool?
+
+    def admin_before_last_save: () -> bool?
+
+    def admin_change_to_be_saved: () -> ::Array[bool?]?
+
+    def admin_in_database: () -> bool?
+
+    def saved_change_to_admin: () -> ::Array[bool?]?
+
+    def saved_change_to_admin?: () -> bool
+
+    def will_save_change_to_admin?: () -> bool
+
+    def restore_admin!: () -> void
+
+    def clear_admin_change: () -> void
+
+    def name: () -> ::String?
+
+    def name=: (::String?) -> ::String?
+
+    def name?: () -> bool
+
+    def name_changed?: () -> bool
+
+    def name_change: () -> [ ::String?, ::String? ]
+
+    def name_will_change!: () -> void
+
+    def name_was: () -> ::String?
+
+    def name_previously_changed?: () -> bool
+
+    def name_previous_change: () -> ::Array[::String?]?
+
+    def name_previously_was: () -> ::String?
+
+    def name_before_last_save: () -> ::String?
+
+    def name_change_to_be_saved: () -> ::Array[::String?]?
+
+    def name_in_database: () -> ::String?
+
+    def saved_change_to_name: () -> ::Array[::String?]?
+
+    def saved_change_to_name?: () -> bool
+
+    def will_save_change_to_name?: () -> bool
+
+    def restore_name!: () -> void
+
+    def clear_name_change: () -> void
+
+    def first_name: () -> ::String?
+
+    def first_name=: (::String?) -> ::String?
+
+    def first_name?: () -> bool
+
+    def first_name_changed?: () -> bool
+
+    def first_name_change: () -> [ ::String?, ::String? ]
+
+    def first_name_will_change!: () -> void
+
+    def first_name_was: () -> ::String?
+
+    def first_name_previously_changed?: () -> bool
+
+    def first_name_previous_change: () -> ::Array[::String?]?
+
+    def first_name_previously_was: () -> ::String?
+
+    def first_name_before_last_save: () -> ::String?
+
+    def first_name_change_to_be_saved: () -> ::Array[::String?]?
+
+    def first_name_in_database: () -> ::String?
+
+    def saved_change_to_first_name: () -> ::Array[::String?]?
+
+    def saved_change_to_first_name?: () -> bool
+
+    def will_save_change_to_first_name?: () -> bool
+
+    def restore_first_name!: () -> void
+
+    def clear_first_name_change: () -> void
+
+    def last_name: () -> ::String?
+
+    def last_name=: (::String?) -> ::String?
+
+    def last_name?: () -> bool
+
+    def last_name_changed?: () -> bool
+
+    def last_name_change: () -> [ ::String?, ::String? ]
+
+    def last_name_will_change!: () -> void
+
+    def last_name_was: () -> ::String?
+
+    def last_name_previously_changed?: () -> bool
+
+    def last_name_previous_change: () -> ::Array[::String?]?
+
+    def last_name_previously_was: () -> ::String?
+
+    def last_name_before_last_save: () -> ::String?
+
+    def last_name_change_to_be_saved: () -> ::Array[::String?]?
+
+    def last_name_in_database: () -> ::String?
+
+    def saved_change_to_last_name: () -> ::Array[::String?]?
+
+    def saved_change_to_last_name?: () -> bool
+
+    def will_save_change_to_last_name?: () -> bool
+
+    def restore_last_name!: () -> void
+
+    def clear_last_name_change: () -> void
+
+    def image: () -> ::String?
+
+    def image=: (::String?) -> ::String?
+
+    def image?: () -> bool
+
+    def image_changed?: () -> bool
+
+    def image_change: () -> [ ::String?, ::String? ]
+
+    def image_will_change!: () -> void
+
+    def image_was: () -> ::String?
+
+    def image_previously_changed?: () -> bool
+
+    def image_previous_change: () -> ::Array[::String?]?
+
+    def image_previously_was: () -> ::String?
+
+    def image_before_last_save: () -> ::String?
+
+    def image_change_to_be_saved: () -> ::Array[::String?]?
+
+    def image_in_database: () -> ::String?
+
+    def saved_change_to_image: () -> ::Array[::String?]?
+
+    def saved_change_to_image?: () -> bool
+
+    def will_save_change_to_image?: () -> bool
+
+    def restore_image!: () -> void
+
+    def clear_image_change: () -> void
+
+    def email_address: () -> ::String
+
+    def email_address=: (::String) -> ::String
+
+    def email_address?: () -> bool
+
+    def email_address_changed?: () -> bool
+
+    def email_address_change: () -> [ ::String?, ::String? ]
+
+    def email_address_will_change!: () -> void
+
+    def email_address_was: () -> ::String?
+
+    def email_address_previously_changed?: () -> bool
+
+    def email_address_previous_change: () -> ::Array[::String?]?
+
+    def email_address_previously_was: () -> ::String?
+
+    def email_address_before_last_save: () -> ::String?
+
+    def email_address_change_to_be_saved: () -> ::Array[::String?]?
+
+    def email_address_in_database: () -> ::String?
+
+    def saved_change_to_email_address: () -> ::Array[::String?]?
+
+    def saved_change_to_email_address?: () -> bool
+
+    def will_save_change_to_email_address?: () -> bool
+
+    def restore_email_address!: () -> void
+
+    def clear_email_address_change: () -> void
+
+    def created_at: () -> ::ActiveSupport::TimeWithZone
+
+    def created_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
+
+    def created_at?: () -> bool
+
+    def created_at_changed?: () -> bool
+
+    def created_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+    def created_at_will_change!: () -> void
+
+    def created_at_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def created_at_previously_changed?: () -> bool
+
+    def created_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def created_at_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def created_at_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+    def created_at_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def created_at_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+    def saved_change_to_created_at: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_created_at?: () -> bool
+
+    def will_save_change_to_created_at?: () -> bool
+
+    def restore_created_at!: () -> void
+
+    def clear_created_at_change: () -> void
+
+    def updated_at: () -> ::ActiveSupport::TimeWithZone
+
+    def updated_at=: (::ActiveSupport::TimeWithZone) -> ::ActiveSupport::TimeWithZone
+
+    def updated_at?: () -> bool
+
+    def updated_at_changed?: () -> bool
+
+    def updated_at_change: () -> [ ::ActiveSupport::TimeWithZone?, ::ActiveSupport::TimeWithZone? ]
+
+    def updated_at_will_change!: () -> void
+
+    def updated_at_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def updated_at_previously_changed?: () -> bool
+
+    def updated_at_previous_change: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def updated_at_previously_was: () -> ::ActiveSupport::TimeWithZone?
+
+    def updated_at_before_last_save: () -> ::ActiveSupport::TimeWithZone?
+
+    def updated_at_change_to_be_saved: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def updated_at_in_database: () -> ::ActiveSupport::TimeWithZone?
+
+    def saved_change_to_updated_at: () -> ::Array[::ActiveSupport::TimeWithZone?]?
+
+    def saved_change_to_updated_at?: () -> bool
+
+    def will_save_change_to_updated_at?: () -> bool
+
+    def restore_updated_at!: () -> void
+
+    def clear_updated_at_change: () -> void
+  end
+  include GeneratedAttributeMethods
+  def sessions: () -> ::Session::ActiveRecord_Associations_CollectionProxy
+  def sessions=: (::Session::ActiveRecord_Associations_CollectionProxy | ::Array[::Session]) -> (::Session::ActiveRecord_Associations_CollectionProxy | ::Array[::Session])
+  def session_ids: () -> ::Array[::Integer]
+  def session_ids=: (::Array[::Integer]) -> ::Array[::Integer]
+
+  def account: () -> ::Account?
+  def account=: (::Account?) -> ::Account?
+  def reload_account: () -> ::Account?
+  def build_account: (untyped) -> ::Account
+  def create_account: (untyped) -> ::Account
+  def create_account!: (untyped) -> ::Account
+  module GeneratedAssociationMethods
+  end
+  include GeneratedAssociationMethods
+
+  module GeneratedRelationMethods
+  end
+
+  class ActiveRecord_Relation < ::ActiveRecord::Relation
+    include ::User::GeneratedRelationMethods
+    include ::_ActiveRecord_Relation[::User, ::Integer]
+    include ::Enumerable[::User]
+  end
+
+  class ActiveRecord_Associations_CollectionProxy < ::ActiveRecord::Associations::CollectionProxy
+    include ::User::GeneratedRelationMethods
+    include ::_ActiveRecord_Relation[::User, ::Integer]
+  end
+end

@@ -1,0 +1,12 @@
+class Current < ActiveSupport::CurrentAttributes
+  # Define attributes
+  attr_accessor account: Account?
+  attr_accessor session: Session?
+
+  # Define delegated method
+  def user: () -> User?
+
+  # Inherited class methods from CurrentAttributes
+  def self.reset: () -> void
+  def self.set: (?Hash[Symbol, untyped]) { () -> untyped } -> untyped
+end
