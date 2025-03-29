@@ -101,7 +101,7 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
 
     # All days should have empty booking arrays
     calendar.each do |week|
-      week[:days].each do |_date, bookings|
+      week[:days].each do |_date, bookings| # rubocop:disable Style/HashEachMethods
         assert_empty bookings
       end
     end
