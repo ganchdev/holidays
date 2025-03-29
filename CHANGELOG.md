@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/ganchdev/holidays/compare/v0.1.0...v0.1.1) (2025-03-29)
+
+
+### Bug Fixes
+
+* app version path ([8ad45b0](https://github.com/ganchdev/holidays/commit/8ad45b0803a9a654f4f26fb1eaeb412cec215d53))
+
 ## [0.1.0](https://github.com/ganchdev/holidays/compare/v0.0.1...v0.1.0) (2025-03-29)
 
 ### Features
