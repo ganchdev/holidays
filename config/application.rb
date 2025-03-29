@@ -12,9 +12,9 @@ module Holidays
   class Application < Rails::Application
 
     # The path to the root of the application.
-    APP_ROOT = Pathname.new(File.expand_path("../..", __dir__))
+    APP_ROOT = find_root("/")
 
-    # The Katapult version
+    # The app version
     VERSION_PATH = File.join(APP_ROOT, "VERSION")
     if File.file?(VERSION_PATH)
       VERSION = File.read(VERSION_PATH).strip.delete_prefix("v")
