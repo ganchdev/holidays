@@ -85,6 +85,7 @@ class RoomTest < ActiveSupport::TestCase
     end
   end
 
+  # rubocop:disable Metrics/BlockLength
   test "should find rooms available between dates" do
     # Setup: Create rooms
     room1 = Room.create!(name: "Odd Room", capacity: 5, property: properties(:one))
@@ -183,5 +184,6 @@ class RoomTest < ActiveSupport::TestCase
     assert_includes available_rooms, room2, "Room2 should be available when search ends on check-in date"
     assert_includes available_rooms, room3, "Room3 should be available Jan 6-10"
   end
+  # rubocop:enable Metrics/BlockLength
 
 end

@@ -47,7 +47,7 @@ module Admin
     end
 
     def authorized_user_params
-      params.require(:authorized_user).permit(:email_address, :account_id, :user_id)
+      params.expect(authorized_user: [:email_address, :account_id, :user_id])
     end
 
   end
