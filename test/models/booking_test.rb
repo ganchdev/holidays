@@ -99,7 +99,7 @@ class BookingTest < ActiveSupport::TestCase
     assert_respond_to @booking, :room
   end
 
-  test "for_day scope should return bookings that overlap with the specified day" do
+  test "for_day scope should return bookings that overlap with the specified day" do # rubocop:disable Metrics/BlockLength
     # Create a booking for days 10-15
     base_date = Date.today.beginning_of_month
     booking1 = Booking.create!(

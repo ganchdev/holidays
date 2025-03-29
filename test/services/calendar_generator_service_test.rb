@@ -97,7 +97,7 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
     calendar = service.call
 
     assert_kind_of Array, calendar
-    assert calendar.length > 0
+    assert calendar.length.positive?
 
     # All days should have empty booking arrays
     calendar.each do |week|
@@ -107,6 +107,7 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
     end
   end
 
+  # rubocop:disable Naming/VariableNumber
   test "should handle bookings that span year boundaries" do
     service = CalendarGeneratorService.new(property: @property, year: @year)
     calendar = service.call
@@ -126,6 +127,7 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
     jan_3_data_2024 = find_date_in_calendar(calendar_2024, Date.new(2024, 1, 3))
     assert_includes jan_3_data_2024, @booking3
   end
+  # rubocop:enable Naming/VariableNumber
 
   private
 

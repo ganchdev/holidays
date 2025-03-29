@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
 
   # GET /properties/:property_id/bookings
   def index
-    @weeks ||= CalendarGeneratorService.new(property: @property).call
+    @weeks = CalendarGeneratorService.new(property: @property).call
   end
 
   # GET /properties/:property_id/bookings/:id
