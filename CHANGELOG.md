@@ -2,7 +2,6 @@
 
 ## [0.1.0](https://github.com/ganchdev/holidays/compare/v0.0.1...v0.1.0) (2025-03-29)
 
-
 ### Features
 
 * add admin; add authorized users ([7094ed6](https://github.com/ganchdev/holidays/commit/7094ed66e24fe7735a26fafa33724a01ffbf16c5))
@@ -15,7 +14,33 @@
 * reloadable forms ([669a3fb](https://github.com/ganchdev/holidays/commit/669a3fbdb05470e4edca16ad85042a5ac2af9761))
 * start ui ([4805db4](https://github.com/ganchdev/holidays/commit/4805db4e9414150fa7b04cc31cd303eea946b084))
 
-
 ### Bug Fixes
 
 * some tests ([f380de0](https://github.com/ganchdev/holidays/commit/f380de0ec7f5fed9f66204e9874e9e5ecd5b4f43))
+
+### Improvements
+
+* move bookings outside of room
+* refactor rename reservations to bookings
+* refactor property paths
+
+### Continuous Integration
+
+* adds CI ([#17](https://github.com/ganchdev/holidays/pull/17))
+
+### Miscellaneous Chores
+
+* initial commit
+* add starter schema
+* rubocop
+* start auth
+* add dashboard
+* finish auth
+* add tests
+* translations
+* tests fixes
+* some crappy rbs types
+* update ruby to 3.4.2 and gems
+* gemfile lock
+* bunch of changes
+* update rubocop config
