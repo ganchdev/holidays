@@ -58,7 +58,7 @@ jobs:
       - name: Check type signature
         env:
           RAILS_ENV: development
-        run: bin/bundle --parallel --format=progress --format=github
+        run: bin/bundle exec steep check
 
   test:
     runs-on: ubuntu-latest
