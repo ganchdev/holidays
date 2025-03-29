@@ -55,7 +55,7 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-      - name: Check type signature
+      - name: Check type signatures
         env:
           RAILS_ENV: development
         run: bin/bundle exec steep check
