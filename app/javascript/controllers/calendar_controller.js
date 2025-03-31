@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {
     this.observeWeeks();
     this.scrollToCurrentWeek();
-    this.scrollToSaved();
+    // this.scrollToSaved();
 
     document.addEventListener("turbo:before-visit", this.saveScroll);
   }
@@ -58,10 +58,16 @@ export default class extends Controller {
 
     const currentWeek = this.weekTargets.find((week) => {
       const weekStart = new Date(week.dataset.week);
+      weekStart.setHours(0, 0, 0, 0);
+
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 6);
+      weekEnd.setHours(0, 0, 0, 0);
+
       return today >= weekStart && today <= weekEnd;
     });
+
+    // debugger;
 
     if (currentWeek) {
       currentWeek.scrollIntoView({ behavior: "instant", block: "start" });
