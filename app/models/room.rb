@@ -34,8 +34,8 @@ class Room < ApplicationRecord
   scope :available_for_booking, lambda { |booking|
     available = available_between(booking.starts_at, booking.ends_at)
     room_with_booking = joins(:bookings).where(
-      "bookings.starts_at = ? AND bookings.ends_at = ? AND bookings.id = ?",
-      booking.starts_at.to_datetime, booking.ends_at.to_datetime, booking.id
+      "bookings.starts_at < ? AND bookings.ends_at > ? AND bookings.id = ?",
+      booking.ends_at.to_datetime, booking.starts_at.to_datetime, booking.id
     ).select("rooms.id")
 
     where(id: available).or(where(id: room_with_booking))

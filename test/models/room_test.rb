@@ -19,7 +19,6 @@
 require "test_helper"
 
 # rubocop:disable Metrics/BlockLength
-# rubocop:disable Lint/UselessAssignment
 class RoomTest < ActiveSupport::TestCase
 
   def setup
@@ -188,93 +187,86 @@ class RoomTest < ActiveSupport::TestCase
   end
 
   # Room.available_for_booking
-  test "should find rooms available for a specific booking" do
-    # Setup: Create rooms
-    room1 = Room.create!(name: "Odd Room", capacity: 5, property: properties(:one))
-    room2 = Room.create!(name: "Meeting Room", capacity: 5, property: properties(:one))
-    room3 = Room.create!(name: "Board Room", capacity: 20, property: properties(:one))
+  test "should include booked room and only other rooms available for the same period" do
+    room1 = Room.create!(name: "Room 1", capacity: 5, property: properties(:one))
+    room2 = Room.create!(name: "Room 2", capacity: 10, property: properties(:one))
+    room3 = Room.create!(name: "Room 3", capacity: 15, property: properties(:one))
+    room4 = Room.create!(name: "Room 4", capacity: 8, property: properties(:one))
+    room5 = Room.create!(name: "Room 5", capacity: 2, property: properties(:one))
 
-    # Room 1: Booking Jan 5-8
-    booking1 = Booking.create!(
+    # Bookings:
+    # booking_a: Jan 5–10 on room1
+    booking_a = Booking.create!(
       room: room1,
       starts_at: Date.new(2023, 1, 5),
-      ends_at: Date.new(2023, 1, 8)
+      ends_at: Date.new(2023, 1, 10)
     )
 
-    # Room 2: Booking Jan 10-15
-    booking2 = Booking.create!(
+    # room2 has a conflicting booking Jan 7–9
+    Booking.create!(
       room: room2,
-      starts_at: Date.new(2023, 1, 10),
+      starts_at: Date.new(2023, 1, 7),
+      ends_at: Date.new(2023, 1, 9)
+    )
+
+    # room3 has a non-overlapping booking Jan 2–4
+    Booking.create!(
+      room: room3,
+      starts_at: Date.new(2023, 1, 2),
+      ends_at: Date.new(2023, 1, 4)
+    )
+
+    # room4 has overlapping booking Jan 1–15 (completely blocks)
+    Booking.create!(
+      room: room4,
+      starts_at: Date.new(2023, 1, 1),
       ends_at: Date.new(2023, 1, 15)
     )
 
-    # Room 3: Two bookings: Jan 3-6 and Jan 20-25
-    booking3 = Booking.create!(
-      room: room3,
-      starts_at: Date.new(2023, 1, 3),
-      ends_at: Date.new(2023, 1, 6)
+    # room5 has overlapping Jan 15-20
+    Booking.create!(
+      room: room5,
+      starts_at: Date.new(2023, 1, 19),
+      ends_at: Date.new(2023, 1, 23)
     )
 
-    booking4 = Booking.create!(
-      room: room3,
-      starts_at: Date.new(2023, 1, 20),
-      ends_at: Date.new(2023, 1, 25)
+    # Case 1: Booking is Jan 5–10
+    # We expect:
+    # - room1 (current booking's room) to be included even if it overlaps
+    # - room3 to be included (free during range)
+    # - room2 & room4 to be excluded (conflict)
+    available_rooms = Room.available_for_booking(booking_a)
+    assert_includes available_rooms, room1, "Room1 should be included (it's the booking's own room)"
+    assert_includes available_rooms, room3, "Room3 should be included (available Jan 5–10)"
+    assert_not_includes available_rooms, room2, "Room2 should be excluded (overlaps Jan 7–9)"
+    assert_not_includes available_rooms, room4, "Room4 should be excluded (completely booked)"
+
+    # Case 2: Modify booking_a to Jan 3–6 (still within room3’s free time)
+    booking_a.update!(starts_at: Date.new(2023, 1, 3), ends_at: Date.new(2023, 1, 6))
+    available_rooms = Room.available_for_booking(booking_a)
+    assert_includes available_rooms, room1, "Room1 should still be included"
+    assert_not_includes available_rooms, room3, "Room3 should be excluded now (has booking Jan 2–4 overlapping)"
+
+    # Case 3: booking completely isolated (Jan 20–25)
+    booking_a.update!(starts_at: Date.new(2023, 1, 20), ends_at: Date.new(2023, 1, 25))
+    available_rooms = Room.available_for_booking(booking_a)
+    assert_includes available_rooms, room1, "Room1 should always be included"
+    assert_includes available_rooms, room2, "Room2 should be included (no booking conflict)"
+    assert_includes available_rooms, room3, "Room3 should be included (no conflict)"
+    assert_includes available_rooms, room4, "Room4 should be included Jan 1–15"
+    assert_not_includes available_rooms, room5, "Room5 should not be included"
+
+    # Case 4: booking period exactly matches another booking on another room
+    Booking.create!(
+      room: room2,
+      starts_at: Date.new(2023, 2, 1),
+      ends_at: Date.new(2023, 2, 5)
     )
-
-    # Test Case 1: New booking that doesn't conflict with any existing booking
-    new_booking = Booking.new(
-      starts_at: Date.new(2023, 1, 16),
-      ends_at: Date.new(2023, 1, 19)
-    )
-    available_rooms = Room.available_for_booking(new_booking)
-    assert_includes available_rooms, room1, "Room1 should be available Jan 16-19"
-    assert_includes available_rooms, room2, "Room2 should be available Jan 16-19"
-    assert_includes available_rooms, room3, "Room3 should be available Jan 16-19"
-
-    # Test Case 2: New booking that conflicts with booking1 (room1)
-    new_booking = Booking.new(
-      starts_at: Date.new(2023, 1, 6),
-      ends_at: Date.new(2023, 1, 10)
-    )
-    available_rooms = Room.available_for_booking(new_booking)
-    assert_not_includes available_rooms, room1, "Room1 should not be available Jan 6-10 (conflicts with booking1)"
-    assert_includes available_rooms, room2, "Room2 should be available Jan 6-10"
-    assert_includes available_rooms, room3, "Room3 should be available Jan 6-10"
-
-    # Test Case 3: For an existing booking, its room should be included regardless of availability
-    # This checks that a room is available for its own booking
-    available_rooms = Room.available_for_booking(booking1)
-    assert_includes available_rooms, room1, "Room1 should be available for its own existing booking"
-
-    # Test Case 4: When booking dates conflict with other rooms' bookings
-    # but this is an existing booking, only its own room and available rooms should be returned
-    available_rooms = Room.available_for_booking(booking3) # Jan 3-6 booking for room3
-    assert_not_includes available_rooms, room1, "Room1 should not be available Jan 3-6 (conflicts with booking1)"
-    assert_includes available_rooms, room2, "Room2 should be available Jan 3-6"
-    assert_includes available_rooms, room3, "Room3 should be included as it's the booking's own room"
-
-    # Test Case 5: Booking that starts exactly when another ends
-    new_booking = Booking.new(
-      starts_at: Date.new(2023, 1, 8),  # Room1's booking ends on Jan 8
-      ends_at: Date.new(2023, 1, 10)    # Room2's booking starts on Jan 10
-    )
-    available_rooms = Room.available_for_booking(new_booking)
-    assert_includes available_rooms, room1,
-                    "Room1 should be available when booking starts on previous booking's end date"
-    assert_includes available_rooms, room2, "Room2 should be available when booking ends on next booking's start date"
-    assert_includes available_rooms, room3, "Room3 should be available Jan 8-10"
-
-    # Test Case 6: Booking that spans multiple existing bookings
-    new_booking = Booking.new(
-      starts_at: Date.new(2023, 1, 4),
-      ends_at: Date.new(2023, 1, 12)
-    )
-    available_rooms = Room.available_for_booking(new_booking)
-    assert_not_includes available_rooms, room1, "Room1 should not be available Jan 4-12 (conflicts with booking1)"
-    assert_not_includes available_rooms, room2, "Room2 should not be available Jan 4-12 (conflicts with booking2)"
-    assert_not_includes available_rooms, room3, "Room3 should not be available Jan 4-12 (conflicts with booking3)"
+    booking_a.update!(starts_at: Date.new(2023, 2, 1), ends_at: Date.new(2023, 2, 5))
+    available_rooms = Room.available_for_booking(booking_a)
+    assert_includes available_rooms, room1, "Room1 always included"
+    assert_not_includes available_rooms, room2, "Room2 has exact conflict, should be excluded"
   end
 
 end
 # rubocop:enable Metrics/BlockLength
-# rubocop:enable Lint/UselessAssignment
