@@ -3,7 +3,7 @@
 class BookingsController < ApplicationController
 
   layout "bookings", only: [:index, :show]
-  layout "application", only: [:new, :create, :edit]
+  layout "application", only: [:new, :create, :edit, :update]
 
   before_action :find_property
   before_action :find_booking, only: [:show, :edit, :update, :destroy]

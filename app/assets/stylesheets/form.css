@@ -1,3 +1,29 @@
 form.button_to button.header {
   margin: 0;
 }
+
+.form-errors {
+  border: 1px solid #d93526; /* Slightly darker red border */
+  border-radius: var(--pico-border-radius, 2rem);
+  padding: 1rem; /* Space inside the container */
+  margin-bottom: 1.5rem; /* Space below the error message */
+}
+
+.form-errors h3 {
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.form-errors ul {
+  margin: 0;
+  padding-left: 1.25rem; /* Indent the list */
+  list-style-type: disc; /* Use bullet points */
+}
+
+.form-errors li {
+  color: #d93526;
+}
+
+.form-errors li:not(:last-child) {
+  margin-bottom: 0.5rem; /* Space between each error */
+}
