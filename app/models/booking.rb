@@ -35,6 +35,7 @@ class Booking < ApplicationRecord
   validate :ends_at_after_starts_at
   validate :no_overlapping_bookings
 
+  scope :active, -> { where(cancelled_at: nil) }
   scope :upcoming, -> { where("starts_at >= ?", Date.current.beginning_of_day + 1.day) }
   scope :past, -> { where("ends_at < ?", Date.current.beginning_of_day) }
   scope :current, lambda {
@@ -61,6 +62,7 @@ class Booking < ApplicationRecord
     end_time   = ends_at.end_of_day
 
     overlapping_bookings = property.bookings
+                                   .active
                                    .where(room_id: room_id)
                                    .where.not(id: id)
                                    .where("starts_at < ? AND ends_at > ?", end_time, start_time)

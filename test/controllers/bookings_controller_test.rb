@@ -62,12 +62,12 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to property_booking_url(@property, @booking)
   end
 
-  test "should destroy booking" do
-    assert_difference("Booking.count", -1) do
-      delete property_booking_url(@property, @booking)
-    end
+  test "should cancel booking" do
+    delete property_booking_url(@property, @booking)
 
-    assert_redirected_to property_bookings_url(@property)
+    @booking.reload
+
+    assert_not_nil @booking.cancelled_at
   end
 
 end

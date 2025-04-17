@@ -25,12 +25,12 @@ class BookingsController < ApplicationController
       Date.today
     end
 
-    @bookings = @property.bookings.for_day(@day)
+    @bookings = @property.bookings.active.for_day(@day)
   end
 
   # GET /properties/:property_id/bookings/new
   def new
-    @booking = @property.bookings.build
+    @booking = @property.bookings.active.build
   end
 
   # GET /properties/:property_id/bookings/:id/edit
@@ -40,7 +40,7 @@ class BookingsController < ApplicationController
 
   # POST /properties/:property_id/bookings
   def create
-    @booking = @property.bookings.build(booking_params)
+    @booking = @property.bookings.active.build(booking_params)
 
     if params[:reload].present?
       if @booking.starts_at.present? &&
@@ -105,7 +105,7 @@ class BookingsController < ApplicationController
 
   # DELETE /properties/:property_id/bookings/:id
   def destroy
-    @booking.destroy!
+    @booking.update!(cancelled_at: Time.current)
     redirect_to property_bookings_path(@property),
                 notice: t("flash.bookings.destroyed_successfully"),
                 status: :see_other
@@ -118,7 +118,7 @@ class BookingsController < ApplicationController
   end
 
   def find_booking
-    @booking = @property.bookings.find(params[:id])
+    @booking = @property.bookings.active.find(params[:id])
   end
 
   def booking_params

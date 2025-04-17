@@ -101,6 +101,7 @@ class CalendarGeneratorService
   # @rbs return: Array[Booking]
   def property_bookings
     @property_bookings ||= property.bookings
+                                   .active
                                    .where("starts_at < ? AND ends_at > ?", @end_date + 1, @start_date)
                                    .to_a
   end
