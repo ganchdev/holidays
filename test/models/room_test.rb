@@ -19,6 +19,7 @@
 require "test_helper"
 
 # rubocop:disable Metrics/BlockLength
+# rubocop:disable Lint/UselessAssignment
 class RoomTest < ActiveSupport::TestCase
 
   def setup
@@ -276,3 +277,4 @@ class RoomTest < ActiveSupport::TestCase
 
 end
 # rubocop:enable Metrics/BlockLength
+# rubocop:enable Lint/UselessAssignment
