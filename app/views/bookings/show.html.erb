@@ -1,9 +1,31 @@
-<h1>Booking Details</h1>
+<% content_for :title, "Booking" %>
+<%= render_nav title: "Booking for #{@booking.room.name}", back_url: "history.back()" do %>
+  <li>
+    <%= link_to "Edit booking", edit_property_booking_path(back_to: "history.back()"), type: "button" %>
+  </li>
+<% end %>
 
-<p>Adults: <%= @booking.adults %></p>
-<p>Children: <%= @booking.children %></p>
-<p>Deposit: <%= number_to_currency(@booking.deposit) %></p>
-<p>Notes: <%= @booking.notes %></p>
+<div class="bookings-show">
+  <dl>
+    <dt>Room</dt>
+    <dd><%= @booking.room.name %>
 
-<%= link_to "Edit", edit_property_booking_path(@property, @booking) %> |
-<%= link_to "Back to Bookings", property_bookings_path(@property) %>
+    <dt>Starts Date</dt>
+    <dd><%= @booking.starts_at.to_date %></dd>
+
+    <dt>Ends Date</dt>
+    <dd><%= @booking.ends_at.to_date %></dd>
+
+    <dt>Notes</dt>
+    <dd><%= @booking.notes %></dd>
+
+    <dt>Deposit</dt>
+    <dd><%= @booking.deposit %></dd>
+
+    <dt>Adults</dt>
+    <dd><%= @booking.adults %></dd>
+
+    <dt>Children</dt>
+    <dd><%= @booking.children %></dd>
+  </dl>
+</div>

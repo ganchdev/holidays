@@ -55,7 +55,7 @@ class Booking < ApplicationRecord
   end
 
   def no_overlapping_bookings
-    return if property.nil? || starts_at.blank? || ends_at.blank? || room_id.blank?
+    return if room_id.blank? || property.nil? || starts_at.blank? || ends_at.blank?
 
     start_time = starts_at.beginning_of_day
     end_time   = ends_at.end_of_day

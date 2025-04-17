@@ -1,0 +1,17 @@
+.bookings-show {
+  margin: 2rem;
+}
+
+.bookings-list-item a {
+  text-decoration: none !important;
+  color: unset !important;
+}
+
+.bookings-list-item dl {
+  color: unset !important;
+}
+
+.bookings-list-item article {
+  margin: 20px;
+  border: 1px solid var(--pico-primary-background);
+}

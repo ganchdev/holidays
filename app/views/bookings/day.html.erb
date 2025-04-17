@@ -6,6 +6,33 @@
 <% end %>
 
 <% @bookings.each do |b| %>
-  <%= b.inspect %>
-  <br>
+  <div class="bookings-list-item">
+    <%= link_to property_booking_path(@property, b) do %>
+      <article>
+        <% if @day == b.starts_at.to_date %>
+          <header>Check in</header>
+        <% elsif @day == b.ends_at.to_date %>
+          <header>Check out</header>
+        <% end %>
+        <dl>
+          <dt>Room</dt>
+          <dd><%= room_badge b.room %></dd>
+
+          <dt>Start Date</dt>
+          <dd><%= b.starts_at.to_date %></dd>
+
+          <dt>End Date</dt>
+          <dd><%= b.ends_at.to_date %></dd>
+
+          <% if b.notes.present? %>
+            <dt>Notes</dt>
+            <dd><%= b.notes %></dd>
+          <% end %>
+
+          <dt>Deposit</dt>
+          <dd><%= icon b.deposit.present? ? "check-circle-fill" : "x-circle-fill", class: b.deposit.present? ? "icon success" : "icon danger" %></dd>
+        </dl>
+      </article>
+    <% end %>
+  </div>
 <% end %>

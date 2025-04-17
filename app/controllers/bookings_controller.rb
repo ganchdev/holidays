@@ -3,7 +3,7 @@
 class BookingsController < ApplicationController
 
   layout "bookings", only: [:index, :show]
-  layout "application", only: [:new, :create]
+  layout "application", only: [:new, :create, :edit]
 
   before_action :find_property
   before_action :find_booking, only: [:show, :edit, :update, :destroy]
@@ -35,6 +35,7 @@ class BookingsController < ApplicationController
 
   # GET /properties/:property_id/bookings/:id/edit
   def edit
+    @available_rooms = @property.rooms.available_for_booking(@booking)
   end
 
   # POST /properties/:property_id/bookings
@@ -71,7 +72,29 @@ class BookingsController < ApplicationController
 
   # PATCH/PUT /properties/:property_id/bookings/:id
   def update
-    if @booking.update(booking_params)
+    @booking.assign_attributes(booking_params)
+
+    if params[:reload].present?
+      if @booking.starts_at.present? &&
+         @booking.ends_at.present? &&
+         @booking.ends_at.to_date > @booking.starts_at.to_date
+
+        available_rooms = @property.rooms.available_for_booking(@booking)
+      else
+        available_rooms = nil
+      end
+
+      render turbo_stream:
+        turbo_stream.replace(
+          :booking_form,
+          method: :morph,
+          partial: "bookings/form",
+          locals: { booking: @booking, available_rooms: available_rooms }
+        )
+      return
+    end
+
+    if @booking.save
       redirect_to property_booking_path(@property, @booking),
                   notice: t("flash.bookings.updated_successfully"),
                   status: :see_other
