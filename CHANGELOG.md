@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.1](https://github.com/ganchdev/holidays/compare/v0.1.0...v0.1.1) (2025-04-18)
+
+
+### Bug Fixes
+
+* add active method sugnature ([1348d7f](https://github.com/ganchdev/holidays/commit/1348d7f8a4fa8fff631e104e621e7b81bbab6158))
+* app version path ([8ad45b0](https://github.com/ganchdev/holidays/commit/8ad45b0803a9a654f4f26fb1eaeb412cec215d53))
+* remove hours fro calendar scrollTo dates ([8c1f68b](https://github.com/ganchdev/holidays/commit/8c1f68b4dbcbdb45cddc681d111801a038bdef97))
+
 ## [0.1.0](https://github.com/ganchdev/holidays/compare/v0.0.1...v0.1.0) (2025-03-29)
 
 ### Features
