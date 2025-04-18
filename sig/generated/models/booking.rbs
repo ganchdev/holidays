@@ -407,12 +407,15 @@ class Booking < ::ApplicationRecord
   def create_room: (untyped) -> ::Room
   def create_room!: (untyped) -> ::Room
 
+  def self.active: () -> ::Booking::ActiveRecord_Relation
   def self.upcoming: () -> ::Booking::ActiveRecord_Relation
   def self.past: () -> ::Booking::ActiveRecord_Relation
   def self.current: () -> ::Booking::ActiveRecord_Relation
   def self.for_day: (untyped day) -> ::Booking::ActiveRecord_Relation
 
   module GeneratedRelationMethods
+    def active: () -> ::Booking::ActiveRecord_Relation
+
     def upcoming: () -> ::Booking::ActiveRecord_Relation
 
     def past: () -> ::Booking::ActiveRecord_Relation
