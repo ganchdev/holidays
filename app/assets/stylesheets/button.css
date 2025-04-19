@@ -1,0 +1,21 @@
+button.danger {
+  background-color: #b22234;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button.danger:hover,
+button.danger:focus {
+  background-color: #c82333;
+}
+
+button.danger:disabled {
+  background-color: #e4606d;
+  opacity: 0.6;
+  cursor: not-allowed;
+}

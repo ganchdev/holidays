@@ -15,3 +15,21 @@
   margin: 20px;
   border: 1px solid var(--pico-primary-background);
 }
+
+.bookings-check-in,
+.bookings-check-out {
+  color: white;
+}
+
+.bookings-check-in svg,
+.bookings-check-out svg {
+  vertical-align: revert;
+}
+
+.bookings-check-in {
+  background-color: #27ae60;
+}
+
+.bookings-check-out {
+  background-color: #e67e22;
+}

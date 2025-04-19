@@ -1,12 +1,16 @@
 form.button_to button.header {
   margin: 0;
+  padding: calc(
+      var(--pico-nav-link-spacing-vertical) - var(--pico-border-width) * 2
+    )
+    var(--pico-nav-link-spacing-horizontal);
 }
 
 .form-errors {
-  border: 1px solid #d93526; /* Slightly darker red border */
+  border: 1px solid #d93526;
   border-radius: var(--pico-border-radius, 2rem);
-  padding: 1rem; /* Space inside the container */
-  margin-bottom: 1.5rem; /* Space below the error message */
+  padding: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-errors h3 {
@@ -16,8 +20,8 @@ form.button_to button.header {
 
 .form-errors ul {
   margin: 0;
-  padding-left: 1.25rem; /* Indent the list */
-  list-style-type: disc; /* Use bullet points */
+  padding-left: 1.25rem;
+  list-style-type: disc;
 }
 
 .form-errors li {
@@ -25,5 +29,5 @@ form.button_to button.header {
 }
 
 .form-errors li:not(:last-child) {
-  margin-bottom: 0.5rem; /* Space between each error */
+  margin-bottom: 0.5rem;
 }

@@ -9,11 +9,11 @@
 
   <body>
     <%= yield :nav %>
+    <%= render "layouts/flash" %>
     <main class="container-fluid">
       <div class="page">
         <%= yield %>
       </div>
-      <%= render "layouts/flash" %>
     </main>
   </body>
 </html>

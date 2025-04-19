@@ -1,0 +1,12 @@
+.flash {
+  padding: 1rem;
+  color: white;
+}
+
+.flash.notice {
+  background-color: var(--pico-color-green-500, #4caf50);
+}
+
+.flash.alert {
+  background-color: var(--pico-color-red-500, #d93526);
+}

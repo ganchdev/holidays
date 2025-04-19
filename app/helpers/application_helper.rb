@@ -11,7 +11,7 @@ module ApplicationHelper
     button_to path, **html_options do
       concat(icon(icon_name, **icon_options))
       concat(" ")
-      concat(name)
+      concat(content_tag(:span, name))
     end
   end
 

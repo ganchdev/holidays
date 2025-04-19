@@ -10,9 +10,19 @@
     <%= link_to property_booking_path(@property, b) do %>
       <article>
         <% if @day == b.starts_at.to_date %>
-          <header>Check in</header>
+          <header class="bookings-check-in">
+            <%= icon "sign-in" %>
+            <span>
+              Check in
+            </span>
+          </header>
         <% elsif @day == b.ends_at.to_date %>
-          <header>Check out</header>
+          <header class="bookings-check-out">
+            <%= icon "sign-out" %>
+            <span>
+              Check out
+            </span>
+          </header>
         <% end %>
         <dl>
           <dt>Room</dt>
