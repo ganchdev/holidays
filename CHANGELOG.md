@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/ganchdev/holidays/compare/v0.1.1...v0.1.5) (2025-04-19)
+
+
+### Miscellaneous Chores
+
+* release 0.1.5 ([5a4db21](https://github.com/ganchdev/holidays/commit/5a4db2148561f1023453b5de5bb476976854385a))
+
 ## [0.1.1](https://github.com/ganchdev/holidays/compare/v0.1.0...v0.1.1) (2025-04-18)
 
 
