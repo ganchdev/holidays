@@ -37,6 +37,16 @@ class RoomTest < ActiveSupport::TestCase
     assert_includes @room.errors[:name], expected_message
   end
 
+  test "should have a unique name" do
+    existing_room = rooms(:one)
+    @room.name = existing_room.name
+
+    assert_not @room.valid?, "Saved the room with a duplicate name"
+    expected_message = I18n.t("activerecord.errors.models.room.attributes.name.taken",
+                              default: "has already been taken")
+    assert_includes @room.errors[:name], expected_message
+  end
+
   test "should require a capacity" do
     @room.capacity = nil
     assert_not @room.valid?, "Saved the room without a capacity"

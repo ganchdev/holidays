@@ -18,7 +18,10 @@
 #
 # Indexes
 #
-#  index_bookings_on_room_id  (room_id)
+#  index_bookings_on_cancelled_at  (cancelled_at)
+#  index_bookings_on_ends_at       (ends_at)
+#  index_bookings_on_room_id       (room_id)
+#  index_bookings_on_starts_at     (starts_at)
 #
 class Booking < ApplicationRecord
 

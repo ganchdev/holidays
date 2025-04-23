@@ -21,7 +21,7 @@ class Room < ApplicationRecord
   belongs_to :property
   has_many :bookings, dependent: :restrict_with_error
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { scope: :property_id, message: :taken }
   validates :capacity, presence: true, numericality: { greater_than: 0, only_integer: true }
 
   scope :available_between, lambda { |start_date, end_date|
