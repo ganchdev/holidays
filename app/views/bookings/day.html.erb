@@ -1,13 +1,19 @@
 <% content_for :title, "Bookings" %>
-<%= render_nav title: @day.strftime("%a, %d %b %Y"), back_url: property_bookings_path(@property) do %>
+<%= render_nav title: @day.strftime("%a, %d %b %Y"), back_url: "history.back()" do %>
   <li>
     <%= link_to "New booking", new_property_booking_path(back_to: "history.back()"), type: "button" %>
   </li>
 <% end %>
 
+<% if @bookings.empty? %>
+  <article>
+    There are no bookings for this date.
+  </article>
+<% end %>
+
 <% @bookings.each do |b| %>
   <div class="bookings-list-item">
-    <%= link_to property_booking_path(@property, b), data: { action: "click->bookings#setPath", path: request.fullpath } do %>
+    <%= link_to property_booking_path(@property, b) do %>
       <article>
         <% if @day == b.starts_at.to_date %>
           <header class="bookings-check-in">

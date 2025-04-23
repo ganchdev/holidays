@@ -1,5 +1,5 @@
 <% flash.each do |key, message| %>
-  <div class="flash <%= key %>" data-controller="flashes">
+  <div class="flash <%= key %>" data-turbo-temporary>
     <%= message %>
   </div>
 <% end %>
