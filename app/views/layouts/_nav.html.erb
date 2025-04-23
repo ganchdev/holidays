@@ -5,6 +5,8 @@
     <ul>
       <% if back_url == "history.back()" %>
         <li><%= link_to_with_icon "", "arrow-left", icon_options: { height: 26, width: 26 }, onclick: "history.back()", type: "button", class: "primary" %></li>
+      <% elsif back_url == "sessionStorage.getItem('backPath')" %>
+        <li><%= link_to_with_icon "", "arrow-left", icon_options: { height: 26, width: 26 }, method: :get, type: "button", class: "primary", data: { bookings_target: "backLink" } %></li>
       <% else %>
         <li><%= link_to_with_icon back_url, "arrow-left", icon_options: { height: 26, width: 26 }, method: :get, type: "button", class: "primary" %></li>
       <% end %>

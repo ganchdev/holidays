@@ -1,5 +1,5 @@
 <% content_for :title, "Booking" %>
-<%= render_nav title: "Booking for #{@booking.room.name}", back_url: "history.back()" do %>
+<%= render_nav title: "Booking for #{@booking.room.name}", back_url: "sessionStorage.getItem('backPath')" do %>
   <li>
     <%= link_to "Edit booking", edit_property_booking_path(back_to: "history.back()"), type: "button" %>
   </li>
