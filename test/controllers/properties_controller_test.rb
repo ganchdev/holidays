@@ -11,9 +11,9 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
     set_current_user(@user)
   end
 
-  test "should get new" do
+  test "should get new but redirect to root" do
     get new_property_url
-    assert_response :success
+    assert_redirected_to root_url
   end
 
   test "should create property" do
