@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root "dashboard#index"
+  root "root#index"
   scope controller: :auth do
     get "/auth", action: :new
     get "/auth/:provider/callback", action: :callback

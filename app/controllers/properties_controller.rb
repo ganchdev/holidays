@@ -3,6 +3,7 @@
 class PropertiesController < ApplicationController
 
   before_action :find_property, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_if_property_created, only: :new
 
   # GET /properties/:id
   def show
@@ -51,6 +52,13 @@ class PropertiesController < ApplicationController
 
   def property_params
     params.expect(property: [:name, :account_id])
+  end
+
+  # Don't allow creating more than one property for now
+  def redirect_if_property_created
+    return unless Current.account.properties.count >= 1
+
+    redirect_to root_path
   end
 
 end

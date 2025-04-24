@@ -1,7 +1,0 @@
-<% content_for :title, "Dashboard" %>
-
-<ul class="list">
-  <% Current.account.properties.each do |prop| %>
-    <li><%= link_to prop.name, property_path(prop), class: "" %></li>
-  <% end %>
-</ul>

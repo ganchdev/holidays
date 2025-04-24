@@ -5,7 +5,7 @@
     <ul>
       <% if back_url == "history.back()" %>
         <li><%= link_to_with_icon "", "arrow-left", icon_options: { height: 26, width: 26 }, onclick: "history.back()", type: "button", class: "primary" %></li>
-      <% else %>
+      <% elsif back_url&.starts_with?("/") %>
         <li><%= link_to_with_icon back_url, "arrow-left", icon_options: { height: 26, width: 26 }, method: :get, type: "button", class: "primary" %></li>
       <% end %>
       <li>

@@ -1,54 +1,54 @@
 <% content_for :title, "Bookings" %>
 <%= render_nav title: @day.strftime("%a, %d %b %Y"), back_url: "history.back()" do %>
   <li>
-    <%= link_to "New booking", new_property_booking_path(back_to: "history.back()"), type: "button" %>
+    <%= link_to "New booking", new_property_booking_path(back_to: "history.back()", day: @day), type: "button" %>
   </li>
 <% end %>
 
-<% if @bookings.empty? %>
-  <article>
-    There are no bookings for this date.
-  </article>
-<% end %>
-
-<% @bookings.each do |b| %>
-  <div class="bookings-list-item">
-    <%= link_to property_booking_path(@property, b) do %>
-      <article>
-        <% if @day == b.starts_at.to_date %>
-          <header class="bookings-check-in">
-            <%= icon "sign-in" %>
-            <span>
-              Check in
-            </span>
-          </header>
-        <% elsif @day == b.ends_at.to_date %>
-          <header class="bookings-check-out">
-            <%= icon "sign-out" %>
-            <span>
-              Check out
-            </span>
-          </header>
-        <% end %>
-        <dl>
-          <dt>Room</dt>
-          <dd><%= room_badge b.room %></dd>
-
-          <dt>Start Date</dt>
-          <dd><%= b.starts_at.to_date %></dd>
-
-          <dt>End Date</dt>
-          <dd><%= b.ends_at.to_date %></dd>
-
-          <% if b.notes.present? %>
-            <dt>Notes</dt>
-            <dd><%= b.notes %></dd>
+<% if @bookings.any? %>
+  <% @bookings.each do |b| %>
+    <div class="bookings-list-item">
+      <%= link_to property_booking_path(@property, b) do %>
+        <article>
+          <% if @day == b.starts_at.to_date %>
+            <header class="bookings-check-in">
+              <%= icon "sign-in" %>
+              <span>
+                Check in
+              </span>
+            </header>
+          <% elsif @day == b.ends_at.to_date %>
+            <header class="bookings-check-out">
+              <%= icon "sign-out" %>
+              <span>
+                Check out
+              </span>
+            </header>
           <% end %>
+          <dl>
+            <dt>Room</dt>
+            <dd><%= room_badge b.room %></dd>
 
-          <dt>Deposit</dt>
-          <dd><%= icon b.deposit.present? ? "check-circle-fill" : "x-circle-fill", class: b.deposit.present? ? "icon success" : "icon danger" %></dd>
-        </dl>
-      </article>
-    <% end %>
+            <dt>Start Date</dt>
+            <dd><%= b.starts_at.to_date %></dd>
+
+            <dt>End Date</dt>
+            <dd><%= b.ends_at.to_date %></dd>
+
+            <% if b.notes.present? %>
+              <dt>Notes</dt>
+              <dd><%= b.notes %></dd>
+            <% end %>
+
+            <dt>Deposit</dt>
+            <dd><%= icon b.deposit.present? ? "check-circle-fill" : "x-circle-fill", class: b.deposit.present? ? "icon success" : "icon danger" %></dd>
+          </dl>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="page">
+    <h3>No bookings for this date</h3>
   </div>
 <% end %>

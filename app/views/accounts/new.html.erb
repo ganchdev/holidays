@@ -1,14 +1,13 @@
-<h1>Create New Account</h1>
+<% content_for :title, "Create new account" %>
+<%= render_nav title: "Create new account" %>
 
 <%= form_with model: Current.user.account do |form| %>
   <div>
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: true %>
   </div>
 
   <div>
     <%= form.submit "Create Account" %>
   </div>
 <% end %>
-
-<%= link_to "Back", root_path %>

@@ -1,5 +1,5 @@
 <% content_for :title, @property.name %>
-<%= render_nav title: @property.name, back_url: root_path do %>
+<%= render_nav title: @property.name do %>
   <li>
     <%= link_to "Edit", edit_property_path(@property), type: "button", class: "primary" %>
   </li>
