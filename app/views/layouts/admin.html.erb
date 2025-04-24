@@ -8,8 +8,6 @@
   </head>
 
   <body>
-    <%= render "layouts/flash" %>
-
     <nav>
       <ul>
         <li><%= link_to "Accounts", admin_accounts_path %></li>
@@ -17,7 +15,10 @@
         <li><%= link_to "Authorized Users", admin_authorized_users_path %></li>
       </ul>
     </nav>
-
-    <%= yield %>
+    <%= render "layouts/flash" %>
+    <br>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
   </body>
 </html>
