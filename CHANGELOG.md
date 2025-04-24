@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/ganchdev/holidays/compare/v0.1.5...v0.1.6) (2025-04-24)
+
+
+### Bug Fixes
+
+* back button navigation in bookings ([8a1e3d3](https://github.com/ganchdev/holidays/commit/8a1e3d32d8c2fead587ae7b4810763721f1f87c1))
+
 ## [0.1.5](https://github.com/ganchdev/holidays/compare/v0.1.1...v0.1.5) (2025-04-19)
 
 
