@@ -13,8 +13,6 @@ Configuration ENV variables are managed via [dotenv](https://github.com/motdotla
 
 ## Running
 
-The recommended way for running this application in development is to use Foreman. This is useful for running all the components required.
-
 First, make sure everything is setup:
 
 ```
@@ -27,7 +25,7 @@ To run everything in for development purposes, just run:
 ./bin/dev
 ```
 
-For production use, this application will be run within a container and Foreman will not be used.
+For production use, this application will be run within a container.
 
 ## Tests and linting
 
