@@ -1,24 +1,50 @@
-# README
+# Holidays
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An app to manage property bookings
 
-Things you may want to cover:
+## Pre-requisites
+- Ruby 3.4.2
+- bundler
+- sqlite3
 
-* Ruby version
+## Configuration
 
-* System dependencies
+Configuration ENV variables are managed via [dotenv](https://github.com/motdotla/dotenv) and examples could be seen in the `.env.local.example` file.
 
-* Configuration
+## Running
 
-* Database creation
+The recommended way for running this application in development is to use Foreman. This is useful for running all the components required.
 
-* Database initialization
+First, make sure everything is setup:
 
-* How to run the test suite
+```
+./bin/setup
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+To run everything in for development purposes, just run:
 
-* Deployment instructions
+```
+./bin/dev
+```
 
-* ...
+For production use, this application will be run within a container and Foreman will not be used.
+
+## Tests and linting
+
+To run tests for this application, you can simply execute as needed.
+
+```
+./bin/rails test
+```
+
+Run Rubocop via:
+
+```
+./bin/rubocop
+```
+
+Run Steep static typechecking via:
+
+```
+./bin/steep-check
+```
