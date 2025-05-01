@@ -21,4 +21,5 @@ class AuthorizedUser < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :account, optional: true
 
+  validates :email_address, uniqueness: { case_sensitive: true }
 end
