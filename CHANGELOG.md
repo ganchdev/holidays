@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/ganchdev/holidays/compare/v0.1.7...v0.1.8) (2025-05-01)
+
+
+### Bug Fixes
+
+* unique authorized user email addresses ([69b2592](https://github.com/ganchdev/holidays/commit/69b259215269e97eac3ab9cedb7d2f1e92d7c215))
+
 ## [0.1.7](https://github.com/ganchdev/holidays/compare/v0.1.6...v0.1.7) (2025-04-24)
 
 
