@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/ganchdev/holidays/compare/v0.1.8...v0.1.9) (2025-05-07)
+
+
+### Bug Fixes
+
+* neighbour bookings ([d7883bf](https://github.com/ganchdev/holidays/commit/d7883bf6b3b1c9847cf2951697590e25aecc765b))
+
 ## [0.1.8](https://github.com/ganchdev/holidays/compare/v0.1.7...v0.1.8) (2025-05-01)
 
 
