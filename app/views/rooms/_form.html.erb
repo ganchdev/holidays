@@ -2,17 +2,17 @@
   <%= form_errors room %>
 
   <div>
-    <%= form.label :name %>
+    <%= form.label :name, t('helpers.label.room.name') %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :capacity %>
+    <%= form.label :capacity, t('helpers.label.room.capacity') %>
     <%= form.number_field :capacity, min: 1 %>
   </div>
 
   <div>
-    <%= form.label :color %>
+    <%= form.label :color, t('helpers.label.room.color') %>
     <%= form.color_field :color %>
   </div>
 

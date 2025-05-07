@@ -24,10 +24,10 @@ class Room < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :property_id, message: :taken }
   validates :capacity, presence: true, numericality: { greater_than: 0, only_integer: true }
 
-  scope :available_between, lambda { |start_date, end_date|
+  scope :available_between, lambda { |starts_at, ends_at|
     where.not(id: joins(:bookings)
               .where("bookings.starts_at < ? AND bookings.ends_at > ? AND bookings.cancelled_at IS NULL",
-                     end_date&.to_datetime, start_date&.to_datetime)
+                     ends_at, starts_at&.end_of_day)
               .select("rooms.id"))
   }
 
@@ -35,7 +35,7 @@ class Room < ApplicationRecord
     available = available_between(booking.starts_at, booking.ends_at)
     room_with_booking = joins(:bookings).where(
       "bookings.starts_at < ? AND bookings.ends_at > ? AND bookings.id = ? AND bookings.cancelled_at IS NULL",
-      booking.ends_at.to_datetime, booking.starts_at.to_datetime, booking.id
+      booking.ends_at, booking.starts_at.end_of_day, booking.id
     ).select("rooms.id")
 
     where(id: available).or(where(id: room_with_booking))

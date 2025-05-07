@@ -1,4 +1,16 @@
 bg:
+  helpers:
+    label:
+      room:
+        name: "Име"
+        capacity: "Капацитет"
+        color: "Цвят"
+    submit:
+      room:
+        create: "Създай стая"
+        update: "Обнови стая"
+  titles:
+    new_booking: "Нова резервация"
   flash:
     accounts:
       already_has_account: "Вече имате акаунт."
@@ -28,6 +40,7 @@ bg:
         starts_at: "Дата на настаняване"
         ends_at: "Дата на напускане"
         deposit: "Депозит"
+        adults: "Възрастни"
     errors:
       models:
         account:

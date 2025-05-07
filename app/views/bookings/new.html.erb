@@ -1,4 +1,4 @@
-<% content_for :title, "New booking" %>
-<%= render_nav title: "Нова резервация", back_url: params[:back_to] || property_path(@property) %>
+<% content_for :title, t("titles.new_booking") %>
+<%= render_nav title: t("titles.new_booking"), back_url: params[:back_to] || property_path(@property) %>
 
 <%= render "form", booking: @booking %>
