@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11](https://github.com/ganchdev/holidays/compare/v0.1.10...v0.1.11) (2025-05-16)
+
+
+### Bug Fixes
+
+* bookings rooms spacing and sorting ([a91c5c5](https://github.com/ganchdev/holidays/commit/a91c5c59e8cedf9623966e840fd58410dab42ab7))
+
 ## [0.1.10](https://github.com/ganchdev/holidays/compare/v0.1.9...v0.1.10) (2025-05-16)
 
 
