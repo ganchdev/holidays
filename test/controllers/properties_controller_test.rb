@@ -21,6 +21,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
       post properties_url, params: { property: { name: "New Property" } }
     end
     assert_redirected_to property_path(Property.last)
+    assert_equal I18n.t("flash.properties.created_successfully"), flash[:notice]
   end
 
   test "should show property" do
@@ -36,6 +37,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
   test "should update property" do
     patch property_url(@property), params: { property: { name: "Updated Name" } }
     assert_redirected_to property_path(@property)
+    assert_equal I18n.t("flash.properties.updated_successfully"), flash[:notice]
     @property.reload
     assert_equal "Updated Name", @property.name
   end
@@ -58,6 +60,7 @@ class PropertiesControllerTest < ActionDispatch::IntegrationTest
       delete property_url(property_without_bookings)
     end
     assert_redirected_to properties_url
+    assert_equal I18n.t("flash.properties.destroyed_successfully"), flash[:notice]
   end
 
 end

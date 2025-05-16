@@ -27,6 +27,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
       post property_rooms_url(@property), params: { room: { name: "New Room", capacity: 10, color: "Blue" } }
     end
     assert_redirected_to property_rooms_path(@property)
+    assert_equal I18n.t("flash.rooms.created_successfully"), flash[:notice]
   end
 
   test "should get edit" do
@@ -37,6 +38,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
   test "should update room" do
     patch property_room_url(@property, @room), params: { room: { name: "Updated Name", capacity: 15, color: "Red" } }
     assert_redirected_to property_rooms_path(@property)
+    assert_equal I18n.t("flash.rooms.updated_successfully"), flash[:notice]
     @room.reload
     assert_equal "Updated Name", @room.name
     assert_equal 15, @room.capacity
@@ -48,6 +50,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
       delete property_room_url(@property, @room)
     end
     assert_redirected_to property_rooms_url(@property)
+    assert_equal I18n.t("flash.rooms.destroyed_successfully"), flash[:notice]
   end
 
 end

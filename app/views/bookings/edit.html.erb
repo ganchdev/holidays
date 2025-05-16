@@ -1,7 +1,7 @@
-<% content_for :title, "Edit booking" %>
-<%= render_nav title: "Edit booking", back_url: params[:back_to] || property_path(@property) do %>
+<% content_for :title, t("titles.edit_booking") %>
+<%= render_nav title: t("titles.edit_booking"), back_url: params[:back_to] || property_path(@property) do %>
   <li>
-    <%= button_to_with_icon "Cancel booking", property_booking_path(@property, @booking), "x", class: "header danger", method: :delete, data: { turbo_confirm: "Are you sure?" }  %>
+    <%= button_to_with_icon t("buttons.cancel_booking"), property_booking_path(@property, @booking), "x", class: "header danger", method: :delete, data: { turbo_confirm: t("helpers.confirm.delete") }  %>
   </li>
 <% end %>
 

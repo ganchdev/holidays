@@ -1,15 +1,15 @@
-<h1>Accounts</h1>
+<h1><%= t("admin.titles.accounts") %></h1>
 
-<%= link_to "New Account", new_admin_account_path, class: "button" %>
+<%= link_to t("admin.buttons.new_account"), new_admin_account_path, class: "button" %>
 
 <table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Created At</th>
-      <th>Updated At</th>
-      <th>Actions</th>
+      <th><%= t("common.id") %></th>
+      <th><%= t("common.name") %></th>
+      <th><%= t("common.created_at") %></th>
+      <th><%= t("common.updated_at") %></th>
+      <th><%= t("common.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -20,8 +20,8 @@
         <td><%= account.created_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td><%= account.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
         <td>
-          <%= link_to "Edit", edit_admin_account_path(account) %> |
-          <%= button_to "Delete", admin_account_path(account), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+          <%= link_to t("admin.buttons.edit"), edit_admin_account_path(account) %> |
+          <%= button_to t("admin.buttons.delete"), admin_account_path(account), method: :delete, data: { turbo_confirm: t("admin.messages.confirm_delete") } %>
         </td>
       </tr>
     <% end %>

@@ -10,9 +10,9 @@
   <body>
     <nav>
       <ul>
-        <li><%= link_to "Accounts", admin_accounts_path %></li>
-        <li><%= link_to "Users", admin_users_path %></li>
-        <li><%= link_to "Authorized Users", admin_authorized_users_path %></li>
+        <li><%= link_to t("admin.titles.accounts"), admin_accounts_path %></li>
+        <li><%= link_to t("admin.titles.users"), admin_users_path %></li>
+        <li><%= link_to t("admin.titles.authorized_users"), admin_authorized_users_path %></li>
       </ul>
     </nav>
     <%= render "layouts/flash" %>

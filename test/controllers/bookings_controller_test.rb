@@ -38,6 +38,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to property_booking_url(@property, Booking.last)
+    assert_equal I18n.t("flash.bookings.created_successfully"), flash[:notice]
   end
 
   test "should show booking" do
@@ -60,6 +61,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       }
     }
     assert_redirected_to property_booking_url(@property, @booking)
+    assert_equal I18n.t("flash.bookings.updated_successfully"), flash[:notice]
   end
 
   test "should cancel booking" do
@@ -68,6 +70,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     @booking.reload
 
     assert_not_nil @booking.cancelled_at
+    assert_equal I18n.t("flash.bookings.destroyed_successfully"), flash[:notice]
   end
 
 end

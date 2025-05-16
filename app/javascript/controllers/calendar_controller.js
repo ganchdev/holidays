@@ -80,9 +80,26 @@ export default class extends Controller {
     const weekEndDate = new Date(weekStartDate);
     weekEndDate.setDate(weekStartDate.getDate() + 6);
 
-    const options = { day: "numeric", month: "long" };
-    const firstDay = weekStartDate.toLocaleDateString("en-GB", options);
-    const lastDay = weekEndDate.toLocaleDateString("en-GB", options);
+    // Format date with capitalized month names from our i18n data
+    const formatDate = (date) => {
+      const day = date.getDate();
+      const monthIndex = date.getMonth();
+      
+      // Use our custom month names if available
+      let monthName;
+      if (window.i18n && window.i18n.months) {
+        monthName = window.i18n.months[monthIndex];
+      } else {
+        // Fallback to browser's locale
+        const currentLocale = window.appLocale || "bg";
+        monthName = date.toLocaleDateString(currentLocale, { month: 'long' });
+      }
+      
+      return `${day} ${monthName}`;
+    };
+
+    const firstDay = formatDate(weekStartDate);
+    const lastDay = formatDate(weekEndDate);
     const year = weekStartDate.getFullYear();
 
     this.weekHeaderTarget.textContent = `${firstDay} - ${lastDay}, ${year}`;

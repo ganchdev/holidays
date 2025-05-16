@@ -1,4 +1,4 @@
-<% content_for :title, "Editing room" %>
-<%= render_nav title: "Editing room #{@room.name}", back_url: property_rooms_path(@property) %>
+<% content_for :title, t("titles.edit_room") %>
+<%= render_nav title: t("common.editing_room", name: @room.name), back_url: property_rooms_path(@property) %>
 
 <%= render "form", room: @room %>

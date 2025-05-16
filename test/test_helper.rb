@@ -19,5 +19,19 @@ module ActiveSupport
     # Add more helper methods to be used by all tests here...
     include AuthHelper
 
+    setup do
+      # Set a consistent locale for all tests to ensure predictable translations
+      I18n.locale = :en
+    end
+
+    # Helper method to switch locale if needed for specific tests
+    def with_locale(locale)
+      original_locale = I18n.locale
+      I18n.locale = locale
+      yield
+    ensure
+      I18n.locale = original_locale
+    end
+
   end
 end

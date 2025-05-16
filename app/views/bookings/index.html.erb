@@ -1,7 +1,7 @@
-<% content_for :title, "Bookings" %>
-<%= render_nav title: "Bookings", back_url: property_path(@property) do %>
+<% content_for :title, t("titles.bookings") %>
+<%= render_nav title: t("titles.bookings"), back_url: property_path(@property) do %>
   <li>
-    <%= link_to "Today", property_bookings_path, type: "button" %>
+    <%= link_to t("buttons.today"), property_bookings_path, type: "button" %>
   </li>
 <% end %>
 
@@ -15,8 +15,8 @@
             <li class="weekday" >
               <%= link_to day_property_bookings_path(@property, day: day[0]), class: "weekday-link", data: { turbo_prefetch: false } do %>
                 <div class="date">
-                  <span><%= day[0].to_date.strftime("%d") %></span>
-                  <span><%= day[0].to_date.strftime("%a") %></span>
+                  <span><%= I18n.l(day[0].to_date, format: "%d") %></span>
+                  <span><%= I18n.t('date.abbr_day_names')[day[0].to_date.wday] %></span>
                 </div>
                 <div class="weekday-bookings">
                   <div class="flex-container">

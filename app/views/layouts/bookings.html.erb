@@ -1,9 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <%= render "layouts/head" %>
 
     <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+    <script>
+      window.appLocale = "<%= I18n.locale %>";
+      window.i18n = {
+        months: <%= raw I18n.t('date.month_names')[1..].to_json %>,
+        abbr_months: <%= raw I18n.t('date.abbr_month_names')[1..].to_json %>,
+        days: <%= raw I18n.t('date.day_names').to_json %>,
+        abbr_days: <%= raw I18n.t('date.abbr_day_names').to_json %>
+      };
+    </script>
     <%= yield :head %>
   </head>
 

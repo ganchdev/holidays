@@ -20,7 +20,7 @@ module Admin
       @account = Account.new(account_params)
 
       if @account.save
-        redirect_to admin_accounts_path, notice: "Account successfully created."
+        redirect_to admin_accounts_path, notice: t("admin.messages.account_created")
       else
         render :new, status: :unprocessable_entity
       end
@@ -28,7 +28,7 @@ module Admin
 
     def update
       if @account.update(account_params)
-        redirect_to admin_accounts_path, notice: "Account successfully updated."
+        redirect_to admin_accounts_path, notice: t("admin.messages.account_updated")
       else
         render :edit, status: :unprocessable_entity
       end
@@ -36,7 +36,7 @@ module Admin
 
     def destroy
       @account.destroy
-      redirect_to admin_accounts_path, notice: "Account successfully deleted."
+      redirect_to admin_accounts_path, notice: t("admin.messages.account_deleted")
     end
 
     private

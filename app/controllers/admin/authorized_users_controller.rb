@@ -20,7 +20,7 @@ module Admin
       @authorized_user = AuthorizedUser.new(authorized_user_params)
 
       if @authorized_user.save
-        redirect_to admin_authorized_users_path, notice: "Authorized user successfully created."
+        redirect_to admin_authorized_users_path, notice: t("admin.messages.authorized_user_created")
       else
         @authorized_users = AuthorizedUser.all
         render :index, status: :unprocessable_entity
@@ -29,7 +29,7 @@ module Admin
 
     def update
       if @authorized_user.update(authorized_user_params)
-        redirect_to admin_authorized_users_path, notice: "Authorized user successfully updated."
+        redirect_to admin_authorized_users_path, notice: t("admin.messages.authorized_user_updated")
       else
         render :edit, status: :unprocessable_entity
       end
@@ -37,7 +37,7 @@ module Admin
 
     def destroy
       @authorized_user.destroy
-      redirect_to admin_authorized_users_path, notice: "Authorized user successfully deleted."
+      redirect_to admin_authorized_users_path, notice: t("admin.messages.authorized_user_deleted")
     end
 
     private

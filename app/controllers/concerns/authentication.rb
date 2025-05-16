@@ -34,7 +34,7 @@ module Authentication
 
   def request_authentication
     session[:return_to_after_authenticating] = request.url
-    redirect_to auth_path, alert: "Your session is no longer valid. Please login again to continue..."
+    redirect_to auth_path, alert: t("your_session_invalid")
   end
 
   def after_authentication_url

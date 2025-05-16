@@ -1,21 +1,21 @@
 <div id="<%= dom_id room %>">
   <p>
-    <strong>Name:</strong>
+    <strong><%= t("common.name") %>:</strong>
     <%= room.name %>
   </p>
 
   <p>
-    <strong>Capacity:</strong>
+    <strong><%= t("common.capacity") %>:</strong>
     <%= room.capacity %>
   </p>
 
   <p>
-    <strong>Color:</strong>
+    <strong><%= t("common.color") %>:</strong>
     <%= room.color %>
   </p>
 
   <p>
-    <strong>Property:</strong>
+    <strong><%= t("activerecord.attributes.property.name") %>:</strong>
     <%= room.property_id %>
   </p>
 

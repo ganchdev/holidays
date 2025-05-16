@@ -1,7 +1,7 @@
-<% content_for :title, "Bookings" %>
-<%= render_nav title: @day.strftime("%a, %d %b %Y"), back_url: "history.back()" do %>
+<% content_for :title, t("titles.bookings") %>
+<%= render_nav title: I18n.l(@day, format: :long), back_url: "history.back()" do %>
   <li>
-    <%= link_to "New booking", new_property_booking_path(back_to: "history.back()", day: @day), type: "button" %>
+    <%= link_to t("buttons.new_booking"), new_property_booking_path(back_to: "history.back()", day: @day), type: "button" %>
   </li>
 <% end %>
 
@@ -14,33 +14,33 @@
             <header class="bookings-check-in">
               <%= icon "sign-in" %>
               <span>
-                Check in
+                <%= t("common.check_in") %>
               </span>
             </header>
           <% elsif @day == b.ends_at.to_date %>
             <header class="bookings-check-out">
               <%= icon "sign-out" %>
               <span>
-                Check out
+                <%= t("common.check_out") %>
               </span>
             </header>
           <% end %>
           <dl>
-            <dt>Room</dt>
+            <dt><%= t("common.room") %></dt>
             <dd><%= room_badge b.room %></dd>
 
-            <dt>Start Date</dt>
-            <dd><%= b.starts_at.to_date %></dd>
+            <dt><%= t("common.start_date") %></dt>
+            <dd><%= I18n.l(b.starts_at.to_date) %></dd>
 
-            <dt>End Date</dt>
-            <dd><%= b.ends_at.to_date %></dd>
+            <dt><%= t("common.end_date") %></dt>
+            <dd><%= I18n.l(b.ends_at.to_date) %></dd>
 
             <% if b.notes.present? %>
-              <dt>Notes</dt>
+              <dt><%= t("common.notes") %></dt>
               <dd><%= b.notes %></dd>
             <% end %>
 
-            <dt>Deposit</dt>
+            <dt><%= t("common.deposit") %></dt>
             <dd><%= icon b.deposit.present? ? "check-circle-fill" : "x-circle-fill", class: b.deposit.present? ? "icon success" : "icon danger" %></dd>
           </dl>
         </article>
@@ -49,6 +49,6 @@
   <% end %>
 <% else %>
   <div class="page">
-    <h3>No bookings for this date</h3>
+    <h3><%= t("common.no_bookings") %></h3>
   </div>
 <% end %>

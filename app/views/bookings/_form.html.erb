@@ -14,9 +14,9 @@
   <div>
     <%= form.label :room_id %>
     <% if local_assigns[:available_rooms].present? %>
-      <%= form.select :room_id, options_for_select(available_rooms.map { |r| [r.name, r.id] }, booking&.room&.id), { include_blank: "Select a room" }, required: true %>
+      <%= form.select :room_id, options_for_select(available_rooms.map { |r| [r.name, r.id] }, booking&.room&.id), { include_blank: t("common.select_room") }, required: true %>
     <% else %>
-      <%= form.select :room_id, [], { include_blank: "Select dates" }, disabled: true %>
+      <%= form.select :room_id, [], { include_blank: t("common.select_dates") }, disabled: true %>
     <% end %>
   </div>
 

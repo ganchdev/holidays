@@ -5,8 +5,8 @@
   </div>
 
   <div>
-    <%= form.label :account_id, "Account" %>
-    <%= form.collection_select :account_id, Account.all, :id, :name, include_blank: "No Account" %>
+    <%= form.label :account_id, t("common.account") %>
+    <%= form.collection_select :account_id, Account.all, :id, :name, include_blank: t("admin.messages.na") %>
   </div>
 
   <div>

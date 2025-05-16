@@ -1,16 +1,16 @@
-<h1>Authorized Users</h1>
+<h1><%= t("admin.titles.authorized_users") %></h1>
 
-<%= link_to "New authorized user", new_admin_authorized_user_path, class: "button" %>
+<%= link_to t("admin.buttons.new_authorized_user"), new_admin_authorized_user_path, class: "button" %>
 
 <!-- Authorized Users Table -->
 <table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Account</th>
-      <th>User</th>
-      <th>Actions</th>
+      <th><%= t("common.id") %></th>
+      <th><%= t("common.email") %></th>
+      <th><%= t("common.account") %></th>
+      <th><%= t("common.user") %></th>
+      <th><%= t("common.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -18,11 +18,11 @@
       <tr>
         <td><%= authorized_user.id %></td>
         <td><%= authorized_user.email_address %></td>
-        <td><%= authorized_user.account&.name || "N/A" %></td>
-        <td><%= authorized_user.user&.name || "N/A" %></td>
+        <td><%= authorized_user.account&.name || t("admin.messages.na") %></td>
+        <td><%= authorized_user.user&.name || t("admin.messages.na") %></td>
         <td>
-          <%= link_to "Edit", edit_admin_authorized_user_path(authorized_user) %> |
-          <%= button_to "Delete", admin_authorized_user_path(authorized_user), method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+          <%= link_to t("admin.buttons.edit"), edit_admin_authorized_user_path(authorized_user) %> |
+          <%= button_to t("admin.buttons.delete"), admin_authorized_user_path(authorized_user), method: :delete, data: { turbo_confirm: t("admin.messages.confirm_delete") } %>
         </td>
       </tr>
     <% end %>

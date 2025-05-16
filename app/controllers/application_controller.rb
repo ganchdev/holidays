@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include Authentication
 
   before_action :find_account
+  before_action :set_locale
 
   rescue_from ActiveRecord::RecordNotDestroyed, with: :handle_record_not_destroyed_error
 
@@ -17,6 +18,10 @@ class ApplicationController < ActionController::Base
     return unless Current.user
 
     Current.account = Current.user.account
+  end
+
+  def set_locale
+    I18n.locale = :bg
   end
 
   def handle_record_not_destroyed_error(exception)

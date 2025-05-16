@@ -1,12 +1,12 @@
 <% content_for :title, @property.name %>
 <%= render_nav title: @property.name do %>
   <li>
-    <%= link_to "Edit", edit_property_path(@property), type: "button", class: "primary" %>
+    <%= link_to t("buttons.edit"), edit_property_path(@property), type: "button", class: "primary" %>
   </li>
 <% end %>
 
-<%= button_to_with_icon "New booking", new_property_booking_path(@property), "plus", method: :get %>
-<%= button_to "Bookings", property_bookings_path(@property), method: :get, class: "outline" %>
+<%= button_to_with_icon t("buttons.new_booking"), new_property_booking_path(@property), "plus", method: :get %>
+<%= button_to t("buttons.bookings"), property_bookings_path(@property), method: :get, class: "outline" %>
 
 <code class="version">
   v<%= Holidays::Application.version %>

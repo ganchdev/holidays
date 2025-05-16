@@ -1,31 +1,31 @@
-<% content_for :title, "Booking" %>
-<%= render_nav title: "Booking for #{@booking.room.name}", back_url: "history.back()" do %>
+<% content_for :title, t("titles.booking") %>
+<%= render_nav title: t("common.booking_for", room: @booking.room.name), back_url: "history.back()" do %>
   <li>
-    <%= link_to "Edit booking", edit_property_booking_path(back_to: "history.back()"), type: "button" %>
+    <%= link_to t("buttons.edit_booking"), edit_property_booking_path(back_to: "history.back()"), type: "button" %>
   </li>
 <% end %>
 
 <div class="bookings-show">
   <dl>
-    <dt>Room</dt>
+    <dt><%= t("common.room") %></dt>
     <dd><%= @booking.room.name %>
 
-    <dt>Starts Date</dt>
-    <dd><%= @booking.starts_at.to_date %></dd>
+    <dt><%= t("common.start_date") %></dt>
+    <dd><%= I18n.l(@booking.starts_at.to_date) %></dd>
 
-    <dt>Ends Date</dt>
-    <dd><%= @booking.ends_at.to_date %></dd>
+    <dt><%= t("common.end_date") %></dt>
+    <dd><%= I18n.l(@booking.ends_at.to_date) %></dd>
 
-    <dt>Notes</dt>
+    <dt><%= t("common.notes") %></dt>
     <dd><%= @booking.notes %></dd>
 
-    <dt>Deposit</dt>
+    <dt><%= t("common.deposit") %></dt>
     <dd><%= @booking.deposit %></dd>
 
-    <dt>Adults</dt>
+    <dt><%= t("common.adults") %></dt>
     <dd><%= @booking.adults %></dd>
 
-    <dt>Children</dt>
+    <dt><%= t("common.children") %></dt>
     <dd><%= @booking.children %></dd>
   </dl>
 </div>

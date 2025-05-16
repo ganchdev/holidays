@@ -1,5 +1,5 @@
-<% content_for :title, "Create new account" %>
-<%= render_nav title: "Create new account" %>
+<% content_for :title, t("titles.new_account") %>
+<%= render_nav title: t("titles.new_account") %>
 
 <%= form_with model: Current.user.account do |form| %>
   <div>
@@ -8,6 +8,6 @@
   </div>
 
   <div>
-    <%= form.submit "Create Account" %>
+    <%= form.submit t("buttons.create_account") %>
   </div>
 <% end %>

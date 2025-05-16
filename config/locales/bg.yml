@@ -5,12 +5,87 @@ bg:
         name: "Име"
         capacity: "Капацитет"
         color: "Цвят"
+      booking:
+        room_id: "Стая"
+        starts_at: "Дата на настаняване"
+        ends_at: "Дата на напускане"
+        adults: "Възрастни"
+        children: "Деца"
+        deposit: "Депозит"
+        notes: "Бележки"
+      account:
+        name: "Име"
+      property:
+        name: "Име"
     submit:
       room:
         create: "Създай стая"
         update: "Обнови стая"
+      booking:
+        create: "Създай резервация"
+        update: "Обнови резервация"
+      account:
+        create: "Създай акаунт"
+        update: "Обнови акаунт"
+      property:
+        create: "Създай имот"
+        update: "Обнови имот"
+    confirm:
+      delete: "Сигурни ли сте?"
   titles:
     new_booking: "Нова резервация"
+    edit_booking: "Редактиране на резервация"
+    booking: "Резервация"
+    bookings: "Резервации"
+    new_property: "Нов имот"
+    edit_property: "Редактиране на имот"
+    new_room: "Нова стая"
+    edit_room: "Редактиране на стая"
+    rooms: "Стаи"
+    new_account: "Създаване на нов акаунт"
+  buttons:
+    new_booking: "Нова резервация"
+    edit_booking: "Редактирай резервация"
+    cancel_booking: "Отмени резервация"
+    bookings: "Резервации"
+    new_room: "Нова стая"
+    edit_room: "Редактирай стая"
+    edit: "Редактирай"
+    back: "Назад"
+    today: "Днес"
+    delete: "Изтрий"
+    create_account: "Създай акаунт"
+    sign_in_with_google: "Вход с Google"
+  common:
+    room: "Стая"
+    start_date: "Начална дата"
+    end_date: "Крайна дата"
+    notes: "Бележки"
+    deposit: "Депозит"
+    adults: "Възрастни"
+    children: "Деца"
+    check_in: "Настаняване"
+    check_out: "Напускане"
+    booking_for: "Резервация за %{room}"
+    editing_room: "Редактиране на стая %{name}"
+    name: "Име"
+    capacity: "Капацитет"
+    color: "Цвят"
+    actions: "Действия"
+    id: "ID"
+    created_at: "Създаден на"
+    updated_at: "Обновен на"
+    email: "Имейл"
+    account: "Акаунт"
+    user: "Потребител"
+    admin: "Администратор"
+    first_name: "Първо име"
+    last_name: "Фамилия"
+    no_bookings: "Няма резервации за тази дата"
+    no_rooms: "Няма налични стаи"
+    select_room: "Изберете стая"
+    select_dates: "Изберете дати"
+    unauthorized: "Неоторизиран"
   flash:
     accounts:
       already_has_account: "Вече имате акаунт."
@@ -41,6 +116,17 @@ bg:
         ends_at: "Дата на напускане"
         deposit: "Депозит"
         adults: "Възрастни"
+        children: "Деца"
+        notes: "Бележки"
+        room_id: "Стая"
+      account:
+        name: "Име"
+      property:
+        name: "Име"
+      room:
+        name: "Име"
+        capacity: "Капацитет"
+        color: "Цвят"
     errors:
       models:
         account:
@@ -101,4 +187,57 @@ bg:
             deposit:
               not_a_number: "трябва да бъде число"
               greater_than_or_equal_to: "трябва да бъде поне 0"
+  admin:
+    titles:
+      accounts: "Акаунти"
+      users: "Потребители"
+      authorized_users: "Оторизирани потребители"
+      new_account: "Нов акаунт"
+      edit_account: "Редактиране на акаунт"
+      new_authorized_user: "Нов оторизиран потребител"
+      edit_authorized_user: "Редактиране на оторизиран потребител"
+      edit_user: "Редактиране на потребител"
+    buttons:
+      new_account: "Нов акаунт"
+      new_authorized_user: "Нов оторизиран потребител"
+      edit: "Редактирай"
+      delete: "Изтрий"
+      back: "Назад"
+    messages:
+      confirm_delete: "Сигурни ли сте?"
+      user_deleted: "Потребителят беше успешно изтрит."
+      account_deleted: "Акаунтът беше успешно изтрит."
+      authorized_user_deleted: "Оторизираният потребител беше успешно изтрит."
+      cannot_delete_current_user: "Не може да изтриете текущия потребител"
+      yes: "Да"
+      no: "Не"
+      na: "Не е наличен"
+      account_created: "Акаунтът беше успешно създаден."
+      account_updated: "Акаунтът беше успешно актуализиран."
+      user_updated: "Потребителят беше успешно актуализиран."
+      authorized_user_created: "Оторизираният потребител беше успешно създаден."
+      authorized_user_updated: "Оторизираният потребител беше успешно актуализиран."
   hello: "Здравей, свят"
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+      day_header: "%a, %d %b %Y"
+    day_names: [Неделя, Понеделник, Вторник, Сряда, Четвъртък, Петък, Събота]
+    abbr_day_names: [Нед, Пон, Вто, Сря, Чет, Пет, Съб]
+    month_names: [~, Януари, Февруари, Март, Април, Май, Юни, Юли, Август, Септември, Октомври, Ноември, Декември]
+    abbr_month_names: [~, Яну, Фев, Мар, Апр, Май, Юни, Юли, Авг, Сеп, Окт, Ное, Дек]
+    order:
+      - :day
+      - :month
+      - :year
+  app:
+    name: "Почивки"
+    description: "Приложение за управление на резервации"
+  pwa:
+    name: "Почивки"
+    short_name: "почи"
+    description: "Почивки. Приложение за управление на резервации"
+  unauthorized: "Неоторизиран достъп"
+  your_session_invalid: "Вашата сесия вече не е валидна. Моля, влезте отново, за да продължите..."

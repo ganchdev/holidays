@@ -14,7 +14,7 @@ module Admin
 
     def update
       if @user.update(user_params)
-        redirect_to admin_users_path, notice: "User successfully updated."
+        redirect_to admin_users_path, notice: t("admin.messages.user_updated")
       else
         render :edit, status: :unprocessable_entity
       end
@@ -22,10 +22,10 @@ module Admin
 
     def destroy
       if Current.user == @user
-        redirect_to admin_users_path, alert: "Cannot delete current user"
+        redirect_to admin_users_path, alert: t("admin.messages.cannot_delete_current_user")
       else
         @user.destroy
-        redirect_to admin_users_path, notice: "User successfully deleted."
+        redirect_to admin_users_path, notice: t("admin.messages.user_deleted")
       end
     end
 

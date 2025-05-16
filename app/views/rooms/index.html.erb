@@ -1,7 +1,7 @@
-<% content_for :title, "Rooms" %>
-<%= render_nav title: "Rooms", back_url: edit_property_path(@property) do %>
+<% content_for :title, t("titles.rooms") %>
+<%= render_nav title: t("titles.rooms"), back_url: edit_property_path(@property) do %>
   <li>
-    <%= link_to "New room", new_property_room_path(@property), type: "button", class: "primary" %>
+    <%= link_to t("buttons.new_room"), new_property_room_path(@property), type: "button", class: "primary" %>
   </li>
 <% end %>
 
@@ -9,9 +9,9 @@
   <table>
     <thead>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Capacity</th>
-        <th scope="col">Color</th>
+        <th scope="col"><%= t("common.name") %></th>
+        <th scope="col"><%= t("common.capacity") %></th>
+        <th scope="col"><%= t("common.color") %></th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -21,11 +21,11 @@
           <th scope="row"><%= room.name %></th>
           <td><%= room.capacity %></td>
           <td><%= room.color %></td>
-          <td><%= link_to "Edit", edit_property_room_path(@property, room) %></td>
+          <td><%= link_to t("buttons.edit"), edit_property_room_path(@property, room) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <h3>No rooms available</h3>
+  <h3><%= t("common.no_rooms") %></h3>
 <% end %>

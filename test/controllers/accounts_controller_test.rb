@@ -18,7 +18,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     get new_account_url
 
     assert_redirected_to root_path
-    assert_equal "You already have an account.", flash[:alert]
+    assert_equal I18n.t("flash.accounts.already_has_account"), flash[:alert]
   end
 
   test "should create account for user without account" do
@@ -29,7 +29,7 @@ class AccountsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to root_path
-    assert_equal "Account was successfully created.", flash[:notice]
+    assert_equal I18n.t("flash.accounts.created_successfully"), flash[:notice]
 
     @user_without_account.reload
     assert_not_nil @user_without_account.account_id
