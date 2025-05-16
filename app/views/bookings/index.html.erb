@@ -19,9 +19,18 @@
                   <span><%= day[0].to_date.strftime("%a") %></span>
                 </div>
                 <div class="weekday-bookings">
-                  <% day[1].each do |booking| %>
-                    <%= room_badge booking.room %>
-                  <% end %>
+                  <div class="flex-container">
+                    <% bookings = day[1] %>
+                    <% if bookings.any? %>
+                      <% @property.rooms.map(&:name).each do |name| %>
+                        <% if booking = bookings.find { |b| b.room.name == name } %>
+                          <%= room_badge booking.room %>
+                        <% else %>
+                          <span class="booking-placeholder"></span>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
               <% end %>
             </li>
