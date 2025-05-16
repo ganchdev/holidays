@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.10](https://github.com/ganchdev/holidays/compare/v0.1.9...v0.1.10) (2025-05-16)
+
+
+### Bug Fixes
+
+* align bookings; remove weekly snap scrolling ([7a39b47](https://github.com/ganchdev/holidays/commit/7a39b474ce3e1bd55a7d853f3c21a3a70b1fa14e))
+
 ## [0.1.9](https://github.com/ganchdev/holidays/compare/v0.1.8...v0.1.9) (2025-05-07)
 
 
