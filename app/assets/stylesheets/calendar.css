@@ -70,7 +70,7 @@
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.8rem;
+  gap: 1.2rem;
 }
 
 .booking-placeholder {

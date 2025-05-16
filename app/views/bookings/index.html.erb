@@ -22,8 +22,8 @@
                   <div class="flex-container">
                     <% bookings = day[1] %>
                     <% if bookings.any? %>
-                      <% @property.rooms.map(&:name).each do |name| %>
-                        <% if booking = bookings.find { |b| b.room.name == name } %>
+                      <% @rooms.each do |room| %>
+                        <% if booking = bookings.find { |b| b.room.name == room.name } %>
                           <%= room_badge booking.room %>
                         <% else %>
                           <span class="booking-placeholder"></span>

@@ -10,6 +10,7 @@ class BookingsController < ApplicationController
 
   # GET /properties/:property_id/bookings
   def index
+    @rooms = @property.rooms.sort_by { |r| r.name.to_i }
     @weeks = CalendarGeneratorService.new(property: @property).call
   end
 
