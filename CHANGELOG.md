@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.12](https://github.com/ganchdev/holidays/compare/v0.1.11...v0.1.12) (2025-05-16)
+
+
+### Bug Fixes
+
+* missing bg translations ([2b61f46](https://github.com/ganchdev/holidays/commit/2b61f46ea07a20852a5795934873219475de57cb))
+
 ## [0.1.11](https://github.com/ganchdev/holidays/compare/v0.1.10...v0.1.11) (2025-05-16)
 
 
