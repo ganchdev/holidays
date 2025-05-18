@@ -11,6 +11,7 @@
 #  deposit      :decimal(10, 2)
 #  ends_at      :datetime
 #  notes        :text
+#  price        :decimal(10, 2)
 #  starts_at    :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -96,6 +97,22 @@ class BookingTest < ActiveSupport::TestCase
     expected_message = I18n.t("activerecord.errors.models.booking.attributes.deposit.not_a_number",
                               default: "must be a number")
     assert_includes @booking.errors[:deposit], expected_message
+  end
+
+  test "should require price to be at least 0" do
+    @booking.price = -10
+    assert_not @booking.valid?, "Saved the booking with a negative price"
+    expected_message = I18n.t("activerecord.errors.models.booking.attributes.price.greater_than_or_equal_to",
+                              default: "must be at least 0")
+    assert_includes @booking.errors[:price], expected_message
+  end
+
+  test "should require price to be a number" do
+    @booking.price = "abc"
+    assert_not @booking.valid?, "Saved the booking with a non-numeric price"
+    expected_message = I18n.t("activerecord.errors.models.booking.attributes.price.not_a_number",
+                              default: "must be a number")
+    assert_includes @booking.errors[:price], expected_message
   end
 
   test "should respond to room association" do
@@ -220,6 +237,48 @@ class BookingTest < ActiveSupport::TestCase
       )
       assert_includes booking.errors[:base], expected_message
     end
+  end
+
+  test "nights should calculate the number of nights between start and end dates" do
+    # Since transform_datetimes sets starts_at to end_of_day and ends_at to beginning_of_day
+    # A 3-day period will result in 3 nights when using to_date conversion
+
+    # 3-night stay
+    @booking.starts_at = Date.new(2025, 5, 1)
+    @booking.ends_at = Date.new(2025, 5, 4)
+    assert_equal 3, @booking.nights
+
+    # 1-night stay
+    @booking.starts_at = Date.new(2025, 5, 1)
+    @booking.ends_at = Date.new(2025, 5, 2)
+    assert_equal 1, @booking.nights
+
+    # 7-night stay
+    @booking.starts_at = Date.new(2025, 5, 1)
+    @booking.ends_at = Date.new(2025, 5, 8)
+    assert_equal 7, @booking.nights
+  end
+
+  test "amount_due should calculate the total amount due" do
+    @booking.starts_at = Date.new(2025, 5, 1)
+    @booking.ends_at = Date.new(2025, 5, 4) # 3 nights
+    @booking.price = 100.00
+    @booking.deposit = 0.00
+
+    # With no deposit
+    assert_equal 300.00, @booking.amount_due
+
+    # With deposit
+    @booking.deposit = 150.00
+    assert_equal 150.00, @booking.amount_due
+
+    # When deposit exceeds total
+    @booking.deposit = 350.00
+    assert_equal(0.00, @booking.amount_due)
+
+    # With no price
+    @booking.price = 0.00
+    assert_equal(0.00, @booking.amount_due)
   end
 
 end

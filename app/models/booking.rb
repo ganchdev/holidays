@@ -11,6 +11,7 @@
 #  deposit      :decimal(10, 2)
 #  ends_at      :datetime
 #  notes        :text
+#  price        :decimal(10, 2)
 #  starts_at    :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -32,6 +33,7 @@ class Booking < ApplicationRecord
   validates :adults, presence: true, numericality: { greater_than_or_equal_to: 1, only_integer: true }
   validates :children, numericality: { greater_than_or_equal_to: 0, only_integer: true }, allow_nil: true
   validates :deposit, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
 
@@ -50,6 +52,20 @@ class Booking < ApplicationRecord
   scope :for_day, lambda { |day|
     overlapping(day.to_date, day.to_date + 1)
   }
+
+  def nights
+    (ends_at.to_date - starts_at.to_date).to_i
+  end
+
+  def amount_due
+    return 0.00 if price.zero?
+
+    total = price * nights
+
+    return 0.00 if total < deposit
+
+    total - deposit
+  end
 
   private
 

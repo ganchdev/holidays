@@ -16,16 +16,25 @@
     <dt><%= t("common.end_date") %></dt>
     <dd><%= I18n.l(@booking.ends_at.to_date) %></dd>
 
+    <dt><%= t("common.nights") %></dt>
+    <dd><%= @booking.nights %></dd>
+
     <dt><%= t("common.notes") %></dt>
     <dd><%= @booking.notes %></dd>
-
-    <dt><%= t("common.deposit") %></dt>
-    <dd><%= @booking.deposit %></dd>
 
     <dt><%= t("common.adults") %></dt>
     <dd><%= @booking.adults %></dd>
 
     <dt><%= t("common.children") %></dt>
     <dd><%= @booking.children %></dd>
+
+    <dt><%= t("common.deposit") %></dt>
+    <dd><%= @booking.deposit || 0 %> лв.</dd>
+
+    <dt><%= t("common.price") %></dt>
+    <dd><%= @booking.price || 0 %> лв. (нощувка)</dd>
+
+    <dt><%= t("common.amount") %></dt>
+    <dd><%= @booking.price || 0 %> лв.</dd>
   </dl>
 </div>
