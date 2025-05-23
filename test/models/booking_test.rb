@@ -274,7 +274,8 @@ class BookingTest < ActiveSupport::TestCase
 
     # When deposit exceeds total
     @booking.deposit = 350.00
-    assert_equal(0.00, @booking.amount_due)
+    amount = (@booking.price * 3) - @booking.deposit
+    assert_equal(amount, @booking.amount_due)
 
     # With no price
     @booking.price = 0.00

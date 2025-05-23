@@ -64,6 +64,7 @@ bg:
     notes: "Бележки"
     deposit: "Депозит"
     price: "Цена"
+    price_per_night: "Цена на нощувка"
     amount: "Дължима сума"
     nights: "Нощувки"
     adults: "Възрастни"
