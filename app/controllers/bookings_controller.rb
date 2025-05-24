@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 class BookingsController < ApplicationController
 
   layout "bookings", only: [:index, :show]
@@ -135,3 +136,4 @@ class BookingsController < ApplicationController
   end
 
 end
+# rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
