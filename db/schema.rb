@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_23_230219) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_17_234825) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -38,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_23_230219) do
     t.datetime "ends_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10, scale: 2
     t.index ["cancelled_at"], name: "index_bookings_on_cancelled_at"
     t.index ["ends_at"], name: "index_bookings_on_ends_at"
     t.index ["room_id"], name: "index_bookings_on_room_id"
@@ -59,6 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_23_230219) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10, scale: 2
     t.index ["property_id"], name: "index_rooms_on_property_id"
   end
 

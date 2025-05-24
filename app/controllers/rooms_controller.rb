@@ -57,7 +57,7 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.expect(room: [:name, :capacity, :color, :property_id])
+    params.expect(room: [:name, :capacity, :price, :color, :property_id])
   end
 
 end
