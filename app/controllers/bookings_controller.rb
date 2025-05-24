@@ -43,6 +43,10 @@ class BookingsController < ApplicationController
   def create
     @booking = @property.bookings.active.build(booking_params)
 
+    if params[:use_room_price]
+      @booking.price = @booking&.room&.price
+    end
+
     if params[:reload].present?
       if @booking.starts_at.present? &&
          @booking.ends_at.present? &&
@@ -74,6 +78,10 @@ class BookingsController < ApplicationController
   # PATCH/PUT /properties/:property_id/bookings/:id
   def update
     @booking.assign_attributes(booking_params)
+
+    if params[:use_room_price]
+      @booking.price = @booking&.room&.price
+    end
 
     if params[:reload].present?
       if @booking.starts_at.present? &&

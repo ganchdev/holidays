@@ -35,10 +35,22 @@
     <%= form.number_field :deposit, step: "0.01", min: 0, placeholder: "0.00", value: number_with_precision(booking&.deposit, precision: 2) %>
   </div>
 
-  <div>
+  <div data-controller="booking-price">
+    <%
+      room_price = booking&.room&.price
+      price_disabled = room_price.present? && (booking.price == room_price)
+    %>
     <%= form.label t("common.price_per_night") %>
-    <%= form.number_field :price, step: "0.01", min: 0, placeholder: "0.00", value: number_with_precision(booking&.room&.price, precision: 2)  %>
+    <%= form.number_field :price, step: "0.01", min: 0, placeholder: "0.00", value: number_with_precision(booking&.price, precision: 2), disabled: price_disabled, data: { booking_price_target: "price" } %>
+    <% if room_price %>
+      <label class="m-1">
+        <%= check_box_tag :use_room_price, "1", booking.price == room_price, data: { action: "booking-price#checkRoomPrice" } %>
+        <%= "#{number_with_precision(room_price, precision: 2)} лв. - #{t("common.room")} #{booking.room.name}" %>
+      </label>
+      <br>
+    <% end %>
   </div>
+
 
   <div>
     <%= form.label :notes %>
