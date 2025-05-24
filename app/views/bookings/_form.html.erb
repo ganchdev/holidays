@@ -14,7 +14,7 @@
   <div>
     <%= form.label :room_id %>
     <% if local_assigns[:available_rooms].present? %>
-      <%= form.select :room_id, options_for_select(available_rooms.map { |r| [r.name, r.id] }, booking&.room&.id), { include_blank: t("common.select_room") }, required: true %>
+      <%= form.select :room_id, options_for_select(available_rooms.map { |r| [r.name, r.id] }, booking&.room&.id), { include_blank: t("common.select_room") }, required: true, data: { action: "change->form-reload#trigger" } %> <%# trigger price change %>
     <% else %>
       <%= form.select :room_id, [], { include_blank: t("common.select_dates") }, disabled: true %>
     <% end %>
@@ -32,12 +32,12 @@
 
   <div>
     <%= form.label :deposit %>
-    <%= form.number_field :deposit, step: "0.01", min: 0 %>
+    <%= form.number_field :deposit, step: "0.01", min: 0, placeholder: "0.00", value: number_with_precision(booking&.deposit, precision: 2) %>
   </div>
 
   <div>
     <%= form.label t("common.price_per_night") %>
-    <%= form.number_field :price, step: "0.01", min: 0 %>
+    <%= form.number_field :price, step: "0.01", min: 0, placeholder: "0.00", value: number_with_precision(booking&.room&.price, precision: 2)  %>
   </div>
 
   <div>

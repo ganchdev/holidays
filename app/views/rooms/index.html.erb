@@ -11,6 +11,7 @@
       <tr>
         <th scope="col"><%= t("common.name") %></th>
         <th scope="col"><%= t("common.capacity") %></th>
+        <th scope="col"><%= t("common.price_per_night") %></th>
         <th scope="col"><%= t("common.color") %></th>
         <th scope="col"></th>
       </tr>
@@ -20,6 +21,7 @@
         <tr>
           <th scope="row"><%= room.name %></th>
           <td><%= room.capacity %></td>
+          <td><%= room.price %></td>
           <td><%= room.color %></td>
           <td><%= link_to t("buttons.edit"), edit_property_room_path(@property, room) %></td>
         </tr>

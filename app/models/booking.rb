@@ -58,9 +58,9 @@ class Booking < ApplicationRecord
   end
 
   def amount_due
-    return 0.00 if price.zero?
+    return 0.00 if price.to_d.zero?
 
-    (price * nights) - deposit
+    (price * nights) - deposit.to_d
   end
 
   private

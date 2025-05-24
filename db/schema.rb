@@ -60,6 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_17_234825) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10, scale: 2
     t.index ["property_id"], name: "index_rooms_on_property_id"
   end
 

@@ -263,23 +263,31 @@ class BookingTest < ActiveSupport::TestCase
     @booking.starts_at = Date.new(2025, 5, 1)
     @booking.ends_at = Date.new(2025, 5, 4) # 3 nights
     @booking.price = 100.00
-    @booking.deposit = 0.00
 
-    # With no deposit
+    # With zero deposit
+    @booking.deposit = 0.00
     assert_equal 300.00, @booking.amount_due
 
     # With deposit
     @booking.deposit = 150.00
     assert_equal 150.00, @booking.amount_due
 
+    # With no deposit
+    @booking.deposit = nil
+    assert_equal 300.00, @booking.amount_due
+
     # When deposit exceeds total
     @booking.deposit = 350.00
     amount = (@booking.price * 3) - @booking.deposit
-    assert_equal(amount, @booking.amount_due)
+    assert_equal amount, @booking.amount_due
+
+    # With zero price
+    @booking.price = 0.00
+    assert_equal 0.00, @booking.amount_due
 
     # With no price
-    @booking.price = 0.00
-    assert_equal(0.00, @booking.amount_due)
+    @booking.price = nil
+    assert_equal 0.00, @booking.amount_due
   end
 
 end

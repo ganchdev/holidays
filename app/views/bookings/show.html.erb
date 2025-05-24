@@ -29,12 +29,12 @@
     <dd><%= @booking.children %></dd>
 
     <dt><%= t("common.deposit") %></dt>
-    <dd><%= @booking.deposit || 0 %> лв.</dd>
+    <dd><%= number_with_precision(@booking.deposit || 0, precision: 2) %> лв.</dd>
 
     <dt><%= t("common.price") %></dt>
-    <dd><%= @booking.price || 0 %> лв. (нощувка)</dd>
+    <dd><%= number_with_precision(@booking.price || 0, precision: 2) %> лв. (нощувка)</dd>
 
     <dt><%= t("common.amount") %></dt>
-    <dd><%= @booking.price || 0 %> лв.</dd>
+    <dd><%= number_with_precision(@booking.amount_due || 0, precision: 2) %> лв.</dd>
   </dl>
 </div>
