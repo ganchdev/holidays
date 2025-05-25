@@ -54,7 +54,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       capacity: 2,
       color: "green"
     )
-    
+
     assert_difference("Booking.count", 1) do
       post property_bookings_url(@property), params: {
         booking: {
@@ -85,7 +85,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       },
       reload: "1"
     }
-    
+
     assert_response :success
     assert_includes @response.body, "turbo-stream"
   end
@@ -101,7 +101,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       },
       reload: "1"
     }
-    
+
     assert_response :success
     assert_includes @response.body, "turbo-stream"
   end
@@ -112,12 +112,12 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     # The booking show page doesn't use h1 tags, so we'll check for something that exists
     assert_select "dl", 1
   end
-  
+
   test "should get day view" do
     get day_property_bookings_url(@property, day: Date.today)
     assert_response :success
   end
-  
+
   test "should get day view with invalid date" do
     get day_property_bookings_url(@property, day: "invalid-date")
     assert_response :success
@@ -141,13 +141,13 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     }
     assert_redirected_to property_booking_url(@property, @booking)
     assert_equal I18n.t("flash.bookings.updated_successfully"), flash[:notice]
-    
+
     @booking.reload
     assert_equal 3, @booking.adults
     assert_equal 120.0, @booking.price.to_f
     assert_equal "Updated notes", @booking.notes
   end
-  
+
   test "should update booking with room price" do
     # Create a new room with a known price to avoid updating existing rooms
     room_price = 85.0
@@ -158,10 +158,10 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       capacity: 2,
       color: "blue"
     )
-    
+
     # Assign booking to the new room first
     @booking.update!(room_id: new_room.id)
-    
+
     patch property_booking_url(@property, @booking), params: {
       booking: {
         room_id: new_room.id,
@@ -172,13 +172,13 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       },
       use_room_price: "1"
     }
-    
+
     assert_redirected_to property_booking_url(@property, @booking)
-    
+
     @booking.reload
     assert_equal room_price, @booking.price.to_f
   end
-  
+
   test "should handle form reload during update" do
     patch property_booking_url(@property, @booking), params: {
       booking: {
@@ -189,7 +189,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       },
       reload: "1"
     }
-    
+
     assert_response :success
     assert_includes @response.body, "turbo-stream"
   end
@@ -202,7 +202,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil @booking.cancelled_at
     assert_equal I18n.t("flash.bookings.destroyed_successfully"), flash[:notice]
   end
-  
+
   test "should render new with errors when validation fails on create" do
     post property_bookings_url(@property), params: {
       booking: {
@@ -212,20 +212,20 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
         ends_at: (DateTime.now + 1.month) + 3.days
       }
     }
-    
+
     assert_response :unprocessable_entity
     assert_select "div.form-errors"
   end
-  
+
   test "should render edit with errors when validation fails on update" do
     patch property_booking_url(@property, @booking), params: {
       booking: {
-        adults: 0, # Invalid: adults must be ≥ 1
+        adults: 0 # Invalid: adults must be ≥ 1
       }
     }
-    
+
     assert_response :unprocessable_entity
     assert_select "div.form-errors"
   end
-  
+
 end
