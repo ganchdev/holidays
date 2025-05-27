@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 class BookingsController < ApplicationController
 
   layout "bookings", only: [:index, :show]
@@ -43,6 +44,10 @@ class BookingsController < ApplicationController
   def create
     @booking = @property.bookings.active.build(booking_params)
 
+    if params[:use_room_price]
+      @booking.price = @booking&.room&.price
+    end
+
     if params[:reload].present?
       if @booking.starts_at.present? &&
          @booking.ends_at.present? &&
@@ -74,6 +79,10 @@ class BookingsController < ApplicationController
   # PATCH/PUT /properties/:property_id/bookings/:id
   def update
     @booking.assign_attributes(booking_params)
+
+    if params[:use_room_price]
+      @booking.price = @booking&.room&.price
+    end
 
     if params[:reload].present?
       if @booking.starts_at.present? &&
@@ -123,7 +132,8 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.expect(booking: [:room_id, :adults, :children, :deposit, :notes, :starts_at, :ends_at])
+    params.expect(booking: [:room_id, :adults, :children, :deposit, :price, :notes, :starts_at, :ends_at])
   end
 
 end
+# rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity

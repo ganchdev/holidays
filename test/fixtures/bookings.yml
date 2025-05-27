@@ -11,6 +11,7 @@
 #  deposit      :decimal(10, 2)
 #  ends_at      :datetime
 #  notes        :text
+#  price        :decimal(10, 2)
 #  starts_at    :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

@@ -8,6 +8,7 @@
 #  capacity    :integer
 #  color       :string
 #  name        :string
+#  price       :decimal(10, 2)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  property_id :integer          not null
@@ -23,6 +24,7 @@ class Room < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { scope: :property_id, message: :taken }
   validates :capacity, presence: true, numericality: { greater_than: 0, only_integer: true }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   scope :available_between, lambda { |starts_at, ends_at|
     where.not(id: joins(:bookings)
