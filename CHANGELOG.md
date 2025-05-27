@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/ganchdev/holidays/compare/v0.1.12...v0.2.0) (2025-05-27)
+
+
+### Features
+
+* booking prices ([#57](https://github.com/ganchdev/holidays/issues/57)) ([194f3ed](https://github.com/ganchdev/holidays/commit/194f3ed60d651fb4ce5421d87039f8fe92bbdfbd))
+
 ## [0.1.12](https://github.com/ganchdev/holidays/compare/v0.1.11...v0.1.12) (2025-05-16)
 
 
