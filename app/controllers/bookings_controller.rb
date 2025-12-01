@@ -132,7 +132,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.expect(booking: [:room_id, :adults, :children, :deposit, :price, :notes, :starts_at, :ends_at])
+    params.expect(booking: [:room_id, :adults, :children, :deposit, :price, :name, :notes, :starts_at, :ends_at])
   end
 
 end
