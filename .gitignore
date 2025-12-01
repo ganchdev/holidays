@@ -35,3 +35,5 @@
 
 .gem_rbs_collection/
 .idea/
+
+.DS_Store
