@@ -5,38 +5,130 @@
   </li>
 <% end %>
 
-<div data-controller="calendar">
-  <div data-calendar-target="weekHeader"></div>
-  <ul data-calendar-target="list">
-    <% @weeks.each do |week| %>
-      <li class="week" data-calendar-target="week" data-week="<%= week[:start_date].to_s %>">
-        <ul class="weekdays">
-          <% week[:days].each do |day| %>
-            <li class="weekday" >
-              <%= link_to day_property_bookings_path(@property, day: day[0]), class: "weekday-link", data: { turbo_prefetch: false } do %>
-                <div class="date">
-                  <span><%= I18n.l(day[0].to_date, format: "%d") %></span>
-                  <span><%= I18n.t('date.abbr_day_names')[day[0].to_date.wday] %></span>
-                </div>
-                <div class="weekday-bookings">
-                  <div class="flex-container">
-                    <% bookings = day[1] %>
-                    <% if bookings.any? %>
-                      <% @rooms.each do |room| %>
-                        <% if booking = bookings.find { |b| b.room.name == room.name } %>
-                          <%= room_badge booking.room %>
-                        <% else %>
-                          <span class="booking-placeholder"></span>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                  </div>
+<div data-controller="horizontal-calendar">
+  <div data-horizontal-calendar-target="monthHeader"></div>
+  <div data-horizontal-calendar-target="scrollContainer" class="horizontal-calendar-container">
+    <!-- Fixed left column for room numbers -->
+    <div class="fixed-room-column">
+      <div class="room-header-placeholder"></div>
+      <% @rooms.each do |room| %>
+        <div class="room-label-fixed" style="background-color: <%= room.color %>">
+          <%= room.name %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Scrollable calendar area -->
+    <div class="scrollable-calendar">
+      <!-- Day headers -->
+      <div class="calendar-headers">
+        <% @days.each do |day_data| %>
+          <% date, bookings = day_data %>
+          <div class="day-header" data-date="<%= date.to_s %>" data-horizontal-calendar-target="day">
+            <%= link_to day_property_bookings_path(@property, day: date), class: "date-link", data: { turbo_prefetch: false } do %>
+              <span class="date-number"><%= I18n.l(date, format: "%d") %></span>
+              <span class="date-day"><%= I18n.t('date.abbr_day_names')[date.wday] %></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Room rows with booking spans -->
+      <div class="calendar-body">
+        <% @rooms.each do |room| %>
+          <div class="room-row" data-room-id="<%= room.id %>">
+            <div class="room-timeline">
+              <% @days.each do |day_data| %>
+                <% date, bookings = day_data %>
+                <% room_booking = bookings.find { |b| b.room_id == room.id } %>
+                <div class="day-cell" data-date="<%= date.to_s %>" data-room-id="<%= room.id %>">
+                  <% if room_booking %>
+                    <%# This will be filled by booking spans via CSS positioning %>
+                  <% end %>
                 </div>
               <% end %>
-            </li>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Booking spans (positioned absolutely) -->
+      <div class="booking-spans-container">
+        <% @property.bookings.active.each do |booking| %>
+          <% start_date = booking.starts_at.to_date %>
+          <% end_date = booking.ends_at.to_date - 1.day %>
+          <% checkout_date = booking.ends_at.to_date %>
+          <% start_index = @days.index { |d| d[0] == start_date } %>
+          <% end_index = @days.index { |d| d[0] == end_date } %>
+          <% checkout_index = @days.index { |d| d[0] == checkout_date } %>
+
+          <% if start_index %>
+            <%
+              # For each day the booking spans, determine if it's partial
+              booking_parts = []
+
+              # Add regular booking days (full occupancy)
+              if end_index
+                (start_index..end_index).each do |day_index|
+                  current_date = @days[day_index][0]
+
+                  # Check if this is check-in day (booking starts here)
+                  is_checkin_day = current_date == booking.starts_at.to_date
+
+                  if is_checkin_day
+                    # Check-in day - right half only (afternoon arrival)
+                    booking_parts << { index: day_index, offset: 0.5, width: 0.5 }
+                  else
+                    # Full day
+                    booking_parts << { index: day_index, offset: 0, width: 1 }
+                  end
+                end
+              end
+
+              # Add checkout day if it exists (left half only - morning departure)
+              if checkout_index && checkout_index != start_index
+                booking_parts << { index: checkout_index, offset: 0, width: 0.5 }
+              end
+
+
+              # Combine consecutive full days into single spans
+              combined_spans = []
+              current_span = nil
+
+              booking_parts.each do |part|
+                if part[:width] == 1 && current_span &&
+                   part[:index] == current_span[:end_index] + 1 &&
+                   part[:offset] == 0
+                  # Extend current span
+                  current_span[:end_index] = part[:index]
+                  current_span[:width] = current_span[:end_index] - current_span[:start_index] + 1
+                else
+                  # Start new span
+                  combined_spans << current_span if current_span
+                  current_span = {
+                    start_index: part[:index],
+                    end_index: part[:index],
+                    offset: part[:offset],
+                    width: part[:width]
+                  }
+                end
+              end
+              combined_spans << current_span if current_span
+            %>
+
+            <% combined_spans.each do |span| %>
+              <%= link_to property_booking_path(@property, booking),
+                  class: "booking-span #{'booking-span--half-day' if span[:width] == 0.5}",
+                  style: "--start-index: #{span[:start_index]}; --left-offset: #{span[:offset]}; --span-width: #{span[:width]}; --width-adjustment: 0; background-color: #{booking.room.color}",
+                  data: { booking_id: booking.id, room_id: booking.room_id } do %>
+                <% unless span[:width] == 0.5 %>
+                  <div class="booking-name"><%= booking.name || "Booking ##{booking.id}" %></div>
+                <% end %>
+              <% end %>
+            <% end %>
           <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

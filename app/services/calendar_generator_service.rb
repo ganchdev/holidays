@@ -38,6 +38,14 @@ class CalendarGeneratorService
     generate_weeks(group_bookings)
   end
 
+  def days
+    bookings = group_bookings
+
+    (@start_date..@end_date).map do |date|
+      [date, bookings[date] || []]
+    end
+  end
+
   private
 
   attr_reader :property #: Property

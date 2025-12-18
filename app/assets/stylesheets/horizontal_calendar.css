@@ -1,0 +1,273 @@
+/* Horizontal Calendar Styles */
+.horizontal-calendar-container {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--pico-background-color);
+  border: 1px solid var(--pico-border-color);
+}
+
+/* Fixed room column on the left */
+.fixed-room-column {
+  width: 120px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid var(--pico-border-color);
+  background-color: var(--pico-card-background-color);
+  z-index: 30;
+}
+
+.room-header-placeholder {
+  height: 80px;
+  border-bottom: 2px solid var(--pico-border-color);
+  background-color: rgba(var(--pico-primary-rgb), 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pico-primary-inverse);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.room-label-fixed {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--pico-border-color);
+}
+
+/* Scrollable calendar area */
+.scrollable-calendar {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  position: relative;
+  background-color: var(--pico-background-color);
+}
+
+/* Calendar Headers */
+.calendar-headers {
+  display: flex;
+  border-bottom: 2px solid var(--pico-border-color);
+  background-color: var(--pico-card-background-color);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.day-header {
+  width: 120px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--pico-border-color);
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  position: relative;
+}
+
+/* Add stronger day column borders to headers */
+.day-header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--pico-muted-border-color);
+}
+
+.date-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+
+.date-number {
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--pico-color);
+}
+
+.date-day {
+  font-size: 0.8rem;
+  color: var(--pico-muted-color);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.date-month {
+  font-size: 0.7rem;
+  color: var(--pico-muted-color);
+  margin-top: 1px;
+}
+
+/* Calendar Body */
+.calendar-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-row {
+  min-height: 80px;
+  border-bottom: 1px solid var(--pico-border-color);
+  position: relative;
+  background-color: var(--pico-background-color);
+}
+
+.room-row:hover {
+  background-color: var(--pico-secondary-background);
+}
+
+.room-row:last-child {
+  border-bottom: none;
+}
+
+.room-timeline {
+  display: flex;
+  position: relative;
+}
+
+.day-cell {
+  width: 120px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--pico-border-color);
+  min-height: 80px;
+  position: relative;
+}
+
+/* Add stronger day column borders */
+.day-cell::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--pico-muted-border-color);
+}
+
+/* Booking Spans Container */
+.booking-spans-container {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 80px);
+  pointer-events: none;
+}
+
+.booking-span {
+  position: absolute;
+  top: calc(var(--room-index, 0) * 80px + 6px);
+  left: calc((var(--start-index, 0) + var(--left-offset, 0)) * 120px + 2px);
+  width: calc(
+    (var(--span-width, 1) + var(--width-adjustment, 0)) * 120px - 4px
+  );
+  height: 68px;
+  border-radius: 6px;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
+  overflow: hidden;
+}
+
+.booking-span:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.booking-span:visited {
+  color: white;
+}
+
+.booking-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Half-day booking spans (check-in/check-out) */
+.booking-span--half-day {
+  border: none !important;
+  box-shadow: none !important;
+  opacity: 0.7;
+}
+
+/* Current day highlighting */
+.day-header[data-date="<%= Date.current %>"] {
+  background-color: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+}
+
+.day-header[data-date="<%= Date.current %>"] .date-link {
+  color: var(--pico-primary-inverse);
+}
+
+.day-header[data-date="<%= Date.current %>"] .date-number,
+.day-header[data-date="<%= Date.current %>"] .date-day,
+.day-header[data-date="<%= Date.current %>"] .date-month {
+  color: var(--pico-primary-inverse);
+}
+
+/* Month header */
+[data-horizontal-calendar-target="monthHeader"] {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--pico-border-color);
+  background-color: var(--pico-card-background-color);
+  color: var(--pico-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .fixed-room-column {
+    width: 40px;
+  }
+
+  .day-header,
+  .day-cell {
+    width: 100px;
+  }
+
+  .booking-span {
+    left: calc((var(--start-index, 0) + var(--left-offset, 0)) * 100px + 2px);
+    width: calc(
+      (var(--span-width, 1) + var(--width-adjustment, 0)) * 100px - 4px
+    );
+    top: calc(var(--room-index, 0) * 80px + 6px);
+    height: 68px;
+  }
+
+  .horizontal-calendar-container {
+    height: 70vh;
+  }
+}
