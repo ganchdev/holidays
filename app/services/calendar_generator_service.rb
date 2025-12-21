@@ -28,7 +28,7 @@ class CalendarGeneratorService
     @property = property
     @year = year
     @start_date = Date.new(@year, 1, 1)
-    @end_date = Date.new(@year, 12, 31)
+    @end_date = Date.new(@year + 1, 12, 31)
   end
 
   # Generate and return the calendar structure
