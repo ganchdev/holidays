@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/ganchdev/holidays/compare/v0.3.0...v0.4.0) (2026-01-18)
+
+
+### Features
+
+* horizontal calendar ([#101](https://github.com/ganchdev/holidays/issues/101)) ([308c814](https://github.com/ganchdev/holidays/commit/308c814495a05100eba2074238fbf03766d93e1a))
+
 ## [0.3.0](https://github.com/ganchdev/holidays/compare/v0.2.0...v0.3.0) (2025-12-01)
 
 
