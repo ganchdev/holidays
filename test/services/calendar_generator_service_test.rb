@@ -53,7 +53,7 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
 
     # Test overall structure - should be an array of [date, bookings] tuples
     assert_kind_of Array, days
-    assert days.all? { |day| day.is_a?(Array) && day.length == 2 }
+    assert days.all? { |day| day.is_a?(Array) && day.length == 2 } # rubocop:disable Lint/AmbiguousBlockAssociation
 
     # Find specific dates to check bookings
     jan_10_data = find_date_in_days(days, Date.new(2023, 1, 10))
@@ -84,7 +84,7 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
     assert days.length.positive?
 
     # All days should have empty booking arrays
-    days.each do |_date, bookings|
+    days.each do |_date, bookings| # rubocop:disable Style/HashEachMethods
       assert_empty bookings
     end
   end

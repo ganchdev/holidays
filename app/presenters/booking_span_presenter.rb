@@ -121,7 +121,7 @@ class BookingSpanPresenter
     part[:width] == 1 &&
       current_span &&
       part[:index] == current_span[:end_index] + 1 &&
-      part[:offset] == 0
+      part[:offset].zero?
   end
 
   def extend_current_span(span, part)
@@ -136,7 +136,7 @@ class BookingSpanPresenter
       end_index: part[:index],
       offset: part[:offset],
       width: part[:width],
-      half_day: part[:width] == 0.5
+      half_day: part[:width] == 0.5 # rubocop:disable Lint/FloatComparison
     }
   end
 
