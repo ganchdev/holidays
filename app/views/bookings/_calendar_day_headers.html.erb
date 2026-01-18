@@ -1,0 +1,12 @@
+<!-- Day headers -->
+<div class="calendar-headers">
+  <% days.each do |day_data| %>
+    <% date, bookings = day_data %>
+    <div class="day-header" data-date="<%= date.to_s %>" data-horizontal-calendar-target="day">
+      <%= link_to day_property_bookings_path(property, day: date), class: "date-link", data: { turbo_prefetch: false } do %>
+        <span class="date-number"><%= I18n.l(date, format: "%d") %></span>
+        <span class="date-day"><%= I18n.t('date.abbr_day_names')[date.wday] %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -55,4 +55,29 @@ module ApplicationHelper
     content_tag :span, room.name, class: "badge", style: "background-color: #{room.color}"
   end
 
+  # Render a booking span link with appropriate styling
+  def booking_span_link(booking, span, property)
+    css_class = "booking-span"
+    css_class += " booking-span--half-day" if span[:half_day]
+
+    styles = [
+      "--start-index: #{span[:start_index]}",
+      "--left-offset: #{span[:offset]}",
+      "--span-width: #{span[:width]}",
+      "--width-adjustment: 0",
+      "background-color: #{booking.room.color}"
+    ].join("; ")
+
+    link_to property_booking_path(property, booking),
+            class: css_class,
+            style: styles,
+            data: { booking_id: booking.id, room_id: booking.room_id } do
+      if span[:half_day]
+        nil
+      else
+        content_tag(:div, booking.name || "Booking ##{booking.id}", class: "booking-name")
+      end
+    end
+  end
+
 end

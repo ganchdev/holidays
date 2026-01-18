@@ -1,0 +1,15 @@
+<!-- Booking spans (positioned absolutely) -->
+<div class="booking-spans-container">
+  <% calendar_data = {
+       all_bookings: days.flat_map { |_, bookings| bookings }.uniq,
+       date_to_index: days.each_with_index.to_h { |(date, _), index| [date, index] }
+     }
+  %>
+
+  <% calendar_data[:all_bookings].each do |booking| %>
+    <% presenter = BookingSpanPresenter.new(booking, calendar_data[:date_to_index]) %>
+    <% presenter.spans.each do |span| %>
+      <%= booking_span_link(booking, span, property) %>
+    <% end %>
+  <% end %>
+</div>
