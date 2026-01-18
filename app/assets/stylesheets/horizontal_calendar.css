@@ -58,8 +58,8 @@
 .calendar-headers {
   display: flex;
   border-bottom: 2px solid var(--pico-border-color);
-  background-color: var(--pico-card-background-color);
-  position: sticky;
+  /*background-color: var(--pico-card-background-color);*/
+  /*position: sticky;*/
   top: 0;
   z-index: 20;
 }
@@ -127,10 +127,6 @@
   background-color: var(--pico-background-color);
 }
 
-.room-row:hover {
-  background-color: var(--pico-secondary-background);
-}
-
 .room-row:last-child {
   border-bottom: none;
 }
@@ -172,9 +168,9 @@
 .booking-span {
   position: absolute;
   top: calc(var(--room-index, 0) * 80px + 6px);
-  left: calc((var(--start-index, 0) + var(--left-offset, 0)) * 120px + 2px);
+  left: calc((var(--start-index, 0) + var(--left-offset, 0)) * 120px + 6px);
   width: calc(
-    (var(--span-width, 1) + var(--width-adjustment, 0)) * 120px - 4px
+    (var(--span-width, 1) + var(--width-adjustment, 0)) * 120px - 12px
   );
   height: 68px;
   border-radius: 6px;
@@ -189,7 +185,7 @@
   text-align: center;
   text-decoration: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /*border: 1px solid rgba(255, 255, 255, 0.2);*/
   pointer-events: auto;
   overflow: hidden;
 }
@@ -259,9 +255,9 @@
   }
 
   .booking-span {
-    left: calc((var(--start-index, 0) + var(--left-offset, 0)) * 100px + 2px);
+    left: calc((var(--start-index, 0) + var(--left-offset, 0)) * 100px + 6px);
     width: calc(
-      (var(--span-width, 1) + var(--width-adjustment, 0)) * 100px - 4px
+      (var(--span-width, 1) + var(--width-adjustment, 0)) * 100px - 12px
     );
     top: calc(var(--room-index, 0) * 80px + 6px);
     height: 68px;

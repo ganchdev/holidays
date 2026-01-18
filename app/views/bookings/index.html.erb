@@ -54,18 +54,33 @@
 
       <!-- Booking spans (positioned absolutely) -->
       <div class="booking-spans-container">
-        <% @property.bookings.active.each do |booking| %>
-          <% start_date = booking.starts_at.to_date %>
-          <% end_date = booking.ends_at.to_date - 1.day %>
-          <% checkout_date = booking.ends_at.to_date %>
-          <% start_index = @days.index { |d| d[0] == start_date } %>
-          <% end_index = @days.index { |d| d[0] == end_date } %>
-          <% checkout_index = @days.index { |d| d[0] == checkout_date } %>
+        <%
+          # Extract all unique bookings from @days to avoid duplicate queries
+          all_bookings = @days.flat_map { |date, bookings| bookings }.uniq
+
+          # Create a date to index mapping for fast lookups
+          date_to_index = @days.each_with_index.to_h { |(date, _), index| [date, index] }
+        %>
+
+        <% all_bookings.each do |booking| %>
+          <%
+            start_date = booking.starts_at.to_date
+            end_date = booking.ends_at.to_date - 1.day
+            checkout_date = booking.ends_at.to_date
+
+            # Use the pre-built index mapping instead of expensive @days.index calls
+            start_index = date_to_index[start_date]
+            end_index = date_to_index[end_date]
+            checkout_index = date_to_index[checkout_date]
+          %>
 
           <% if start_index %>
             <%
               # For each day the booking spans, determine if it's partial
               booking_parts = []
+
+              # Check if this is a one-night booking (check-in and checkout are consecutive days)
+              is_one_night_booking = checkout_index && start_index && checkout_index == start_index + 1
 
               # Add regular booking days (full occupancy)
               if end_index
@@ -75,9 +90,12 @@
                   # Check if this is check-in day (booking starts here)
                   is_checkin_day = current_date == booking.starts_at.to_date
 
-                  if is_checkin_day
-                    # Check-in day - right half only (afternoon arrival)
+                  if is_checkin_day && !is_one_night_booking
+                    # Check-in day - right half only (afternoon arrival) for multi-night bookings
                     booking_parts << { index: day_index, offset: 0.5, width: 0.5 }
+                  elsif is_checkin_day && is_one_night_booking
+                    # One-night booking - show from check-in (right half) through checkout (left half) as continuous span
+                    booking_parts << { index: day_index, offset: 0.5, width: 1 }
                   else
                     # Full day
                     booking_parts << { index: day_index, offset: 0, width: 1 }
@@ -85,11 +103,10 @@
                 end
               end
 
-              # Add checkout day if it exists (left half only - morning departure)
-              if checkout_index && checkout_index != start_index
+              # Add checkout day if it exists (left half only - morning departure) and NOT a one-night booking
+              if checkout_index && checkout_index != start_index && !is_one_night_booking
                 booking_parts << { index: checkout_index, offset: 0, width: 0.5 }
               end
-
 
               # Combine consecutive full days into single spans
               combined_spans = []

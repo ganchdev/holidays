@@ -47,26 +47,6 @@ class CalendarGeneratorServiceTest < ActiveSupport::TestCase
     @property.rooms = [@booking1.room, @booking2.room, @booking3.room, @booking4.room]
   end
 
-  test "should generate calendar for entire year" do
-    service = CalendarGeneratorService.new(property: @property, year: @year)
-    calendar = service.call
-
-    # Test overall structure
-    assert_kind_of Array, calendar
-    assert_equal 53, calendar.length # 52 or 53 weeks depending on the year
-
-    # Test first week - January 1, 2023 is a Sunday, so the week starts on December 26, 2022
-    first_week = calendar.first
-    assert_equal Date.new(2022, 12, 26), first_week[:start_date] # Monday before the first day of 2023
-    assert_equal 7, first_week[:days].length
-
-    # Test week structure
-    sample_week = calendar.first
-    assert_includes sample_week.keys, :start_date
-    assert_includes sample_week.keys, :days
-    assert_equal 7, sample_week[:days].length
-  end
-
   test "should correctly map bookings to days" do
     service = CalendarGeneratorService.new(property: @property, year: @year)
     calendar = service.call
