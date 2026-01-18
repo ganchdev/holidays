@@ -5,38 +5,24 @@
   </li>
 <% end %>
 
-<div data-controller="calendar">
-  <div data-calendar-target="weekHeader"></div>
-  <ul data-calendar-target="list">
-    <% @weeks.each do |week| %>
-      <li class="week" data-calendar-target="week" data-week="<%= week[:start_date].to_s %>">
-        <ul class="weekdays">
-          <% week[:days].each do |day| %>
-            <li class="weekday" >
-              <%= link_to day_property_bookings_path(@property, day: day[0]), class: "weekday-link", data: { turbo_prefetch: false } do %>
-                <div class="date">
-                  <span><%= I18n.l(day[0].to_date, format: "%d") %></span>
-                  <span><%= I18n.t('date.abbr_day_names')[day[0].to_date.wday] %></span>
-                </div>
-                <div class="weekday-bookings">
-                  <div class="flex-container">
-                    <% bookings = day[1] %>
-                    <% if bookings.any? %>
-                      <% @rooms.each do |room| %>
-                        <% if booking = bookings.find { |b| b.room.name == room.name } %>
-                          <%= room_badge booking.room %>
-                        <% else %>
-                          <span class="booking-placeholder"></span>
-                        <% end %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </li>
-    <% end %>
-  </ul>
+<div data-controller="horizontal-calendar">
+  <div data-horizontal-calendar-target="monthHeader"></div>
+  <div data-horizontal-calendar-target="scrollContainer" class="horizontal-calendar-container">
+    <!-- Fixed left column for room numbers -->
+    <div class="fixed-room-column">
+      <div class="room-header-placeholder"></div>
+      <% @rooms.each do |room| %>
+        <div class="room-label-fixed" style="background-color: <%= room.color %>">
+          <%= room.name %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Scrollable calendar area -->
+    <div class="scrollable-calendar">
+      <%= render "calendar_day_headers", days: @days, property: @property %>
+      <%= render "calendar_room_rows", rooms: @rooms, days: @days %>
+      <%= render "calendar_booking_spans", days: @days, property: @property %>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,15 @@
+<!-- Room rows with booking spans -->
+<div class="calendar-body">
+  <% rooms.each do |room| %>
+    <div class="room-row" data-room-id="<%= room.id %>">
+      <div class="room-timeline">
+        <% days.each do |day_data| %>
+          <% date, bookings = day_data %>
+          <div class="day-cell" data-date="<%= date.to_s %>" data-room-id="<%= room.id %>">
+            <%# Day cells are filled by absolutely positioned booking spans %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

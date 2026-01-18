@@ -10,6 +10,7 @@
 #  children     :integer          default(0)
 #  deposit      :decimal(10, 2)
 #  ends_at      :datetime
+#  name         :string
 #  notes        :text
 #  price        :decimal(10, 2)
 #  starts_at    :datetime

@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
   # GET /properties/:property_id/bookings
   def index
     @rooms = @property.rooms.sort_by { |r| r.name.to_i }
-    @weeks = CalendarGeneratorService.new(property: @property).call
+    @days = CalendarGeneratorService.new(property: @property).call
   end
 
   # GET /properties/:property_id/bookings/:id
@@ -132,7 +132,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.expect(booking: [:room_id, :adults, :children, :deposit, :price, :notes, :starts_at, :ends_at])
+    params.expect(booking: [:room_id, :adults, :children, :deposit, :price, :name, :notes, :starts_at, :ends_at])
   end
 
 end
