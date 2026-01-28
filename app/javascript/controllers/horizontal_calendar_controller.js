@@ -6,8 +6,14 @@ export default class extends Controller {
   connect() {
     this.setRoomIndices();
     this.observeDays();
-    this.scrollToCurrentDay();
-    this.scrollToSaved();
+
+    // Try to restore saved scroll position first
+    const hadSavedScroll = this.scrollToSaved();
+
+    // Only scroll to current day if we didn't restore a saved position
+    if (!hadSavedScroll) {
+      this.scrollToCurrentDay();
+    }
 
     document.addEventListener("turbo:before-visit", this.saveScroll);
   }
@@ -47,7 +53,9 @@ export default class extends Controller {
     if (scrollX && this.hasScrollContainerTarget) {
       this.scrollContainerTarget.scrollLeft = parseInt(scrollX, 10);
       sessionStorage.removeItem("horizontal-calendar-scroll");
+      return true;
     }
+    return false;
   }
 
   observeDays() {
@@ -78,19 +86,16 @@ export default class extends Controller {
     const currentDay = this.element.querySelector(
       `.day-header[data-date="${todayString}"]`,
     );
-    const scrollableContainer = this.element.querySelector(
-      ".scrollable-calendar",
-    );
 
-    if (currentDay && scrollableContainer) {
+    if (currentDay && this.hasScrollContainerTarget) {
       // Scroll to center the current day
-      const containerWidth = scrollableContainer.clientWidth;
+      const containerWidth = this.scrollContainerTarget.clientWidth;
       const dayWidth = currentDay.clientWidth;
       const dayOffset = currentDay.offsetLeft;
 
       const scrollLeft = dayOffset - containerWidth / 2 + dayWidth / 2;
 
-      scrollableContainer.scrollLeft = Math.max(0, scrollLeft);
+      this.scrollContainerTarget.scrollLeft = Math.max(0, scrollLeft);
       this.updateMonthHeader(currentDay);
     }
   }
