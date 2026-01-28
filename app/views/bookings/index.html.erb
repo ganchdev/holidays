@@ -7,7 +7,7 @@
 
 <div data-controller="horizontal-calendar">
   <div data-horizontal-calendar-target="monthHeader"></div>
-  <div data-horizontal-calendar-target="scrollContainer" class="horizontal-calendar-container">
+  <div class="horizontal-calendar-container">
     <!-- Fixed left column for room numbers -->
     <div class="fixed-room-column">
       <div class="room-header-placeholder"></div>
@@ -19,7 +19,7 @@
     </div>
 
     <!-- Scrollable calendar area -->
-    <div class="scrollable-calendar">
+    <div data-horizontal-calendar-target="scrollContainer" class="scrollable-calendar">
       <%= render "calendar_day_headers", days: @days, property: @property %>
       <%= render "calendar_room_rows", rooms: @rooms, days: @days %>
       <%= render "calendar_booking_spans", days: @days, property: @property %>

@@ -1,6 +1,6 @@
 # Holidays
 
-An app to manage property bookings
+A progressive web app to manage property bookings for https://kormoranhouse.com/
 
 ## Pre-requisites
 - Ruby 3.4.2
