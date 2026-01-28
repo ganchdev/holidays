@@ -50,7 +50,7 @@
     <% if room_price %>
       <label class="m-1">
         <%= check_box_tag :use_room_price, "1", booking.price == room_price, data: { action: "booking-price#checkRoomPrice" } %>
-        <%= "#{number_with_precision(room_price, precision: 2)} лв. - #{t("common.room")} #{booking.room.name}" %>
+        <%= "#{number_with_precision(room_price, precision: 2)} € - #{t("common.room")} #{booking.room.name}" %>
       </label>
       <br>
     <% end %>
