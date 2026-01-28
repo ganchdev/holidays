@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/ganchdev/holidays/compare/v0.4.0...v0.4.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* various improvements and bug fixes ([af5c5a1](https://github.com/ganchdev/holidays/commit/af5c5a168d3f3ddc93c1ddf93946a4f9ae925588))
+
 ## [0.4.0](https://github.com/ganchdev/holidays/compare/v0.3.0...v0.4.0) (2026-01-18)
 
 
