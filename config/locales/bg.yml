@@ -4,7 +4,6 @@ bg:
       room:
         name: "Име"
         capacity: "Капацитет"
-        color: "Цвят"
       booking:
         room_id: "Стая"
         starts_at: "Дата на настаняване"
@@ -15,6 +14,7 @@ bg:
         deposit: "Депозит"
         price: "Цена"
         notes: "Бележки"
+        paid: "Изплати резервацията"
       account:
         name: "Име"
       property:
@@ -76,7 +76,7 @@ bg:
     editing_room: "Редактиране на стая %{name}"
     name: "Име"
     capacity: "Капацитет"
-    color: "Цвят"
+    paid: "Платено"
     actions: "Действия"
     id: "ID"
     created_at: "Създаден на"
@@ -133,7 +133,6 @@ bg:
       room:
         name: "Име"
         capacity: "Капацитет"
-        color: "Цвят"
     errors:
       models:
         account:

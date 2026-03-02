@@ -12,6 +12,7 @@
 #  ends_at      :datetime
 #  name         :string
 #  notes        :text
+#  paid_at      :datetime
 #  price        :decimal(10, 2)
 #  starts_at    :datetime
 #  created_at   :datetime         not null
@@ -53,6 +54,20 @@ class Booking < ApplicationRecord
   scope :for_day, lambda { |day|
     overlapping(day.to_date, day.to_date + 1)
   }
+
+  def color
+    if paid?
+      "#4caf50" # green - fully paid
+    elsif deposit.to_d.positive?
+      "#FF9900" # yellow - partial deposit
+    else
+      "#0172ad" # blue - no deposit (theme color)
+    end
+  end
+
+  def paid?
+    paid_at.present?
+  end
 
   def nights
     (ends_at.to_date - starts_at.to_date).to_i

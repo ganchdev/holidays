@@ -84,6 +84,12 @@ class BookingsController < ApplicationController
       @booking.price = @booking&.room&.price
     end
 
+    if ActiveModel::Type::Boolean.new.cast(params[:booking][:paid])
+      @booking.paid_at ||= Time.current
+    else
+      @booking.paid_at = nil
+    end
+
     if params[:reload].present?
       if @booking.starts_at.present? &&
          @booking.ends_at.present? &&

@@ -52,7 +52,6 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       name: room_name,
       price: room_price,
       capacity: 2,
-      color: "green"
     )
 
     assert_difference("Booking.count", 1) do
@@ -156,7 +155,6 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
       name: room_name,
       price: room_price,
       capacity: 2,
-      color: "blue"
     )
 
     # Assign booking to the new room first

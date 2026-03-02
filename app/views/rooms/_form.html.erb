@@ -12,11 +12,6 @@
   </div>
 
   <div>
-    <%= form.label :color, t('helpers.label.room.color') %>
-    <%= form.color_field :color %>
-  </div>
-
-  <div>
     <%= form.label t("common.price_per_night") %>
     <%= form.number_field :price, step: "0.01", min: 0 %>
   </div>

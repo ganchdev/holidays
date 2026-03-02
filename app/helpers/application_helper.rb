@@ -51,8 +51,9 @@ module ApplicationHelper
     nav_partial.html_safe
   end
 
-  def room_badge(room)
-    content_tag :span, room.name, class: "badge", style: "background-color: #{room.color}"
+  def room_badge(room, color: nil)
+    style = color ? "background-color: #{color}" : nil
+    content_tag :span, room.name, class: "badge", style: style
   end
 
   # Render a booking span link with appropriate styling
@@ -65,7 +66,7 @@ module ApplicationHelper
       "--left-offset: #{span[:offset]}",
       "--span-width: #{span[:width]}",
       "--width-adjustment: 0",
-      "background-color: #{booking.room.color}"
+      "background-color: #{booking.color}"
     ].join("; ")
 
     link_to property_booking_path(property, booking),

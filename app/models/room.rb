@@ -6,7 +6,6 @@
 #
 #  id          :integer          not null, primary key
 #  capacity    :integer
-#  color       :string
 #  name        :string
 #  price       :decimal(10, 2)
 #  created_at  :datetime         not null

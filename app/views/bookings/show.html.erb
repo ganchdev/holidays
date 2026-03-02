@@ -8,10 +8,10 @@
 <div class="bookings-show">
   <dl>
     <dt><%= t("common.name") %></dt>
-    <dd><%= @booking.name %>
+    <dd><%= @booking.name %></dd>
 
     <dt><%= t("common.room") %></dt>
-    <dd><%= @booking.room.name %>
+    <dd><%= @booking.room.name %></dd>
 
     <dt><%= t("common.start_date") %></dt>
     <dd><%= I18n.l(@booking.starts_at.to_date) %></dd>
@@ -28,9 +28,6 @@
     <dt><%= t("common.adults") %></dt>
     <dd><%= @booking.adults %></dd>
 
-    <dt><%= t("common.children") %></dt>
-    <dd><%= @booking.children %></dd>
-
     <dt><%= t("common.deposit") %></dt>
     <dd><%= number_with_precision(@booking.deposit || 0, precision: 2) %> €</dd>
 
@@ -38,6 +35,13 @@
     <dd><%= number_with_precision(@booking.price || 0, precision: 2) %> € (нощувка)</dd>
 
     <dt><%= t("common.amount") %></dt>
-    <dd><%= number_with_precision(@booking.amount_due || 0, precision: 2) %> €</dd>
+    <dd>
+      <% if @booking.paid? %>
+        <s><%= number_with_precision(@booking.amount_due || 0, precision: 2) %> €</s>
+        <span class="badge" style="background-color: #4caf50;"><%= t("common.paid") %></span>
+      <% else %>
+        <%= number_with_precision(@booking.amount_due || 0, precision: 2) %> €
+      <% end %>
+    </dd>
   </dl>
 </div>

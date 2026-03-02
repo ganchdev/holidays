@@ -30,7 +30,7 @@
             <dd><%= b.name %></dd>
 
             <dt><%= t("common.room") %></dt>
-            <dd><%= room_badge b.room %></dd>
+            <dd><%= room_badge b.room, color: b.color %></dd>
 
             <dt><%= t("common.start_date") %></dt>
             <dd><%= I18n.l(b.starts_at.to_date) %></dd>
@@ -45,6 +45,9 @@
 
             <dt><%= t("common.deposit") %></dt>
             <dd><%= icon b.deposit.present? ? "check-circle-fill" : "x-circle-fill", class: b.deposit.present? ? "icon success" : "icon danger" %></dd>
+
+            <dt><%= t("common.paid") %></dt>
+            <dd><%= icon b.paid? ? "check-circle-fill" : "x-circle-fill", class: b.paid? ? "icon success" : "icon danger" %></dd>
           </dl>
         </article>
       <% end %>
