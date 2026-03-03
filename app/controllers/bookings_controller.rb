@@ -77,6 +77,7 @@ class BookingsController < ApplicationController
   end
 
   # PATCH/PUT /properties/:property_id/bookings/:id
+  # rubocop:disable Metrics/MethodLength
   def update
     @booking.assign_attributes(booking_params)
 
@@ -118,6 +119,7 @@ class BookingsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # DELETE /properties/:property_id/bookings/:id
   def destroy

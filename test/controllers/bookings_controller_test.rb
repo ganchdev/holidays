@@ -51,7 +51,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     new_room = @property.rooms.create!(
       name: room_name,
       price: room_price,
-      capacity: 2,
+      capacity: 2
     )
 
     assert_difference("Booking.count", 1) do
@@ -154,7 +154,7 @@ class BookingsControllerTest < ActionDispatch::IntegrationTest
     new_room = @property.rooms.create!(
       name: room_name,
       price: room_price,
-      capacity: 2,
+      capacity: 2
     )
 
     # Assign booking to the new room first
