@@ -61,7 +61,7 @@ class Booking < ApplicationRecord
     elsif deposit.to_d.positive?
       "#FF9900" # yellow - partial deposit
     else
-      "#0172ad" # blue - no deposit (theme color)
+      "#D9482B" # blue - no deposit (theme color)
     end
   end
 
