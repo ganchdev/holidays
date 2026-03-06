@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/ganchdev/holidays/compare/v0.4.1...v0.5.0) (2026-03-06)
+
+
+### Features
+
+* **bookings:** Colors to bookings and a new paid_at field ([#105](https://github.com/ganchdev/holidays/issues/105)) ([3d679cf](https://github.com/ganchdev/holidays/commit/3d679cf931d1fb4ca713f8831daeb574c4025f4b))
+
 ## [0.4.1](https://github.com/ganchdev/holidays/compare/v0.4.0...v0.4.1) (2026-01-28)
 
 
