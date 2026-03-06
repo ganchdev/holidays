@@ -12,6 +12,7 @@
 #  ends_at      :datetime
 #  name         :string
 #  notes        :text
+#  paid_at      :datetime
 #  price        :decimal(10, 2)
 #  starts_at    :datetime
 #  created_at   :datetime         not null

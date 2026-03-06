@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_01_215816) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_02_205613) do
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_01_215816) do
     t.datetime "ends_at"
     t.string "name"
     t.text "notes"
+    t.datetime "paid_at"
     t.decimal "price", precision: 10, scale: 2
     t.integer "room_id", null: false
     t.datetime "starts_at"
@@ -56,7 +57,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_01_215816) do
 
   create_table "rooms", force: :cascade do |t|
     t.integer "capacity"
-    t.string "color"
     t.datetime "created_at", null: false
     t.string "name"
     t.decimal "price", precision: 10, scale: 2

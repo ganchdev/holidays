@@ -22,7 +22,7 @@
 
   <div>
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, required: true %>
   </div>
 
   <div>
@@ -31,8 +31,8 @@
   </div>
 
   <div>
-    <%= form.label :children %>
-    <%= form.number_field :children %>
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
   </div>
 
   <div>
@@ -56,11 +56,14 @@
     <% end %>
   </div>
 
-
   <div>
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
+    <label>
+      <%= check_box_tag "booking[paid]", "1", booking.paid? %>
+      <%= t("helpers.label.booking.paid") %>
+    </label>
   </div>
+
+  <br>
 
   <div>
     <%= form.submit %>

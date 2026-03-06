@@ -6,7 +6,6 @@
 #
 #  id          :integer          not null, primary key
 #  capacity    :integer
-#  color       :string
 #  name        :string
 #  price       :decimal(10, 2)
 #  created_at  :datetime         not null
@@ -20,35 +19,29 @@
 one:
   property: one
   name: 21
-  color: red
   capacity: 2
 
 two:
   property: two
   name: 22
-  color: blue
   capacity: 4
 
 three:
   property: three
   name: 22
-  color: blue
   capacity: 4
 
 four:
   property: four
   name: 24
-  color: blue
   capacity: 4
 
 five:
   property: five
   name: 24
-  color: blue
   capacity: 4
 
 room_without_bookings:
   property: one
   name: 21
-  color: blue
   capacity: 3

@@ -146,41 +146,7 @@ class Room < ::ApplicationRecord
 
     def clear_name_change: () -> void
 
-    def color: () -> ::String?
 
-    def color=: (::String?) -> ::String?
-
-    def color?: () -> bool
-
-    def color_changed?: () -> bool
-
-    def color_change: () -> [ ::String?, ::String? ]
-
-    def color_will_change!: () -> void
-
-    def color_was: () -> ::String?
-
-    def color_previously_changed?: () -> bool
-
-    def color_previous_change: () -> ::Array[::String?]?
-
-    def color_previously_was: () -> ::String?
-
-    def color_before_last_save: () -> ::String?
-
-    def color_change_to_be_saved: () -> ::Array[::String?]?
-
-    def color_in_database: () -> ::String?
-
-    def saved_change_to_color: () -> ::Array[::String?]?
-
-    def saved_change_to_color?: () -> bool
-
-    def will_save_change_to_color?: () -> bool
-
-    def restore_color!: () -> void
-
-    def clear_color_change: () -> void
 
     def created_at: () -> ::ActiveSupport::TimeWithZone
 

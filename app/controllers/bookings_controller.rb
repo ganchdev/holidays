@@ -77,11 +77,18 @@ class BookingsController < ApplicationController
   end
 
   # PATCH/PUT /properties/:property_id/bookings/:id
+  # rubocop:disable Metrics/MethodLength
   def update
     @booking.assign_attributes(booking_params)
 
     if params[:use_room_price]
       @booking.price = @booking&.room&.price
+    end
+
+    if ActiveModel::Type::Boolean.new.cast(params[:booking][:paid])
+      @booking.paid_at ||= Time.current
+    else
+      @booking.paid_at = nil
     end
 
     if params[:reload].present?
@@ -112,6 +119,7 @@ class BookingsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   # DELETE /properties/:property_id/bookings/:id
   def destroy

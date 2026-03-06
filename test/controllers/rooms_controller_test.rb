@@ -24,7 +24,7 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create room" do
     assert_difference("Room.count", 1) do
-      post property_rooms_url(@property), params: { room: { name: "New Room", capacity: 10, color: "Blue" } }
+      post property_rooms_url(@property), params: { room: { name: "New Room", capacity: 10 } }
     end
     assert_redirected_to property_rooms_path(@property)
     assert_equal I18n.t("flash.rooms.created_successfully"), flash[:notice]
@@ -36,13 +36,12 @@ class RoomsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update room" do
-    patch property_room_url(@property, @room), params: { room: { name: "Updated Name", capacity: 15, color: "Red" } }
+    patch property_room_url(@property, @room), params: { room: { name: "Updated Name", capacity: 15 } }
     assert_redirected_to property_rooms_path(@property)
     assert_equal I18n.t("flash.rooms.updated_successfully"), flash[:notice]
     @room.reload
     assert_equal "Updated Name", @room.name
     assert_equal 15, @room.capacity
-    assert_equal "Red", @room.color
   end
 
   test "should destroy room" do
