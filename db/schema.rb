@@ -47,6 +47,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_02_205613) do
     t.index ["starts_at"], name: "index_bookings_on_starts_at"
   end
 
+  create_table "bot_verifications", force: :cascade do |t|
+    t.integer "authorized_user_id", null: false
+    t.string "chat_id", null: false
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["authorized_user_id"], name: "index_bot_verifications_on_authorized_user_id"
+    t.index ["chat_id", "code"], name: "index_bot_verifications_on_chat_id_and_code"
+  end
+
   create_table "properties", force: :cascade do |t|
     t.integer "account_id", null: false
     t.datetime "created_at", null: false
@@ -88,5 +99,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_02_205613) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "bot_verifications", "authorized_users"
   add_foreign_key "sessions", "users"
 end
