@@ -310,17 +310,27 @@ DeepSeek can also format/transform data without new tools:
 2. Bot: "Please enter your email address"
 3. User types: "john@example.com"
 4. Bot: "Open this link in your browser: https://yourapp.com/bot_verify?chat_id=123&email=john@example.com"
-5. User opens link in browser → sees verification CODE on screen
+5. User opens link in browser
+   - IF user is logged into web app AND email matches → sees verification CODE
+   - IF not logged in → redirect to /auth (Google login)
+   - IF email mismatch → show error
 6. User types CODE "123456" back in Telegram
 7. Bot calls: POST /api/v1/auth/verify with code + chat_id
 8. Bot receives user info → logged in
 ```
 
+### Security Gate
+
+The `/bot_verify` page is protected by web authentication:
+- User must be logged into the web app (via existing Google OAuth)
+- User's logged-in email must match the email parameter
+- This prevents unauthorized access even if someone knows the URL
+
 ### Components
 
 | Component | Purpose |
 |-----------|---------|
-| `BotVerifyController` (Web) | Creates BotVerification record, displays code in browser |
+| `BotVerifyController` (Web) | Creates BotVerification record, displays code in browser (requires web auth) |
 | `BotController#verify` (API) | Validates code, returns user info, deletes code |
 
 ### After Login
@@ -338,6 +348,8 @@ Telegram                    Web Browser                    Rails API
     │     (enter email)         │                            │
     │                           │                            │
     │                           │──GET /bot_verify?───▶     │
+    │                           │  (checks web session)      │
+    │                           │  (verifies email match)    │
     │                           │                          Creates BotVerification
     │                           │◀──shows code───────────   │
     │◀──"Check web for code"───│                            │
@@ -451,7 +463,7 @@ CREATE TABLE pending_verifications (
 | BotVerification model | ✅ Done | `app/models/bot_verification.rb` |
 | BotVerification migration | ✅ Done | `db/migrate/20250327000000_create_bot_verifications.rb` |
 | Run migration | ✅ Done | (ran in dev) |
-| Web endpoint for verification code generation | ✅ Done | `app/controllers/bot_verify_controller.rb`, `app/views/bot_verify/show.html.erb`, `config/routes.rb` |
+| Web endpoint for verification code generation | ✅ Done | `app/controllers/bot_verify_controller.rb` (with web auth gate), `app/views/bot_verify/show.html.erb` |
 | Add `guest_id` filter to bookings endpoint | ✅ Done | `app/controllers/api/v1/bot_controller.rb` |
 
 ### Phase 2: Telegram Bot ✅ Pending

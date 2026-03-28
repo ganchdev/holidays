@@ -1,15 +1,16 @@
-<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md text-center">
   <% if @error %>
-    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
       <%= @error %>
     </div>
-    <p class="text-gray-600">Please check your Telegram bot and try again.</p>
+    <p class="text-gray-600">Go back to Telegram and try the login process again.</p>
   <% else %>
-    <h1 class="text-2xl font-bold mb-4">Verification Code</h1>
-    <p class="mb-4">Enter this code in Telegram to complete login:</p>
-    <div class="text-center">
-      <span class="text-4xl font-mono font-bold text-blue-600 tracking-widest"><%= @code %></span>
+    <h1 class="text-2xl font-bold mb-2">Verification Code</h1>
+    <p class="mb-6 text-gray-600">Enter this code in Telegram to complete login:</p>
+    <div class="mb-6">
+      <span class="text-5xl font-mono font-bold text-blue-600 tracking-widest"><%= @code %></span>
     </div>
-    <p class="mt-4 text-sm text-gray-500">Code expires in 10 minutes.</p>
+    <p class="text-sm text-gray-500">Code expires in 10 minutes.</p>
+    <p class="mt-4 text-xs text-gray-400">Logged in as: <%= current_user.email_address %></p>
   <% end %>
 </div>
