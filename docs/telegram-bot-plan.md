@@ -465,6 +465,7 @@ CREATE TABLE pending_verifications (
 | Run migration | ✅ Done | (ran in dev) |
 | Web endpoint for verification code generation | ✅ Done | `app/controllers/bot_verify_controller.rb` (with web auth gate), `app/views/bot_verify/show.html.erb` |
 | Add `guest_id` filter to bookings endpoint | ✅ Done | `app/controllers/api/v1/bot_controller.rb` |
+| Tests | ✅ Done | `test/controllers/bot_api_controller_test.rb`, `test/controllers/bot_verify_controller_test.rb`, `test/models/bot_verification_test.rb` |
 
 ### Phase 2: Telegram Bot ✅ Pending
 
@@ -479,13 +480,15 @@ CREATE TABLE pending_verifications (
 | Tool handlers (all v1 tools) | ⬜ Pending | |
 | BG/EN localization | ⬜ Pending | |
 
-### Phase 3: Testing ✅ Pending
+### Phase 3: Testing
 
 | Task | Status | Notes |
 |------|--------|-------|
-| API endpoint testing | ⬜ Pending | curl or Postman |
+| Unit tests for API endpoints | ✅ Done | `test/controllers/bot_api_controller_test.rb` |
+| Unit tests for BotVerifyController | ✅ Done | `test/controllers/bot_verify_controller_test.rb` |
+| Unit tests for BotVerification model | ✅ Done | `test/models/bot_verification_test.rb` |
+| API endpoint manual testing | ⬜ Pending | curl or Postman |
 | Bot end-to-end testing | ⬜ Pending | Real Telegram messages |
-| Sample queries | ⬜ Pending | Availability, bookings, guest search |
 
 ### Phase 4: Reporting (Optional) ✅ Pending
 

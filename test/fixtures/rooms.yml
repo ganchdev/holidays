@@ -20,28 +20,34 @@ one:
   property: one
   name: 21
   capacity: 2
+  price: 100
 
 two:
   property: two
   name: 22
   capacity: 4
+  price: 150
 
 three:
-  property: three
+  property: one
   name: 22
   capacity: 4
+  price: 120
 
 four:
-  property: four
+  property: two
   name: 24
   capacity: 4
+  price: 180
 
 five:
-  property: five
+  property: one
   name: 24
   capacity: 4
+  price: 200
 
 room_without_bookings:
   property: one
-  name: 21
+  name: 25
   capacity: 3
+  price: 130

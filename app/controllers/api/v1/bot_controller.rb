@@ -85,11 +85,11 @@ module Api
 
         bookings = Booking.joins(room: :property)
                           .where(properties: { account_id: account.id })
-                          .where("bookings.name ILIKE ?", "%#{query}%")
+                          .where("bookings.name LIKE ?", "%#{query}%")
                           .or(
                             Booking.joins(room: :property)
                                   .where(properties: { account_id: account.id })
-                                  .where("bookings.name ILIKE ?", "%#{query}%")
+                                  .where("bookings.name LIKE ?", "%#{query}%")
                           )
                           .select("DISTINCT bookings.name, bookings.id")
                           .limit(20)

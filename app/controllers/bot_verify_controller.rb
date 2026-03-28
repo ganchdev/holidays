@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BotVerifyController < ApplicationController
-
+  allow_unauthenticated_access only: [:show]
   before_action :verify_email_match
 
   def show
@@ -34,12 +34,12 @@ class BotVerifyController < ApplicationController
   def verify_email_match
     @email = params[:email]
 
-    if current_user.nil?
+    if Current.user.nil?
       redirect_to "/auth", alert: "Please log in first"
       return
     end
 
-    if current_user.email_address.downcase != @email.to_s.downcase
+    if Current.user.email_address.downcase != @email.to_s.downcase
       @error = "The email address doesn't match your logged-in account. Please use the email associated with your account."
     end
   end

@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# == Schema Information
+#
+# Table name: bot_verifications
+#
+#  id                  :integer          not null, primary key
+#  code                :string           not null
+#  chat_id             :string           not null
+#  expires_at          :datetime         not null
+#  authorized_user_id  :integer          not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
+one:
+  authorized_user: one
+  chat_id: "111111"
+  code: "111111"
+  expires_at: <%= 10.minutes.from_now %>
+
+two:
+  authorized_user: two
+  chat_id: "222222"
+  code: "222222"
+  expires_at: <%= 10.minutes.from_now %>
+
+expired:
+  authorized_user: one
+  chat_id: "333333"
+  code: "333333"
+  expires_at: <%= 10.minutes.ago %>

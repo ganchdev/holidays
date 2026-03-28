@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 # == Schema Information
@@ -11,17 +13,13 @@
 #  account_id    :integer
 #  user_id       :integer
 #
-# Indexes
-#
-#  index_authorized_users_on_account_id  (account_id)
-#  index_authorized_users_on_user_id     (user_id)
-#
+
 one:
-  email_address: MyString
-  account: MyString
   user: one
+  account: one
+  email_address: one@example.com
 
 two:
-  email_address: MyString
-  account: MyString
   user: two
+  account: two
+  email_address: two@example.com

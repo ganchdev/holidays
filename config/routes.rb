@@ -29,7 +29,10 @@ Rails.application.routes.draw do
       get "rooms", to: "bot#rooms"
       get "availability", to: "bot#availability"
       get "guests", to: "bot#guests"
-      resources :bookings, only: [:index, :show, :create, :update]
+      get "bookings", to: "bot#index"
+      get "bookings/:id", to: "bot#show"
+      post "bookings", to: "bot#create"
+      patch "bookings/:id", to: "bot#update"
     end
   end
 
