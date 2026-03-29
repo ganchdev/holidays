@@ -1,5 +1,28 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: bot_verifications
+#
+#  id                 :integer          not null, primary key
+#  code               :string           not null
+#  expires_at         :datetime         not null
+#  token              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  authorized_user_id :integer          not null
+#  chat_id            :string           not null
+#
+# Indexes
+#
+#  index_bot_verifications_on_authorized_user_id  (authorized_user_id)
+#  index_bot_verifications_on_chat_id_and_code    (chat_id,code)
+#  index_bot_verifications_on_token               (token) UNIQUE
+#
+# Foreign Keys
+#
+#  authorized_user_id  (authorized_user_id => authorized_users.id)
+#
 require "test_helper"
 
 class BotVerificationTest < ActiveSupport::TestCase
@@ -60,6 +83,29 @@ class BotVerificationTest < ActiveSupport::TestCase
     verification = BotVerification.create!(authorized_user: @authorized_user, chat_id: "123456")
 
     assert_equal @authorized_user, verification.authorized_user
+  end
+
+  test "should generate token on create" do
+    verification = BotVerification.create!(authorized_user: @authorized_user, chat_id: "123456")
+
+    assert_not_nil verification.token
+    assert_equal 32, verification.token.length
+  end
+
+  test "should find verification by token" do
+    verification = BotVerification.create!(authorized_user: @authorized_user, chat_id: "123456")
+
+    found = BotVerification.find_by_token(verification.token)
+
+    assert_equal verification, found
+  end
+
+  test "should not find verification with invalid token" do
+    BotVerification.create!(authorized_user: @authorized_user, chat_id: "123456")
+
+    found = BotVerification.find_by_token("invalid_token")
+
+    assert_nil found
   end
 
 end

@@ -53,9 +53,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_02_205613) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "expires_at", null: false
+    t.string "token"
     t.datetime "updated_at", null: false
     t.index ["authorized_user_id"], name: "index_bot_verifications_on_authorized_user_id"
     t.index ["chat_id", "code"], name: "index_bot_verifications_on_chat_id_and_code"
+    t.index ["token"], name: "index_bot_verifications_on_token", unique: true
   end
 
   create_table "properties", force: :cascade do |t|

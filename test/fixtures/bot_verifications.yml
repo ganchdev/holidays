@@ -6,13 +6,24 @@
 #
 # Table name: bot_verifications
 #
-#  id                  :integer          not null, primary key
-#  code                :string           not null
-#  chat_id             :string           not null
-#  expires_at          :datetime         not null
-#  authorized_user_id  :integer          not null
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id                 :integer          not null, primary key
+#  code               :string           not null
+#  expires_at         :datetime         not null
+#  token              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  authorized_user_id :integer          not null
+#  chat_id            :string           not null
+#
+# Indexes
+#
+#  index_bot_verifications_on_authorized_user_id  (authorized_user_id)
+#  index_bot_verifications_on_chat_id_and_code    (chat_id,code)
+#  index_bot_verifications_on_token               (token) UNIQUE
+#
+# Foreign Keys
+#
+#  authorized_user_id  (authorized_user_id => authorized_users.id)
 #
 
 one:

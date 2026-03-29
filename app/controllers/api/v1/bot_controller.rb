@@ -5,16 +5,15 @@ module Api
     class BotController < ApplicationController
 
       skip_before_action :require_authentication, :verify_authenticity_token
+      before_action :verify_bot_token, except: [:verify]
 
       def verify
-        # Verify Telegram login code
         code = params[:code]
         chat_id = params[:chat_id]
 
         verification = BotVerification.find_by_code_and_chat_id(code, chat_id)
 
         if verification
-          verification.destroy
           user = verification.authorized_user
 
           render json: {
@@ -23,7 +22,8 @@ module Api
               id: user.id,
               email: user.email_address,
               account_id: user.account_id
-            }
+            },
+            token: verification.token
           }
         else
           render json: { success: false, error: "Invalid or expired code" }, status: :unauthorized
@@ -31,8 +31,7 @@ module Api
       end
 
       def rooms
-        account = Account.second
-        rooms = Room.joins(:property).where(properties: { account_id: account.id })
+        rooms = Room.joins(:property).where(properties: { account_id: current_account.id })
 
         render json: {
           rooms: rooms.map do |room|
@@ -58,9 +57,8 @@ module Api
         starts_date = Date.parse(starts)
         ends_date = Date.parse(ends)
 
-        account = Account.second
         room_ids = Room.joins(:property)
-                       .where(properties: { account_id: account.id })
+                       .where(properties: { account_id: current_account.id })
                        .available_between(starts_date, ends_date)
                        .pluck(:id)
 
@@ -83,18 +81,11 @@ module Api
 
         return render json: { error: "Missing search parameter" }, status: :bad_request if query.blank?
 
-        account = Account.second
-
         bookings = Booking.joins(room: :property)
-                          .where(properties: { account_id: account.id })
-                          .where("bookings.name LIKE ?", "%#{query}%")
-                          .or(
-                            Booking.joins(room: :property)
-                                  .where(properties: { account_id: account.id })
-                                  .where("bookings.name LIKE ?", "%#{query}%")
-                          )
-                          .select("DISTINCT bookings.name, bookings.id")
-                          .limit(20)
+                         .where(properties: { account_id: current_account.id })
+                         .where("bookings.name LIKE ?", "%#{query}%")
+                         .select("DISTINCT bookings.name, bookings.id")
+                         .limit(20)
 
         guests = bookings.map do |b|
           {
@@ -107,9 +98,8 @@ module Api
       end
 
       def index
-        account = Account.second
         bookings = Booking.joins(room: :property)
-                          .where(properties: { account_id: account.id })
+                          .where(properties: { account_id: current_account.id })
 
         bookings = bookings.where(room_id: params[:room_id]) if params[:room_id].present?
         bookings = bookings.where("bookings.starts_at >= ?", params[:starts]) if params[:starts].present?
@@ -150,9 +140,8 @@ module Api
       end
 
       def show
-        account = Account.second
         booking = Booking.joins(room: :property)
-                         .where(properties: { account_id: account.id })
+                         .where(properties: { account_id: current_account.id })
                          .find(params[:id])
 
         render json: {
@@ -178,10 +167,8 @@ module Api
       end
 
       def create
-        account = Account.second
-
         return render json: { error: "Room not found" }, status: :bad_request unless Room.joins(:property).where(
-          properties: { account_id: account.id }, id: params[:room_id]
+          properties: { account_id: current_account.id }, id: params[:room_id]
         ).exists?
 
         booking = Booking.new(
@@ -220,9 +207,8 @@ module Api
       end
 
       def update
-        account = Account.second
         booking = Booking.joins(room: :property)
-                         .where(properties: { account_id: account.id })
+                         .where(properties: { account_id: current_account.id })
                          .find(params[:id])
 
         booking.assign_attributes(
@@ -259,6 +245,28 @@ module Api
         end
       rescue ActiveRecord::RecordNotFound
         render json: { error: "Booking not found" }, status: :not_found
+      end
+
+      private
+
+      def verify_bot_token
+        token = request.headers["Authorization"]&.gsub("Bearer ", "")
+
+        if token.blank?
+          return render json: { error: "Missing token" }, status: :unauthorized
+        end
+
+        verification = BotVerification.find_by_token(token)
+
+        if verification.nil?
+          return render json: { error: "Invalid token" }, status: :unauthorized
+        end
+
+        @current_account = verification.authorized_user.account
+      end
+
+      def current_account
+        @current_account
       end
 
     end

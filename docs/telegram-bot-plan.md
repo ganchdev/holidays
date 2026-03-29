@@ -316,6 +316,72 @@ DeepSeek can also format/transform data without new tools:
    - IF email mismatch → show error
 6. User types CODE "123456" back in Telegram
 7. Bot calls: POST /api/v1/auth/verify with code + chat_id
+8. API validates code, returns user info + token
+9. Bot stores token, uses for all future API calls
+```
+
+### Token-Based API Authentication
+
+All API endpoints (except `/verify`) require authentication:
+
+```
+Authorization: Bearer <token>
+```
+
+The token is stored in the `bot_verifications` table and links to the user's account.
+
+### Security Gate
+
+The `/bot_verify` page is protected by web authentication:
+- User must be logged into the web app (via existing Google OAuth)
+- User's logged-in email must match the email parameter
+- This prevents unauthorized access even if someone knows the URL
+
+### Components
+
+| Component | Purpose |
+|-----------|---------|
+| `BotVerification` (DB) | Stores session: chat_id, code, token, authorized_user |
+| `BotVerifyController` (Web) | Creates BotVerification record, displays code in browser (requires web auth) |
+| `BotController#verify` (API) | Validates code, returns user info + token |
+| `BotController#verify_bot_token` (API) | Middleware that validates token for all endpoints |
+
+### Visual Reference
+
+```
+Telegram                    Web Browser                    Rails API
+    │                           │                            │
+    │──── /login ───────────────│                            │
+    │     (enter email)         │                            │
+    │                           │                            │
+    │                           │──GET /bot_verify?───▶     │
+    │                           │  (checks web session)      │
+    │                           │  (verifies email match)    │
+    │                           │                          Creates BotVerification
+    │                           │◀──shows code───────────   │
+    │◀──"Check web for code"───│                            │
+    │                           │                            │
+    │──── 123456 ───────────────│                            │
+    │     (enter code)          │                            │
+    │                           │                            │
+    │──── verify API ───────────│───────────────────────────▶│
+    │                           │                          Validates code
+    │◀──"You're logged in!"────│◀──user info + token──────│
+    │                           │                            │
+    │──── (future API calls)────│───────────────────────────▶│
+    │   Authorization: Bearer   │                          Verifies token
+    │◀──response───────────────│◀──data────────────────────│
+```
+1. User in Telegram: /login
+2. Bot: "Please enter your email address"
+3. User types: "john@example.com"
+4. Bot: "Open this link in your browser: https://yourapp.com/bot_verify?chat_id=123&email=john@example.com"
+5. User opens link in browser
+   - IF user is logged into web app AND email matches → sees verification CODE
+   - IF not logged in → redirect to /auth (Google login)
+   - IF email mismatch → show error
+6. User types CODE "123456" back in Telegram
+7. Bot calls: POST /api/v1/auth/verify with code + chat_id
 8. Bot receives user info → logged in
 ```
 
@@ -396,10 +462,12 @@ Telegram                    Web Browser                    Rails API
 
 ## Rails API Endpoints
 
+> **Note**: All endpoints (except `/verify`) require `Authorization: Bearer <token>` header
+
 ### Authentication
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/api/v1/auth/verify` | Verify Telegram code, return user info |
+| POST | `/api/v1/auth/verify` | Verify Telegram code, return user info + token (no auth required) |
 
 ### Rooms
 | Method | Endpoint | Description |
@@ -432,23 +500,28 @@ Telegram                    Web Browser                    Rails API
 
 ---
 
-## Bot State (SQLite)
+## Bot State
+
+The bot uses the existing Rails database (`bot_verifications` table) for session management:
 
 ```sql
-CREATE TABLE sessions (
-  chat_id TEXT PRIMARY KEY,
-  user_id INTEGER NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  last_active_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- bot_verifications table (created via migration)
 
-CREATE TABLE pending_verifications (
-  chat_id TEXT PRIMARY KEY,
-  email TEXT NOT NULL,
-  code TEXT NOT NULL,
-  expires_at TIMESTAMP NOT NULL
-);
+-- Columns:
+-- id                 : integer
+-- code               : string (6-digit code for login)
+-- token              : string (64-char token for API auth)
+-- chat_id            : string (Telegram chat ID)
+-- expires_at         : datetime (code expiry)
+-- authorized_user_id : integer (FK to authorized_users)
+-- created_at         : timestamp
+-- updated_at         : timestamp
 ```
+
+**Flow:**
+1. Code is used once for login via Telegram
+2. Token is used for all subsequent API calls
+3. Session persists until token is invalidated
 
 ---
 
@@ -459,12 +532,13 @@ CREATE TABLE pending_verifications (
 | Task | Status | Files |
 |------|--------|-------|
 | API routes setup | ✅ Done | `config/routes.rb` |
-| BotApiController (rooms, availability, guests, bookings) | ✅ Done | `app/controllers/api/v1/bot_controller.rb` |
+| BotController (rooms, availability, guests, bookings) | ✅ Done | `app/controllers/api/v1/bot_controller.rb` |
 | BotVerification model | ✅ Done | `app/models/bot_verification.rb` |
 | BotVerification migration | ✅ Done | `db/migrate/20250327000000_create_bot_verifications.rb` |
 | Run migration | ✅ Done | (ran in dev) |
 | Web endpoint for verification code generation | ✅ Done | `app/controllers/bot_verify_controller.rb` (with web auth gate), `app/views/bot_verify/show.html.erb` |
 | Add `guest_id` filter to bookings endpoint | ✅ Done | `app/controllers/api/v1/bot_controller.rb` |
+| Token-based API authentication | ✅ Done | Token in bot_verifications table, verify_bot_token before_action |
 | Tests | ✅ Done | `test/controllers/bot_api_controller_test.rb`, `test/controllers/bot_verify_controller_test.rb`, `test/models/bot_verification_test.rb` |
 
 ### Phase 2: Telegram Bot ✅ Pending
