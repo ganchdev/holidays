@@ -28,16 +28,20 @@
 #
 one:
   room: one
+  name: John Doe
   adults: 2
   children: 1
   notes: MyText
   starts_at: 2025-02-16 19:11:43
   ends_at: 2025-02-20 19:11:43
+  price: 200
 
 two:
   room: two
+  name: Jane Smith
   adults: 1
   children: 2
   notes: MyText
   starts_at: 2025-02-16 19:11:43
   ends_at: 2025-02-20 19:11:43
+  price: 300

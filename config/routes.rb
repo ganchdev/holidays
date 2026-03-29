@@ -23,6 +23,21 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      post "auth/verify", to: "bot#verify"
+      get "rooms", to: "bot#rooms"
+      get "availability", to: "bot#availability"
+      get "guests", to: "bot#guests"
+      get "bookings", to: "bot#index"
+      get "bookings/:id", to: "bot#show"
+      post "bookings", to: "bot#create"
+      patch "bookings/:id", to: "bot#update"
+    end
+  end
+
+  get "bot_verify", to: "bot_verify#show"
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
