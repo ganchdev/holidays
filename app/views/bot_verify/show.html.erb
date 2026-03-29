@@ -1,16 +1,35 @@
-<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md text-center">
+<div class="container" style="max-width: 500px; margin: 50px auto; text-align: center;">
   <% if @error %>
-    <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
-      <%= @error %>
-    </div>
-    <p class="text-gray-600">Go back to Telegram and try the login process again.</p>
+    <article style="background-color: #ffe6e6; border-color: #ff6666;">
+      <p><%= @error %></p>
+    </article>
+    <p>Върнете се в Telegram и опитайте отново.</p>
   <% else %>
-    <h1 class="text-2xl font-bold mb-2">Verification Code</h1>
-    <p class="mb-6 text-gray-600">Enter this code in Telegram to complete login:</p>
-    <div class="mb-6">
-      <span class="text-5xl font-mono font-bold text-blue-600 tracking-widest"><%= @code %></span>
+    <h1>Код за потвърждение</h1>
+    <p>Въведете този код в Telegram, за да завършите влизането:</p>
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 30px 0;">
+      <code id="verification-code" style="font-size: 2.5em; background: #f0f0f0; padding: 10px 20px; border-radius: 4px; font-family: monospace;"><%= @code %></code>
+      <button onclick="copyCode()" aria-label="Копирай кода" style="padding: 10px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+      </button>
     </div>
-    <p class="text-sm text-gray-500">Code expires in 10 minutes.</p>
-    <p class="mt-4 text-xs text-gray-400">Logged in as: <%= Current.user.email_address %></p>
+
+    <p><small>Кодът изтича след 10 минути.</small></p>
+    <p><small>Влязъл/а като: <%= Current.user.email_address %></small></p>
+
+    <script>
+      function copyCode() {
+        const code = document.getElementById('verification-code').textContent;
+        navigator.clipboard.writeText(code).then(function() {
+          alert('Кодът е копиран!');
+        }, function() {
+          alert('Грешка при копирането');
+        });
+      }
+    </script>
   <% end %>
 </div>
