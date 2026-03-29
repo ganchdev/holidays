@@ -225,7 +225,7 @@ class BotApiControllerTest < ActionDispatch::IntegrationTest
 
     post "/api/v1/bookings",
          params: {
-           room_id: 999999,
+           room_id: 999_999,
            name: "Test Guest",
            starts: Date.today + 30,
            ends: Date.today + 33

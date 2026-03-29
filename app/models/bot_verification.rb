@@ -49,7 +49,7 @@ class BotVerification < ApplicationRecord
   private
 
   def generate_code
-    self.code = SecureRandom.random_number(100000).to_s.rjust(6, "0")
+    self.code = SecureRandom.random_number(100_000).to_s.rjust(6, "0")
     self.expires_at = 10.minutes.from_now
   end
 

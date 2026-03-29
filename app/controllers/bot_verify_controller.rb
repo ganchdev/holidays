@@ -34,9 +34,9 @@ class BotVerifyController < ApplicationController
       return
     end
 
-    if Current.user.email_address.downcase != @email.to_s.downcase
-      @error = "The email address doesn't match your logged-in account. Please use the email associated with your account."
-    end
+    return unless Current.user.email_address.downcase != @email.to_s.downcase
+
+    @error = "The email address doesn't match your logged-in account. Please use the email associated with your account." # rubocop:disable Layout/LineLength
   end
 
 end

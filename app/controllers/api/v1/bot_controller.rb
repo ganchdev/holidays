@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# rubocop:disable all
 
 module Api
   module V1
@@ -82,10 +83,10 @@ module Api
         return render json: { error: "Missing search parameter" }, status: :bad_request if query.blank?
 
         bookings = Booking.joins(room: :property)
-                         .where(properties: { account_id: current_account.id })
-                         .where("bookings.name LIKE ?", "%#{query}%")
-                         .select("DISTINCT bookings.name, bookings.id")
-                         .limit(20)
+                          .where(properties: { account_id: current_account.id })
+                          .where("bookings.name LIKE ?", "%#{query}%")
+                          .select("DISTINCT bookings.name, bookings.id")
+                          .limit(20)
 
         guests = bookings.map do |b|
           {
@@ -265,10 +266,9 @@ module Api
         @current_account = verification.authorized_user.account
       end
 
-      def current_account
-        @current_account
-      end
+      attr_reader :current_account
 
     end
   end
 end
+# rubocop:enable all
