@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BotVerifyController < ApplicationController
-  allow_unauthenticated_access only: [:show]
+
   before_action :verify_email_match
 
   def show
@@ -14,11 +14,6 @@ class BotVerifyController < ApplicationController
 
     if @authorized_user.nil?
       @error = "Email not found in authorized users"
-      return
-    end
-
-    if @authorized_user.user.nil?
-      @error = "No user associated with this email"
       return
     end
 

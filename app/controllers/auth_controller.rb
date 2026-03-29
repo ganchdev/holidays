@@ -58,7 +58,11 @@ class AuthController < ApplicationController
       u.account = auth_user.account
     end
 
-    user.save! if user.new_record?
+    if user.new_record?
+      user.save!
+      auth_user.update(user: user)
+    end
+
     user
   end
 

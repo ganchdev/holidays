@@ -4,7 +4,7 @@ module Api
   module V1
     class BotController < ApplicationController
 
-      skip_before_action :require_authentication
+      skip_before_action :require_authentication, :verify_authenticity_token
 
       def verify
         # Verify Telegram login code
@@ -15,13 +15,12 @@ module Api
 
         if verification
           verification.destroy
-          user = verification.authorized_user.user
+          user = verification.authorized_user
 
           render json: {
             success: true,
             user: {
               id: user.id,
-              name: user.name,
               email: user.email_address,
               account_id: user.account_id
             }
@@ -32,18 +31,18 @@ module Api
       end
 
       def rooms
-        account = Account.first
+        account = Account.second
         rooms = Room.joins(:property).where(properties: { account_id: account.id })
 
         render json: {
-          rooms: rooms.map { |room|
+          rooms: rooms.map do |room|
             {
               id: room.id,
               name: room.name,
               capacity: room.capacity,
               price: room.price
             }
-          }
+          end
         }
       end
 
@@ -51,28 +50,31 @@ module Api
         starts = params[:starts]
         ends = params[:ends]
 
-        return render json: { error: "Missing starts or ends parameter" }, status: :bad_request if starts.blank? || ends.blank?
+        if starts.blank? || ends.blank?
+          return render json: { error: "Missing starts or ends parameter" },
+                        status: :bad_request
+        end
 
         starts_date = Date.parse(starts)
         ends_date = Date.parse(ends)
 
-        account = Account.first
+        account = Account.second
         room_ids = Room.joins(:property)
-                      .where(properties: { account_id: account.id })
-                      .available_between(starts_date, ends_date)
-                      .pluck(:id)
+                       .where(properties: { account_id: account.id })
+                       .available_between(starts_date, ends_date)
+                       .pluck(:id)
 
         available_rooms = Room.where(id: room_ids)
 
         render json: {
-          available: available_rooms.map { |room|
+          available: available_rooms.map do |room|
             {
               id: room.id,
               name: room.name,
               capacity: room.capacity,
               price: room.price
             }
-          }
+          end
         }
       end
 
@@ -81,7 +83,7 @@ module Api
 
         return render json: { error: "Missing search parameter" }, status: :bad_request if query.blank?
 
-        account = Account.first
+        account = Account.second
 
         bookings = Booking.joins(room: :property)
                           .where(properties: { account_id: account.id })
@@ -94,18 +96,18 @@ module Api
                           .select("DISTINCT bookings.name, bookings.id")
                           .limit(20)
 
-        guests = bookings.map { |b|
+        guests = bookings.map do |b|
           {
             id: b.id,
             name: b.name
           }
-        }.uniq { |g| g[:name] }
+        end.uniq { |g| g[:name] }
 
         render json: { guests: guests }
       end
 
       def index
-        account = Account.first
+        account = Account.second
         bookings = Booking.joins(room: :property)
                           .where(properties: { account_id: account.id })
 
@@ -126,7 +128,7 @@ module Api
         end
 
         render json: {
-          bookings: bookings.map { |booking|
+          bookings: bookings.map do |booking|
             {
               id: booking.id,
               name: booking.name,
@@ -143,15 +145,15 @@ module Api
               paid: booking.paid?,
               cancelled: booking.cancelled_at.present?
             }
-          }
+          end
         }
       end
 
       def show
-        account = Account.first
+        account = Account.second
         booking = Booking.joins(room: :property)
-                        .where(properties: { account_id: account.id })
-                        .find(params[:id])
+                         .where(properties: { account_id: account.id })
+                         .find(params[:id])
 
         render json: {
           booking: {
@@ -176,9 +178,11 @@ module Api
       end
 
       def create
-        account = Account.first
+        account = Account.second
 
-        return render json: { error: "Room not found" }, status: :bad_request unless Room.joins(:property).where(properties: { account_id: account.id }, id: params[:room_id]).exists?
+        return render json: { error: "Room not found" }, status: :bad_request unless Room.joins(:property).where(
+          properties: { account_id: account.id }, id: params[:room_id]
+        ).exists?
 
         booking = Booking.new(
           room_id: params[:room_id],
@@ -216,10 +220,10 @@ module Api
       end
 
       def update
-        account = Account.first
+        account = Account.second
         booking = Booking.joins(room: :property)
-                          .where(properties: { account_id: account.id })
-                          .find(params[:id])
+                         .where(properties: { account_id: account.id })
+                         .find(params[:id])
 
         booking.assign_attributes(
           name: params[:name] || booking.name,
