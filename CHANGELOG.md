@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/ganchdev/holidays/compare/v0.6.0...v0.6.1) (2026-04-20)
+
+
+### Bug Fixes
+
+* **release:** trigger release 0.6.1 ([0eb0b25](https://github.com/ganchdev/holidays/commit/0eb0b25fe6f14e382f2a3d4d42892dbe7254dcea))
+
 ## [0.6.0](https://github.com/ganchdev/holidays/compare/v0.5.0...v0.6.0) (2026-03-29)
 
 
