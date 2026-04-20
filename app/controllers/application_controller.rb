@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   include Authentication
 
   before_action :find_account
+  before_action :set_sentry_context
   before_action :set_locale
 
   rescue_from ActiveRecord::RecordNotDestroyed, with: :handle_record_not_destroyed_error
@@ -18,6 +19,13 @@ class ApplicationController < ActionController::Base
     return unless Current.user
 
     Current.account = Current.user.account
+  end
+
+  def set_sentry_context
+    return unless Current.user
+
+    Sentry.set_user(id: Current.user.id, email: Current.user.email_address, username: Current.user.name)
+    Sentry.set_tags(account_id: Current.account&.id)
   end
 
   def set_locale
